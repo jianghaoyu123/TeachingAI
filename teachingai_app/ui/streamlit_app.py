@@ -221,12 +221,13 @@ def run_app() -> None:
         st.markdown("---")
 
         st.subheader("输入设置")
-        subject = st.selectbox("学科", SUBJECT_OPTIONS, index=0)
+        subject = st.selectbox("学科", SUBJECT_OPTIONS, index=0, key="subject_select")
         grade = st.selectbox(
             "年级",
             GRADE_OPTIONS,
             index=7,
             format_func=lambda g: str(GRADE_DISPLAY_LABELS.get(g, g)),
+            key="grade_select",
         )
         st.markdown("---")
         render_profile_editor(subject, grade)
@@ -234,13 +235,14 @@ def run_app() -> None:
         enable_ocr = True
         st.info("当前版本仅支持在线模型 API 分析。")
 
-    lesson_topic = st.text_input("课题", value="一元一次方程")
+    lesson_topic = st.text_input("课题", key="lesson_topic_input", value="一元一次方程")
     uploaded_files = st.file_uploader(
         "上传教案/逐字稿/PPT/PDF（可多选）",
         type=["txt", "md", "docx", "pptx", "pdf"],
         accept_multiple_files=True,
+        key="lesson_files_uploader",
     )
-    manual_text = st.text_area("或直接粘贴教案/逐字稿文本", height=180)
+    manual_text = st.text_area("或直接粘贴教案/逐字稿文本", height=180, key="manual_text_input")
 
     export_col1, export_col2 = st.columns(2)
     with export_col1:
@@ -259,6 +261,7 @@ def run_app() -> None:
         index=0,
         horizontal=True,
         label_visibility="collapsed",
+        key="analysis_mode_radio",
     )
     if analysis_mode == "deep":
         st.info(
