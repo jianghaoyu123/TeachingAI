@@ -217,17 +217,20 @@ def render_simulation_results(
         else:
             st.info("未返回难度评估结果。")
 
-        st.subheader("结果置信度")
-        if report.confidence:
-            st.metric("总体置信度", f"{report.confidence.overall_score}/100")
-            st.write(f"置信等级: {report.confidence.overall_level}")
-            for item in report.confidence.rationale:
-                st.write(f"- {item}")
-            if report.confidence.profile_confidence:
-                st.markdown("**分学生置信说明**")
-                st.markdown("\n".join(f"- {item}" for item in report.confidence.profile_confidence))
+        if report.analysis_mode == "deep":
+            st.subheader("结果置信度")
+            if report.confidence:
+                st.metric("总体置信度", f"{report.confidence.overall_score}/100")
+                st.write(f"置信等级: {report.confidence.overall_level}")
+                for item in report.confidence.rationale:
+                    st.write(f"- {item}")
+                if report.confidence.profile_confidence:
+                    st.markdown("**分学生置信说明**")
+                    st.markdown("\n".join(f"- {item}" for item in report.confidence.profile_confidence))
+            else:
+                st.info("未返回置信度结果。")
         else:
-            st.info("未返回置信度结果。")
+            st.caption("ℹ️ 置信度评估仅在深度思考模式下可用")
     with col2:
         st.subheader("优化建议")
         for item in report.suggestions:
