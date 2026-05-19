@@ -251,6 +251,25 @@ def run_app() -> None:
         revised_export_format = st.selectbox("修订后教案格式", EXPORT_OPTIONS, index=2)
 
     st.markdown("---")
+    st.subheader("教案改进方向")
+    improvement_focus_options = [
+        ("all", "兼顾全体学生"),
+        ("low", "基础薄弱型学生"),
+        ("mid-low", "中等偏下型学生"),
+        ("mid", "中等稳定型学生"),
+        ("mid-high", "中等偏上型学生"),
+        ("high", "拔高拓展型学生"),
+    ]
+    improvement_focus = st.selectbox(
+        "教案优化侧重点",
+        options=[opt[0] for opt in improvement_focus_options],
+        format_func=lambda x: dict(improvement_focus_options).get(x, x),
+        index=0,
+        key="improvement_focus_select",
+        help="选择教案改进的目标学生群体，系统会根据该层级学生的特点优化教案内容",
+    )
+
+    st.markdown("---")
     st.subheader("分析模式")
     analysis_mode = st.radio(
         "分析模式",
@@ -350,21 +369,23 @@ def run_app() -> None:
                 base_url=base_url,
                 model=model_name,
                 progress_callback=on_progress,
+                improvement_focus=improvement_focus,
             )
             progress_bar.progress(1.0, text="深度预演完成")
             status_placeholder.empty()
         else:
             with st.spinner("快速模式：正在模拟学生反应并生成优化建议..."):
                 report = analyze_with_model_api(
-                    text=merged_text,
-                    subject=subject,
-                    lesson_topic=lesson_topic,
-                    grade=grade,
-                    provider=provider,
-                    api_key=api_key,
-                    base_url=base_url,
-                    model=model_name,
-                )
+                text=merged_text,
+                subject=subject,
+                lesson_topic=lesson_topic,
+                grade=grade,
+                provider=provider,
+                api_key=api_key,
+                base_url=base_url,
+                model=model_name,
+                improvement_focus=improvement_focus,
+            )
     except LLMApiError as exc:
         st.error(f"模型调用失败: {exc}")
         return

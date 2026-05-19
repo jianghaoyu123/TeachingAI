@@ -592,9 +592,19 @@ def _run_aggregator_agent(
     api_key: str,
     base_url: str,
     model: str,
+    improvement_focus: str = "all",
 ) -> dict[str, Any]:
     profile_context = _build_profile_context(subject, grade)
     interaction_log = _summarize_interactions_for_aggregator(modules, interactions, module_deliberations)
+    
+    focus_desc = {
+        "all": "兼顾全体学生，保持教学内容的均衡性",
+        "low": "重点面向基础薄弱型学生，降低难度，增加更多基础讲解和练习",
+        "mid-low": "重点面向中等偏下型学生，提供更多引导和支架",
+        "mid": "重点面向中等稳定型学生，保持适中难度",
+        "mid-high": "重点面向中等偏上型学生，适当增加挑战性内容",
+        "high": "重点面向拔高拓展型学生，增加拓展内容和高阶思维训练",
+    }
 
     system_prompt = (
         f"你是{subject}教研组长智能体，负责汇总多轮课堂预演结果并输出最终分析报告。"
@@ -606,6 +616,7 @@ def _run_aggregator_agent(
 - 各层级学生智能体在每个模块中与教师互动并产生反应
 
 学科: {subject} | 课题: {lesson_topic} | 年级: {grade}
+教案改进方向: {focus_desc.get(improvement_focus, "兼顾全体学生")}
 
 学生画像模板:
 {profile_context}
@@ -653,13 +664,14 @@ def _run_aggregator_agent(
     }}
   ],
   "lesson_plan_change_summary": ["对原教案的关键修改说明"],
-  "revised_lesson_plan": "结合各模块学生反应修订后的完整教案"
+  "revised_lesson_plan": "结合各模块学生反应修订后的完整教案，需特别注意教案改进方向的要求"
 }}
 
 要求:
 - reactions 须覆盖所有参与预演的学生画像
 - suggestions 应引用分模块互动中的具体发现，避免空泛
 - confidence 必须反映模块内讨论是否收敛、证据是否充分
+- revised_lesson_plan 必须严格遵循教案改进方向的要求进行优化
 """.strip()
 
     raw = invoke_llm(
@@ -684,6 +696,7 @@ def analyze_deep_with_llm(
     base_url: str,
     model: str,
     progress_callback: ProgressCallback | None = None,
+    improvement_focus: str = "all",
 ) -> SimulationReport:
     profiles = get_profiles_for_subject(subject, grade)
     student_memory = _init_student_memory(profiles)
@@ -772,6 +785,7 @@ def analyze_deep_with_llm(
         api_key=api_key,
         base_url=base_url,
         model=model,
+        improvement_focus=improvement_focus,
     )
 
     report = build_report_from_parsed(

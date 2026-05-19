@@ -18,6 +18,7 @@ def analyze_with_model_api(
     api_key: str,
     base_url: str,
     model: str,
+    improvement_focus: str = "all",
 ) -> SimulationReport:
     return analyze_with_llm(
         text=text,
@@ -28,6 +29,7 @@ def analyze_with_model_api(
         api_key=api_key,
         base_url=base_url,
         model=model,
+        improvement_focus=improvement_focus,
     )
 
 
@@ -41,6 +43,7 @@ def analyze_deep_with_model_api(
     base_url: str,
     model: str,
     progress_callback: ProgressCallback | None = None,
+    improvement_focus: str = "all",
 ) -> SimulationReport:
     return analyze_deep_with_llm(
         text=text,
@@ -52,4 +55,5 @@ def analyze_deep_with_model_api(
         base_url=base_url,
         model=model,
         progress_callback=progress_callback,
+        improvement_focus=improvement_focus,
     )

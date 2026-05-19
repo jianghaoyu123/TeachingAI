@@ -157,8 +157,18 @@ def _build_profile_context(subject: str, grade: str) -> str:
     return "\n".join(chunks)
 
 
-def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str) -> str:
+def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str, improvement_focus: str = "all") -> str:
     profile_context = _build_profile_context(subject, grade)
+    
+    focus_desc = {
+        "all": "兼顾全体学生，保持教学内容的均衡性",
+        "low": "重点面向基础薄弱型学生，降低难度，增加更多基础讲解和练习",
+        "mid-low": "重点面向中等偏下型学生，提供更多引导和支架",
+        "mid": "重点面向中等稳定型学生，保持适中难度",
+        "mid-high": "重点面向中等偏上型学生，适当增加挑战性内容",
+        "high": "重点面向拔高拓展型学生，增加拓展内容和高阶思维训练",
+    }
+    
     return f"""
 你是{subject}学科教研助手，请基于教师输入材料进行“虚拟学生群体教学预演”。
 
@@ -167,6 +177,8 @@ def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str) -> str
 年级: {grade}
 学生画像模板(优先遵循):
 {profile_context}
+
+教案改进方向: {focus_desc.get(improvement_focus, "兼顾全体学生")}
 
 输入材料:
 {text[:14000]}
@@ -201,7 +213,7 @@ def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str) -> str
     "lesson_plan_change_summary": [
         "概括说明 AI 对原教案做了哪些关键修改，每条一句话"
     ],
-    "revised_lesson_plan": "基于上述建议修改后的完整新教案或课堂流程稿，要求分点清晰，可直接给老师参考使用"
+    "revised_lesson_plan": "基于上述建议修改后的完整新教案或课堂流程稿，要求分点清晰，可直接给老师参考使用。请特别注意教案改进方向的要求。"
 }}
 """.strip()
 
@@ -544,9 +556,10 @@ def analyze_with_llm(
     api_key: str,
     base_url: str,
     model: str,
+    improvement_focus: str = "all",
 ) -> SimulationReport:
     system_prompt = f"你是严谨的{subject}教学分析助手，需要结合年级特征给出可执行建议，且必须只输出JSON。"
-    user_prompt = _build_prompt(text=text, subject=subject, lesson_topic=lesson_topic, grade=grade)
+    user_prompt = _build_prompt(text=text, subject=subject, lesson_topic=lesson_topic, grade=grade, improvement_focus=improvement_focus)
 
     raw = invoke_llm(
         provider=provider,
