@@ -91,7 +91,17 @@ def _run_teacher_agent(
         user_prompt=user_prompt,
         timeout_sec=180,
     )
-    parsed = parse_llm_json(raw)
+    
+    try:
+        parsed = parse_llm_json(raw)
+    except LLMApiError as e:
+        raise LLMApiError(
+            f"教师智能体返回格式错误：{e}。请尝试更换模型提供商或调整输入内容后重试。"
+        ) from e
+    
+    if not isinstance(parsed, dict):
+        raise LLMApiError("教师智能体返回内容不是有效的JSON对象。")
+    
     teacher_script = str(parsed.get("teacher_script", "")).strip()
 
     modules: list[LessonModule] = []

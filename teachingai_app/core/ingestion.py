@@ -22,13 +22,24 @@ def _has_enough_text(text: str) -> bool:
 
 
 def _get_paddle_ocr_instance():
+    # First try PaddleOCR (original implementation)
     try:
         from paddleocr import PaddleOCR
+        try:
+            # Use Chinese + English general model for mixed teaching documents.
+            return PaddleOCR(use_angle_cls=True, lang="ch")
+        except Exception:
+            pass
+    except Exception:
+        pass
+    
+    # Fallback to easyocr if PaddleOCR is not available
+    try:
+        import easyocr
+        reader = easyocr.Reader(['ch_sim', 'en'], gpu=False)
+        return reader
     except Exception:
         return None
-
-    # Use Chinese + English general model for mixed teaching documents.
-    return PaddleOCR(use_angle_cls=True, lang="ch", show_log=False)
 
 
 def _ocr_image_bytes(image_bytes: bytes, ocr_engine) -> str:
@@ -42,18 +53,30 @@ def _ocr_image_bytes(image_bytes: bytes, ocr_engine) -> str:
 
     try:
         image = Image.open(BytesIO(image_bytes)).convert("RGB")
-        result = ocr_engine.ocr(image, cls=True)
+        # Check if it's PaddleOCR or EasyOCR
+        if hasattr(ocr_engine, 'ocr'):
+            # PaddleOCR
+            result = ocr_engine.ocr(image, cls=True)
+            chunks: list[str] = []
+            for line in result or []:
+                for item in line or []:
+                    if len(item) >= 2 and isinstance(item[1], (list, tuple)):
+                        text = str(item[1][0]).strip()
+                        if text:
+                            chunks.append(text)
+            return "\n".join(chunks)
+        else:
+            # EasyOCR
+            result = ocr_engine.readtext(image)
+            chunks: list[str] = []
+            for item in result or []:
+                if len(item) >= 2:
+                    text = str(item[1]).strip()
+                    if text:
+                        chunks.append(text)
+            return "\n".join(chunks)
     except Exception:
         return ""
-
-    chunks: list[str] = []
-    for line in result or []:
-        for item in line or []:
-            if len(item) >= 2 and isinstance(item[1], (list, tuple)):
-                text = str(item[1][0]).strip()
-                if text:
-                    chunks.append(text)
-    return "\n".join(chunks)
 
 
 def _ocr_pdf_pages(content: bytes, ocr_engine) -> str:

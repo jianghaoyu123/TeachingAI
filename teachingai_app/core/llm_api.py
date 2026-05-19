@@ -62,15 +62,26 @@ def parse_llm_json(text: str) -> dict[str, Any]:
 
 
 def _extract_json_block(text: str) -> dict[str, Any]:
+    text = str(text or "").strip()
+    
+    if not text:
+        raise LLMApiError("模型返回内容为空。")
+    
     fenced = re.search(r"```json\s*(\{.*?\})\s*```", text, flags=re.S)
     if fenced:
-        return json.loads(fenced.group(1))
-
+        try:
+            return json.loads(fenced.group(1))
+        except json.JSONDecodeError as e:
+            pass
+    
     obj = re.search(r"(\{.*\})", text, flags=re.S)
     if obj:
-        return json.loads(obj.group(1))
-
-    raise LLMApiError("模型返回中未找到合法JSON。")
+        try:
+            return json.loads(obj.group(1))
+        except json.JSONDecodeError as e:
+            pass
+    
+    raise LLMApiError(f"模型返回中未找到合法JSON。原始返回内容片段: {text[:200]}...")
 
 
 def _normalize_base_url(base_url: str) -> str:
