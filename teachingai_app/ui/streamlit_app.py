@@ -311,8 +311,6 @@ def _ensure_api_settings() -> None:
             st.session_state["api_model_choice"] = "glm-4-flash"
             st.session_state["api_model_name"] = "glm-4-flash"
     else:
-        st.session_state["api_provider"] = "deepseek"
-
         provider = str(st.session_state.get("api_provider", "deepseek"))
         if provider not in PROVIDER_DEFAULTS:
             provider = "deepseek"
