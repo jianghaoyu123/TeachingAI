@@ -601,7 +601,7 @@ def run_app() -> None:
 
             defaults = PROVIDER_DEFAULTS[selected_provider]
             st.text_input("API Key", type="password", key="api_key", help="输入你的API Key")
-            st.text_input("Base URL（手选模型提供商后自动填充）", key="api_base_url", help="API接口地址")
+            st.text_input("Base URL（手动选择模型提供商后自动填充）", key="api_base_url", help="API接口地址")
 
             model_options = MODEL_OPTIONS_BY_PROVIDER.get(selected_provider, [defaults["model"], "自定义"])
             if "自定义" not in model_options:
@@ -764,7 +764,7 @@ def run_app() -> None:
     
     st.session_state["simulation_triggered"] = False
 
-    st.info("⏳ 模拟正在进行中，请稍候...")
+    st.info("模拟已开始...")
     
     text_chunks: list[str] = []
     pptx_sources: list[tuple[str, bytes]] = []
