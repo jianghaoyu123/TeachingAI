@@ -271,7 +271,7 @@ def _is_using_default_glm_mode() -> bool:
 
 FREE_GL_MODELS = {
     "glm-4-flash": "GLM-4-FLASH（快速）",
-    "glm-4.7-flash": "GLM-4.7-FLASH（更强，可能要等待）",
+    "glm-4.7-flash": "GLM-4.7-FLASH（更强，可能要排队）",
 }
 
 API_MODE_OPTIONS = [
@@ -304,12 +304,12 @@ def _ensure_api_settings() -> None:
         st.session_state["api_provider"] = "glm"
         if env_glm_key:
             st.session_state["api_key"] = env_glm_key
-            st.session_state["api_model_choice"] = "glm-4.7-flash"
-            st.session_state["api_model_name"] = "glm-4.7-flash"
+            st.session_state["api_model_choice"] = "glm-4-flash"
+            st.session_state["api_model_name"] = "glm-4-flash"
         else:
             st.session_state["api_key"] = ""
-            st.session_state["api_model_choice"] = "glm-4.7-flash"
-            st.session_state["api_model_name"] = "glm-4.7-flash"
+            st.session_state["api_model_choice"] = "glm-4-flash"
+            st.session_state["api_model_name"] = "glm-4-flash"
     else:
         provider = str(st.session_state.get("api_provider", "deepseek"))
         if provider not in PROVIDER_DEFAULTS:
@@ -569,12 +569,10 @@ def run_app() -> None:
         if api_mode == "free_glm":
             st.success("🎁 使用免费API模型（GLM系列）")
             free_model_options = [opt[0] for opt in FREE_GL_MODELS.items()]
-            default_index = free_model_options.index("glm-4.7-flash")
             free_model_choice = st.selectbox(
                 "选择免费模型",
                 options=free_model_options,
                 format_func=lambda x: FREE_GL_MODELS.get(x, x),
-                index=default_index,
                 key="free_api_model_choice",
             )
             if env_glm_key:
