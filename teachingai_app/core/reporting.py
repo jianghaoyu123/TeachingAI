@@ -1,10 +1,49 @@
 from __future__ import annotations
 
+import json
+
 from html import escape
 from io import BytesIO
 from datetime import datetime
 
 from .models import SimulationReport
+
+
+def format_revised_lesson_plan(lesson_plan: str) -> str:
+    """将修订后教案从JSON格式转换为友好的文本格式"""
+    if not lesson_plan.strip():
+        return "（模型未返回修订后教案内容）"
+    
+    try:
+        parsed = json.loads(lesson_plan)
+        return _format_json_plan(parsed)
+    except json.JSONDecodeError:
+        return lesson_plan
+
+
+def _format_json_plan(data) -> str:
+    """递归格式化JSON数据为文本格式"""
+    if isinstance(data, dict):
+        result = []
+        for key, value in data.items():
+            formatted_value = _format_json_plan(value)
+            if isinstance(value, (list, dict)):
+                result.append(f"## {key}")
+                result.append(formatted_value)
+            else:
+                result.append(f"**{key}**：{formatted_value}")
+        return "\n\n".join(result)
+    elif isinstance(data, list):
+        result = []
+        for i, item in enumerate(data, 1):
+            formatted_item = _format_json_plan(item)
+            if isinstance(item, dict):
+                result.append(f"{i}. {formatted_item}")
+            else:
+                result.append(f"{i}. {formatted_item}")
+        return "\n".join(result)
+    else:
+        return str(data)
 
 
 def _mode_label(report: SimulationReport) -> str:
@@ -489,7 +528,7 @@ def to_markdown_revised_plan(report: SimulationReport) -> str:
 
     lines.append("")
     lines.append("## 修订后教案")
-    lines.append(report.revised_lesson_plan.strip() or "（模型未返回修订后教案内容）")
+    lines.append(format_revised_lesson_plan(report.revised_lesson_plan))
     return "\n".join(lines)
 
 
@@ -525,7 +564,7 @@ def to_html_revised_plan(report: SimulationReport) -> str:
         parts.append("</section>")
 
     parts.append("<section><h2>修订后教案</h2>")
-    revised = report.revised_lesson_plan.strip() or "（模型未返回修订后教案内容）"
+    revised = format_revised_lesson_plan(report.revised_lesson_plan)
     for paragraph in revised.splitlines():
         text = paragraph.strip()
         if text:
@@ -558,7 +597,7 @@ def to_docx_revised_plan_bytes(report: SimulationReport) -> bytes:
                 doc.add_paragraph(text)
 
     doc.add_heading("修订后教案", level=2)
-    revised = report.revised_lesson_plan.strip() or "（模型未返回修订后教案内容）"
+    revised = format_revised_lesson_plan(report.revised_lesson_plan)
     for paragraph in revised.splitlines():
         text = paragraph.strip()
         if text:

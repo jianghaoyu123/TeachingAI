@@ -7,7 +7,7 @@ import streamlit as st
 
 from teachingai_app.core.models import SimulationReport
 from teachingai_app.core.profiles import get_profiles_for_subject
-from teachingai_app.core.reporting import build_revised_plan_payload, build_student_report_payload
+from teachingai_app.core.reporting import build_revised_plan_payload, build_student_report_payload, format_revised_lesson_plan
 from teachingai_app.ui.constants import PROFILE_LEVEL_FULL_LABELS
 
 
@@ -513,7 +513,7 @@ def render_simulation_results(
             st.markdown("**修订后教案**")
             st.text_area(
                 "修订后教案",
-                value=report.revised_lesson_plan,
+                value=format_revised_lesson_plan(report.revised_lesson_plan),
                 height=420,
                 disabled=True,
                 label_visibility="collapsed",
