@@ -25,13 +25,9 @@
 
 > 说明：深度模式 API 调用次数约为 `2 + 2×模块数`（例如 5 个模块约 12 次），耗时与费用通常显著高于快速模式。
 
-### 2. 新增模型提供商：Kimi、MiniMax
+### 2. 界面与代码结构整理
 
-侧边栏「模型提供商」已支持 **Kimi（月之暗面）** 与 **MiniMax**，默认使用国内 OpenAI 兼容节点，可在界面中修改 Base URL 与 Model。详见下文 [模型 API 配置](#模型-api-配置中国环境)。
-
-### 3. 界面与代码结构整理
-
-- `app.py` 仅作为 Streamlit 入口，主界面逻辑迁至 `teachingai_app/ui/`。
+- `app.py` 仅作为 Streamlit 入口，主界面为 `teachingai_app/ui/`。
 - 核心能力仍位于 `teachingai_app/core/`（材料解析、LLM 调用、快速/深度流水线、报告导出）。
 
 ## 功能
