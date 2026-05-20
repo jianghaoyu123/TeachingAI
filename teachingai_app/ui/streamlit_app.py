@@ -269,24 +269,86 @@ def _is_using_default_glm_mode() -> bool:
     return bool(env_key)
 
 
+FREE_GL_MODELS = {
+    "glm-4-flash": "GLM-4-FLASH（免费）",
+    "glm-4.7b-flash": "GLM-4.7B-FLASH（免费，更强）",
+}
+
+API_MODE_OPTIONS = [
+    ("free_glm", "🎁 免费API模型"),
+    ("custom", "🔑 用户个人API模型"),
+]
+
+PROVIDER_OPTIONS_FOR_CUSTOM = [
+    ("deepseek", "DeepSeek"),
+    ("qwen", "Qwen（阿里通义）"),
+    ("glm", "GLM（智谱）"),
+    ("openai", "OpenAI"),
+    ("gemini", "Google Gemini"),
+    ("claude", "Claude"),
+    ("kimi", "Kimi（月之暗面）"),
+    ("minimax", "MiniMax"),
+]
+
+
 def _ensure_api_settings() -> None:
     env_glm_key = get_glm_api_key_from_env()
 
-    if "api_provider" not in st.session_state:
+    if "api_mode" not in st.session_state:
         if env_glm_key:
-            st.session_state["api_provider"] = "glm"
+            st.session_state["api_mode"] = "free_glm"
+        else:
+            st.session_state["api_mode"] = "custom"
+
+    current_mode = str(st.session_state.get("api_mode", "custom"))
+
+    if current_mode == "free_glm":
+        if env_glm_key:
             st.session_state["api_key"] = env_glm_key
             st.session_state["api_base_url"] = PROVIDER_DEFAULTS["glm"]["base_url"]
+            st.session_state["api_provider"] = "glm"
             st.session_state["api_model_choice"] = "glm-4-flash"
             st.session_state["api_model_name"] = "glm-4-flash"
         else:
+            st.session_state["api_mode"] = "custom"
             st.session_state["api_provider"] = "deepseek"
             st.session_state["api_key"] = ""
             st.session_state["api_base_url"] = PROVIDER_DEFAULTS["deepseek"]["base_url"]
             st.session_state["api_model_choice"] = PROVIDER_DEFAULTS["deepseek"]["model"]
             st.session_state["api_model_name"] = PROVIDER_DEFAULTS["deepseek"]["model"]
-        st.session_state["api_provider_last"] = st.session_state["api_provider"]
-        return
+    else:
+        if "api_provider" not in st.session_state:
+            st.session_state["api_provider"] = "deepseek"
+
+        provider = str(st.session_state.get("api_provider", "deepseek"))
+        if provider not in PROVIDER_DEFAULTS:
+            provider = "deepseek"
+            st.session_state["api_provider"] = provider
+
+        defaults = PROVIDER_DEFAULTS[provider]
+        if "api_key" not in st.session_state:
+            st.session_state["api_key"] = ""
+        if "api_base_url" not in st.session_state:
+            st.session_state["api_base_url"] = defaults["base_url"]
+        if "api_model_choice" not in st.session_state:
+            st.session_state["api_model_choice"] = defaults["model"]
+        if "api_model_name" not in st.session_state:
+            st.session_state["api_model_name"] = defaults["model"]
+        if "api_provider_last" not in st.session_state:
+            st.session_state["api_provider_last"] = provider
+
+        if not str(st.session_state.get("api_base_url", "")).strip():
+            st.session_state["api_base_url"] = defaults["base_url"]
+        if not str(st.session_state.get("api_model_name", "")).strip():
+            st.session_state["api_model_name"] = defaults["model"]
+
+        last_provider = str(st.session_state.get("api_provider_last", provider))
+        if provider != last_provider:
+            new_defaults = PROVIDER_DEFAULTS[provider]
+            st.session_state["api_base_url"] = new_defaults["base_url"]
+            st.session_state["api_model_choice"] = new_defaults["model"]
+            st.session_state["api_model_name"] = new_defaults["model"]
+            st.session_state["api_provider_last"] = provider
 
     provider = str(st.session_state.get("api_provider", "deepseek"))
     if provider not in PROVIDER_DEFAULTS:
@@ -462,7 +524,6 @@ def run_app() -> None:
     st.caption("版本 v1.2：支持快速模式与深度思考模式（多智能体分模块预演）。")
 
     env_glm_key = get_glm_api_key_from_env()
-    using_default_mode = bool(env_glm_key)
     provider = str(st.session_state.get("api_provider", "deepseek"))
     api_key = str(st.session_state.get("api_key", "")).strip()
     base_url = str(st.session_state.get("api_base_url", "")).strip()
@@ -474,22 +535,79 @@ def run_app() -> None:
     )
 
     with st.sidebar:
-        if using_default_mode:
-            st.success("🎁 使用默认免费模型（GLM-4-FLASH）")
-            st.caption("如需更快速度或更强大模型，请切换到自定义API Key模式")
-        else:
-            st.info("💡 首次使用建议先体验默认免费模型")
-        st.markdown("---")
+        st.subheader("🤖 模型API设置")
 
-        st.subheader("模型API设置")
-        if st.button("打开API设置窗口", key="open_api_settings", use_container_width=True):
-            _reset_api_settings_draft_from_saved()
-            _render_api_settings_dialog()
-        key_status = "已配置" if api_key else "未配置"
-        mode_label = "默认免费模式" if using_default_mode else "自定义模式"
-        st.caption(f"当前模式：{mode_label} | 提供商：{provider} | 模型：{model_name or '未设置'}")
-        if not api_key:
-            st.warning("请先点击上方「打开API设置窗口」完成 API Key 配置。")
+        api_mode = st.selectbox(
+            "API模式",
+            options=[opt[0] for opt in API_MODE_OPTIONS],
+            format_func=lambda x: dict(API_MODE_OPTIONS).get(x, x),
+            key="api_mode",
+        )
+
+        if api_mode == "free_glm":
+            if not env_glm_key:
+                st.error("⚠️ 未检测到免费API Key，请切换到「用户个人API模型」模式")
+            else:
+                st.success("🎁 使用免费API模型（GLM系列）")
+                free_model_options = [opt[0] for opt in FREE_GL_MODELS.items()]
+                free_model_choice = st.selectbox(
+                    "选择免费模型",
+                    options=free_model_options,
+                    format_func=lambda x: FREE_GL_MODELS.get(x, x),
+                    key="api_model_choice",
+                )
+                st.session_state["api_model_choice"] = free_model_choice
+                st.session_state["api_model_name"] = free_model_choice
+                st.caption(f"当前模型：{FREE_GL_MODELS.get(free_model_choice, free_model_choice)}")
+        else:
+            st.info("🔑 使用用户个人API模型")
+            provider_options = [opt[0] for opt in PROVIDER_OPTIONS_FOR_CUSTOM]
+
+            current_provider = str(st.session_state.get("api_provider", "deepseek"))
+            try:
+                provider_index = provider_options.index(current_provider)
+            except ValueError:
+                provider_index = 0
+
+            selected_provider = st.selectbox(
+                "模型提供商",
+                options=provider_options,
+                format_func=lambda x: dict(PROVIDER_OPTIONS_FOR_CUSTOM).get(x, x),
+                index=provider_index,
+                key="api_provider",
+            )
+
+            defaults = PROVIDER_DEFAULTS[selected_provider]
+            st.text_input("API Key", type="password", key="api_key", help="输入你的API Key")
+            st.text_input("Base URL（通常已自动填充）", key="api_base_url", help="API接口地址")
+
+            model_options = MODEL_OPTIONS_BY_PROVIDER.get(selected_provider, [defaults["model"], "自定义"])
+            if "自定义" not in model_options:
+                model_options = [*model_options, "自定义"]
+
+            current_model_choice = str(st.session_state.get("api_model_choice", defaults["model"]))
+            if current_model_choice not in model_options:
+                current_model_choice = defaults["model"] if defaults["model"] in model_options else "自定义"
+
+            try:
+                model_index = model_options.index(current_model_choice)
+            except ValueError:
+                model_index = 0
+
+            selected_model = st.selectbox(
+                "模型",
+                options=model_options,
+                index=model_index,
+                key="api_model_choice",
+                format_func=lambda m: MODEL_DESCRIPTION_LABELS.get(str(m), str(m)),
+            )
+            if selected_model == "自定义":
+                st.text_input("自定义模型名称", key="api_model_name", help="填写模型的确切名称")
+            else:
+                st.session_state["api_model_name"] = selected_model
+
+            st.caption("支持 OpenAI / Gemini / Kimi / MiniMax 等兼容接口，以及 Claude 官方 API。")
+
         st.markdown("---")
 
         st.subheader("输入设置")
