@@ -712,20 +712,22 @@ def run_app() -> None:
     _render_classroom_hero(analysis_mode, latest_report if isinstance(latest_report, SimulationReport) else None)
 
     api_ready = bool(api_key and base_url and model_name)
+    simulation_running = st.session_state.get("simulation_running", False)
     if not api_ready:
-        st.warning("请先在侧边栏第一行点击“模型API设置”，完成模型提供商与 API Key 配置。")
+        st.warning('请先在侧边栏第一行点击"模型API设置"，完成模型提供商与 API Key 配置。')
 
     run_clicked = st.button(
         "开始预演与优化",
         type="primary",
         use_container_width=True,
-        disabled=not api_ready,
+        disabled=not api_ready or simulation_running,
     )
 
     if not run_clicked:
+        st.session_state["simulation_running"] = False
         if api_ready:
             if isinstance(latest_report, SimulationReport):
-                st.caption("显示最近一次推理结果。可修改参数后再次点击“开始预演与优化”更新。")
+                st.caption('显示最近一次推理结果。可修改参数后再次点击"开始预演与优化"更新。')
                 mode_name = "深度思考模式" if latest_report.analysis_mode == "deep" else "快速模式"
                 st.caption(
                     f"当前分析来源: 模型 API（{provider} / {model_name} / {mode_name}）"
@@ -742,6 +744,8 @@ def run_app() -> None:
         else:
             st.info("当前未完成 API 配置，按钮已禁用。")
         return
+
+    st.session_state["simulation_running"] = True
 
     text_chunks: list[str] = []
     pptx_sources: list[tuple[str, bytes]] = []
@@ -761,9 +765,11 @@ def run_app() -> None:
 
     merged_text = merge_text_sources(text_chunks)
     if not merged_text.strip():
+        st.session_state["simulation_running"] = False
         st.error("未检测到可分析文本，请上传文件或粘贴内容。")
         return
     if not api_key.strip():
+        st.session_state["simulation_running"] = False
         st.error("请先在侧边栏第一行打开 API 设置窗口并填写 API Key。")
         return
 
@@ -864,12 +870,14 @@ def run_app() -> None:
             )
             progress_bar.progress(100, text="分析完成！")
     except LLMRateLimitError:
+        st.session_state["simulation_running"] = False
         st.warning(
             "⚠️ 免费模型当前请求人数过多，已等待5分钟仍不可用。\n\n"
             "建议切换到「用户个人API模型」模式，使用您自己的 API Key 以获得更稳定的体验。"
         )
         return
     except LLMApiError as exc:
+        st.session_state["simulation_running"] = False
         st.error(
             f"模型调用失败: {exc}\n\n"
             "如果问题持续存在，请点击左侧「API模式」切换到用户个人API模型，使用您自己的API Key。"
@@ -884,6 +892,7 @@ def run_app() -> None:
         st.session_state.pop("latest_source_pptx_bytes", None)
 
     st.session_state["latest_simulation_report"] = report
+    st.session_state["simulation_running"] = False
 
     mode_name = "深度思考模式" if analysis_mode == "deep" else "快速模式"
     st.caption(f"当前分析来源: 模型 API（{provider} / {model_name} / {mode_name}）")
