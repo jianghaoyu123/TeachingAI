@@ -548,10 +548,11 @@ def run_app() -> None:
                 "选择免费模型",
                 options=free_model_options,
                 format_func=lambda x: FREE_GL_MODELS.get(x, x),
-                key="api_model_choice",
+                key="free_api_model_choice",
             )
-            st.session_state["api_model_choice"] = free_model_choice
-            st.session_state["api_model_name"] = free_model_choice
+            if env_glm_key:
+                st.session_state["api_model_choice"] = free_model_choice
+                st.session_state["api_model_name"] = free_model_choice
             st.caption(f"当前模型：{FREE_GL_MODELS.get(free_model_choice, free_model_choice)}")
             if not env_glm_key:
                 st.warning("⚠️ 未检测到 LLM_GLM_KEY 环境变量，免费模型暂时不可用。请切换到「用户个人API模型」模式。")
