@@ -602,8 +602,6 @@ def run_app() -> None:
             st.caption("支持 OpenAI / Gemini / Kimi / MiniMax 等兼容接口，以及 Claude 官方 API。")
 
         st.markdown("---")
-        render_profile_editor(st.session_state.get("subject_select", ""), st.session_state.get("grade_select", ""))
-        st.markdown("---")
         enable_ocr = True
         st.info("当前版本仅支持在线模型 API 分析。")
 
@@ -634,6 +632,9 @@ def run_app() -> None:
     with export_col2:
         revised_export_format = st.selectbox("修订后教案格式", EXPORT_OPTIONS, index=2)
 
+    st.markdown("---")
+    st.subheader("待模拟学生设置")
+    render_profile_editor(st.session_state.get("subject_select", ""), st.session_state.get("grade_select", ""))
     st.markdown("---")
     st.subheader("教案改进方向")
     improvement_focus_options = [
