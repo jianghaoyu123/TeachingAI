@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import ast
 
 from html import escape
 from io import BytesIO
@@ -10,14 +11,22 @@ from .models import SimulationReport
 
 
 def format_revised_lesson_plan(lesson_plan: str) -> str:
-    """将修订后教案从JSON格式转换为友好的文本格式"""
+    """将修订后教案从JSON/Python字典格式转换为友好的文本格式"""
     if not lesson_plan.strip():
         return "（模型未返回修订后教案内容）"
     
+    # 先尝试标准JSON解析
     try:
         parsed = json.loads(lesson_plan)
         return _format_json_plan(parsed)
     except json.JSONDecodeError:
+        pass
+    
+    # 再尝试Python字典格式解析
+    try:
+        parsed = ast.literal_eval(lesson_plan)
+        return _format_json_plan(parsed)
+    except (SyntaxError, ValueError):
         return lesson_plan
 
 
