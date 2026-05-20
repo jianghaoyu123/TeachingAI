@@ -20,7 +20,7 @@ PROFILE_LEVEL_FULL_LABELS = {
 MODEL_OPTIONS_BY_PROVIDER = {
     "deepseek": ["deepseek-v4-pro", "deepseek-v4-flash", "自定义"],
     "qwen": ["qwen-plus", "qwen-turbo", "qwen-max", "自定义"],
-    "glm": ["glm-4-flash", "glm-4-plus", "glm-4-air", "自定义"],
+    "glm": ["glm-4-flash", "glm-4.7b-flash", "glm-4-plus", "glm-4-air", "自定义"],
     "openai": ["gpt-4o-mini", "gpt-4.1-mini", "gpt-4.1", "自定义"],
     "gemini": ["gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro", "自定义"],
     "claude": ["claude-3-5-sonnet-latest", "claude-3-5-haiku-latest", "自定义"],
@@ -49,6 +49,7 @@ MODEL_DESCRIPTION_LABELS = {
     "qwen-turbo": "qwen-turbo｜响应快，适合快速预演",
     "qwen-max": "qwen-max｜能力更强，复杂推理更稳",
     "glm-4-flash": "glm-4-flash｜速度优先，轻量任务友好",
+    "glm-4.7b-flash": "glm-4.7b-flash｜免费额度大，能力更强",
     "glm-4-plus": "glm-4-plus｜能力更强，结果更稳定",
     "glm-4-air": "glm-4-air｜均衡模式，速度与效果兼顾",
     "gpt-4o-mini": "gpt-4o-mini｜经济快速，通用任务",

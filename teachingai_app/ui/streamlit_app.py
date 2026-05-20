@@ -9,7 +9,7 @@ import streamlit.components.v1 as components
 
 from teachingai_app.core.analysis_pipeline import analyze_deep_with_model_api, analyze_with_model_api
 from teachingai_app.core.ingestion import ParseError, merge_text_sources, parse_file
-from teachingai_app.core.llm_api import LLMApiError, PROVIDER_DEFAULTS
+from teachingai_app.core.llm_api import LLMApiError, LLMRateLimitError, PROVIDER_DEFAULTS, get_glm_api_key_from_env
 from teachingai_app.core.models import SimulationReport
 from teachingai_app.core.pptx_revision import PptxRevisionError, build_revised_pptx_payload
 from teachingai_app.ui.constants import (
@@ -264,9 +264,29 @@ def _render_live_progress_panel(
     )
 
 
+def _is_using_default_glm_mode() -> bool:
+    env_key = get_glm_api_key_from_env()
+    return bool(env_key)
+
+
 def _ensure_api_settings() -> None:
+    env_glm_key = get_glm_api_key_from_env()
+
     if "api_provider" not in st.session_state:
-        st.session_state["api_provider"] = "deepseek"
+        if env_glm_key:
+            st.session_state["api_provider"] = "glm"
+            st.session_state["api_key"] = env_glm_key
+            st.session_state["api_base_url"] = PROVIDER_DEFAULTS["glm"]["base_url"]
+            st.session_state["api_model_choice"] = "glm-4-flash"
+            st.session_state["api_model_name"] = "glm-4-flash"
+        else:
+            st.session_state["api_provider"] = "deepseek"
+            st.session_state["api_key"] = ""
+            st.session_state["api_base_url"] = PROVIDER_DEFAULTS["deepseek"]["base_url"]
+            st.session_state["api_model_choice"] = PROVIDER_DEFAULTS["deepseek"]["model"]
+            st.session_state["api_model_name"] = PROVIDER_DEFAULTS["deepseek"]["model"]
+        st.session_state["api_provider_last"] = st.session_state["api_provider"]
+        return
 
     provider = str(st.session_state.get("api_provider", "deepseek"))
     if provider not in PROVIDER_DEFAULTS:
@@ -439,9 +459,10 @@ def run_app() -> None:
     _ensure_api_settings()
 
     st.title("AI虚拟学生教学预演系统")
-    st.caption("版本 v1.1：支持快速模式与深度思考模式（多智能体分模块预演）。")
-    st.caption("运行前需要先联网配置模型 API Key。")
+    st.caption("版本 v1.2：支持快速模式与深度思考模式（多智能体分模块预演）。")
 
+    env_glm_key = get_glm_api_key_from_env()
+    using_default_mode = bool(env_glm_key)
     provider = str(st.session_state.get("api_provider", "deepseek"))
     api_key = str(st.session_state.get("api_key", "")).strip()
     base_url = str(st.session_state.get("api_base_url", "")).strip()
@@ -453,14 +474,22 @@ def run_app() -> None:
     )
 
     with st.sidebar:
+        if using_default_mode:
+            st.success("🎁 使用默认免费模型（GLM-4-FLASH）")
+            st.caption("如需更快速度或更强大模型，请切换到自定义API Key模式")
+        else:
+            st.info("💡 首次使用建议先体验默认免费模型")
+        st.markdown("---")
+
         st.subheader("模型API设置")
         if st.button("打开API设置窗口", key="open_api_settings", use_container_width=True):
             _reset_api_settings_draft_from_saved()
             _render_api_settings_dialog()
         key_status = "已配置" if api_key else "未配置"
-        st.caption(f"当前提供商：{provider} | 当前模型：{model_name or '未设置'} | API Key：{key_status}")
+        mode_label = "默认免费模式" if using_default_mode else "自定义模式"
+        st.caption(f"当前模式：{mode_label} | 提供商：{provider} | 模型：{model_name or '未设置'}")
         if not api_key:
-            st.warning("请先点击上方“打开API设置窗口”完成 API Key 配置。")
+            st.warning("请先点击上方「打开API设置窗口」完成 API Key 配置。")
         st.markdown("---")
 
         st.subheader("输入设置")
@@ -671,8 +700,17 @@ def run_app() -> None:
                     model=model_name,
                     improvement_focus=improvement_focus,
                 )
+    except LLMRateLimitError as exc:
+        st.warning(
+            "⚠️ 免费模型当前请求过于频繁（并发数或QPM达到上限），请稍后再试。\n\n"
+            "如果希望拥有更快速、更强大的体验，请点击左侧「打开API设置窗口」切换到自定义API Key模式。"
+        )
+        return
     except LLMApiError as exc:
-        st.error(f"模型调用失败: {exc}")
+        st.error(
+            f"模型调用失败: {exc}\n\n"
+            "如果问题持续存在，请点击左侧「打开API设置窗口」切换到自定义API Key模式。"
+        )
         return
 
     if len(pptx_sources) == 1:

@@ -21,6 +21,22 @@ class LLMApiError(Exception):
     pass
 
 
+class LLMRateLimitError(LLMApiError):
+    """Rate limit or concurrent request limit exceeded."""
+    pass
+
+
+def get_glm_api_key_from_env() -> str | None:
+    import os
+    return os.environ.get("LLM_GLM_KEY") or None
+
+
+GLM_FREE_MODELS = {
+    "glm-4-flash": "GLM-4-FLASH（免费额度）",
+    "glm-4.7b-flash": "GLM-4.7B-FLASH（免费额度）",
+}
+
+
 PROVIDER_DEFAULTS = {
     "deepseek": {
         "base_url": "https://api.deepseek.com",
@@ -108,7 +124,20 @@ def _build_http_error_message(status_code: int, body_text: str) -> str:
     lowered = body_text.lower()
     compact = body_text[:300]
 
-    # Common provider signals for insufficient balance / quota exhaustion.
+    rate_limit_markers = [
+        "rate limit",
+        "rate_limit",
+        "too many requests",
+        "requests per",
+        "concurrent",
+        "qpm",
+        "rpm",
+        "tpm",
+        "限流",
+        "请求过于频繁",
+        "并发",
+        "ratequota",
+    ]
     quota_markers = [
         "insufficient",
         "insufficient_balance",
@@ -122,9 +151,21 @@ def _build_http_error_message(status_code: int, body_text: str) -> str:
         "欠费",
         "配额",
     ]
-    if status_code in {402, 429} or any(marker in lowered for marker in quota_markers):
+
+    has_rate_limit = any(marker in lowered for marker in rate_limit_markers)
+    has_quota_exhausted = any(marker in lowered for marker in quota_markers)
+
+    if status_code == 429 and has_rate_limit:
         return (
-            "模型调用失败：当前 API 账户可能余额不足或额度已用完，请充值/提升配额后重试。"
+            "RATE_LIMIT_ERROR:免费模型当前请求过于频繁（并发数或QPM达到上限），"
+            "建议稍后再试，或切换到自定义API Key模式获得更稳定的体验。"
+            f"（HTTP {status_code}，响应片段: {compact}）"
+        )
+
+    if status_code in {402, 429} or has_quota_exhausted:
+        return (
+            "模型调用失败：当前 API 账户可能余额不足或额度已用完，请充值/提升配额后重试，"
+            "或切换到自定义API Key模式。"
             f"（HTTP {status_code}，响应片段: {compact}）"
         )
 
@@ -288,7 +329,10 @@ def _post_chat_completion(
         raise LLMApiError(f"调用模型接口失败: {exc}") from exc
 
     if resp.status_code >= 400:
-        raise LLMApiError(_build_http_error_message(resp.status_code, resp.text))
+        error_msg = _build_http_error_message(resp.status_code, resp.text)
+        if error_msg.startswith("RATE_LIMIT_ERROR:"):
+            raise LLMRateLimitError(error_msg[len("RATE_LIMIT_ERROR:") :])
+        raise LLMApiError(error_msg)
 
     data = resp.json()
     try:
