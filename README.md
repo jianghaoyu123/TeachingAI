@@ -1,6 +1,6 @@
 # AI Virtual Student Teaching Lab
 
-一个面向教师的 GUI 工具：上传教案、逐字稿或 PPT 后，模拟不同学生群体反应，并输出教学设计优化建议。
+一个面向教师的备课工具：上传教案、逐字稿或 PPT 后，模拟不同学生群体反应，并输出教学设计优化建议。
 
 在线App地址：https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 
