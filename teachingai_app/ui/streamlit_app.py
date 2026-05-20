@@ -601,7 +601,7 @@ def run_app() -> None:
 
             defaults = PROVIDER_DEFAULTS[selected_provider]
             st.text_input("API Key", type="password", key="api_key", help="输入你的API Key")
-            st.text_input("Base URL（通常已自动填充）", key="api_base_url", help="API接口地址")
+            st.text_input("Base URL（手选模型提供商后自动填充）", key="api_base_url", help="API接口地址")
 
             model_options = MODEL_OPTIONS_BY_PROVIDER.get(selected_provider, [defaults["model"], "自定义"])
             if "自定义" not in model_options:
@@ -721,7 +721,10 @@ def run_app() -> None:
         disabled=not api_ready or simulation_running,
     )
 
-    if not run_clicked:
+    # 如果正在模拟，直接继续执行
+    if simulation_running and st.session_state.get("simulation_triggered", False):
+        pass
+    elif not run_clicked:
         st.session_state["simulation_running"] = False
         if api_ready:
             if isinstance(latest_report, SimulationReport):
@@ -743,18 +746,18 @@ def run_app() -> None:
             st.info("当前未完成 API 配置，按钮已禁用。")
         return
 
-    # 先检查是否有教案文件或文字输入
-    has_content = False
-    if uploaded_files:
-        has_content = True
-    if manual_text.strip():
-        has_content = True
-    
-    if not has_content:
-        st.error("请先上传教案文件或粘贴教案文字，然后再开始模拟。")
-        return
-
     if not st.session_state.get("simulation_triggered", False):
+        # 第一次点击，先检查内容
+        has_content = False
+        if uploaded_files:
+            has_content = True
+        if manual_text.strip():
+            has_content = True
+        
+        if not has_content:
+            st.error("请先上传教案文件或粘贴教案文字，然后再开始模拟。")
+            return
+        
         st.session_state["simulation_running"] = True
         st.session_state["simulation_triggered"] = True
         st.rerun()
