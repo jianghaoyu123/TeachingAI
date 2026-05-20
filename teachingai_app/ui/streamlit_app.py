@@ -509,56 +509,6 @@ MAX_RATE_LIMIT_WAIT_SECONDS = 300
 RATE_LIMIT_WAIT_INTERVAL = 5
 
 
-def _render_blocking_overlay(message: str = "模拟进行中，请稍候...") -> None:
-    st.markdown(
-        f"""
-        <style>
-        .block-overlay {{
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            pointer-events: all;
-        }}
-        .block-overlay-content {{
-            background-color: white;
-            padding: 40px 60px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }}
-        .block-overlay-spinner {{
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }}
-        @keyframes spin {{
-            0% {{ transform: rotate(0deg); }}
-            100% {{ transform: rotate(360deg); }}
-        }}
-        </style>
-        <div class="block-overlay">
-            <div class="block-overlay-content">
-                <div class="block-overlay-spinner"></div>
-                <h3>{message}</h3>
-                <p style="color: #666; margin-top: 10px;">请勿关闭页面或点击其他按钮</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 def _call_with_rate_limit_retry(
     api_call_func,
     status_container: st.empty,
@@ -794,7 +744,6 @@ def run_app() -> None:
         return
 
     st.session_state["simulation_running"] = True
-    _render_blocking_overlay("🚀 模拟正在进行中，请稍候...")
 
     text_chunks: list[str] = []
     pptx_sources: list[tuple[str, bytes]] = []
