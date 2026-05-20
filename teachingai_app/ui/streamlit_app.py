@@ -271,7 +271,7 @@ def _is_using_default_glm_mode() -> bool:
 
 FREE_GL_MODELS = {
     "glm-4-flash": "GLM-4-FLASH（快速）",
-    "glm-4.7b-flash": "GLM-4.7B-FLASH（更强，可能要等待）",
+    "glm-4": "GLM-4（基础版）",
 }
 
 API_MODE_OPTIONS = [
