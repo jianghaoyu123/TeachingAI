@@ -3,9 +3,8 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from .deep_simulation import analyze_deep_with_llm
-from .exam_simulation import analyze_exam_with_llm
 from .llm_api import analyze_with_llm
-from .models import ExamReport, SimulationReport
+from .models import SimulationReport
 
 ProgressCallback = Callable[[str, int, int], None]
 
@@ -57,28 +56,4 @@ def analyze_deep_with_model_api(
         model=model,
         progress_callback=progress_callback,
         improvement_focus=improvement_focus,
-    )
-
-
-def analyze_exam_with_model_api(
-    text: str,
-    subject: str,
-    exam_topic: str,
-    grade: str,
-    provider: str,
-    api_key: str,
-    base_url: str,
-    model: str,
-    progress_callback: ProgressCallback | None = None,
-) -> ExamReport:
-    return analyze_exam_with_llm(
-        text=text,
-        subject=subject,
-        exam_topic=exam_topic,
-        grade=grade,
-        provider=provider,
-        api_key=api_key,
-        base_url=base_url,
-        model=model,
-        progress_callback=progress_callback,
     )

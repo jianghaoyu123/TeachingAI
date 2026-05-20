@@ -86,48 +86,6 @@ class ModuleDeliberationRecord:
 
 
 @dataclass
-class ExamQuestion:
-    question_id: str
-    content: str
-    question_type: str  # 选择题/填空题/解答题/判断题/其他
-    points: float
-    knowledge_tags: List[str] = field(default_factory=list)
-
-
-@dataclass
-class StudentQuestionAttempt:
-    profile_name: str
-    question_id: str
-    predicted_correct: bool
-    estimated_score: float
-    predicted_answer: str
-    error_type: str  # 无明显错误/概念错误/计算错误/审题失误/思路偏差/其他
-    reasoning_note: str
-
-
-@dataclass
-class QuestionDiagnostic:
-    question_id: str
-    difficulty_label: str  # 易/中/难
-    predicted_class_accuracy: float  # 0-1
-    common_error_type: str
-    teaching_note: str
-
-
-@dataclass
-class ExamReport:
-    subject: str
-    grade: str
-    exam_topic: str
-    original_exam_text: str = ""
-    questions: List[ExamQuestion] = field(default_factory=list)
-    student_attempts: List[StudentQuestionAttempt] = field(default_factory=list)
-    question_diagnostics: List[QuestionDiagnostic] = field(default_factory=list)
-    suggestions: List[OptimizationSuggestion] = field(default_factory=list)
-    class_summary: str = ""
-
-
-@dataclass
 class SimulationReport:
     subject: str
     lesson_topic: str
