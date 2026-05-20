@@ -721,6 +721,10 @@ def run_app() -> None:
         disabled=not api_ready or simulation_running,
     )
 
+    if simulation_running:
+        st.info("⏳ 模拟正在进行中，请稍候...")
+        return
+
     if not run_clicked:
         st.session_state["simulation_running"] = False
         if api_ready:
