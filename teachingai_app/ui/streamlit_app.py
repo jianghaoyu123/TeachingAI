@@ -271,7 +271,7 @@ def _is_using_default_glm_mode() -> bool:
 
 FREE_GL_MODELS = {
     "glm-4-flash": "GLM-4-FLASH（免费）",
-    "glm-4.7b-flash": "GLM-4.7B-FLASH（免费，更强）",
+    "glm-4.7b-flash": "GLM-4.7B-FLASH（免费，更强，排队时间更长）",
 }
 
 API_MODE_OPTIONS = [
@@ -295,10 +295,7 @@ def _ensure_api_settings() -> None:
     env_glm_key = get_glm_api_key_from_env()
 
     if "api_mode" not in st.session_state:
-        if env_glm_key:
-            st.session_state["api_mode"] = "free_glm"
-        else:
-            st.session_state["api_mode"] = "custom"
+        st.session_state["api_mode"] = "free_glm"
 
     current_mode = str(st.session_state.get("api_mode", "custom"))
 
@@ -555,7 +552,7 @@ def run_app() -> None:
                 st.session_state["api_model_name"] = free_model_choice
             st.caption(f"当前模型：{FREE_GL_MODELS.get(free_model_choice, free_model_choice)}")
             if not env_glm_key:
-                st.warning("⚠️ 未检测到 LLM_GLM_KEY 环境变量，免费模型暂时不可用。请切换到「用户个人API模型」模式。")
+                st.warning("⚠️ 未检测到 LLM_GLM_KEY 环境变量，可能因为软件为本地模式运行，免费模型暂时不可用。请切换到「用户个人API模型」模式。")
         else:
             st.info("🔑 使用用户个人API模型")
             provider_options = [opt[0] for opt in PROVIDER_OPTIONS_FOR_CUSTOM]
@@ -684,7 +681,7 @@ def run_app() -> None:
 
     api_ready = bool(api_key and base_url and model_name)
     if not api_ready:
-        st.warning("请先在侧边栏第一行点击“打开API设置窗口”，完成模型提供商与 API Key 配置。")
+        st.warning("请先在侧边栏第一行点击“模型API设置”，完成模型提供商与 API Key 配置。")
 
     run_clicked = st.button(
         "开始预演与优化",
