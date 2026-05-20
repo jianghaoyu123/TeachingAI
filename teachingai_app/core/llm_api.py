@@ -190,6 +190,9 @@ def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str, improv
     {{
     "profile_name": "必须与上面学生画像模板中的某个名称完全一致",
       "engagement": "低|中低|中|中高|高",
+            "listening_state": "专注跟随|基本跟随|间歇走神|明显走神|关键段未听到",
+            "distraction_reason": "若有走神或未听到，写明原因；若无可写空字符串",
+            "missed_key_points": ["因走神或兴趣不足而漏听/未建立的关键点"],
       "confusion_points": ["..."],
       "likely_questions": ["..."],
       "error_predictions": ["..."]
@@ -415,6 +418,33 @@ def _normalize_engagement_by_level(level: str, current_engagement: str) -> str:
     return base if random.random() < 0.45 else random.choice(pool)
 
 
+def _normalize_listening_state_by_level(level: str, current_state: str) -> str:
+    valid = {"专注跟随", "基本跟随", "间歇走神", "明显走神", "关键段未听到"}
+    base = current_state if current_state in valid else "基本跟随"
+    candidates = {
+        "low": ["间歇走神", "明显走神", "关键段未听到", "基本跟随"],
+        "mid-low": ["间歇走神", "基本跟随", "明显走神"],
+        "mid": ["基本跟随", "间歇走神", "专注跟随"],
+        "mid-high": ["基本跟随", "专注跟随", "间歇走神"],
+        "high": ["专注跟随", "基本跟随"],
+    }
+    pool = candidates.get(level, candidates["mid"])
+    return base if random.random() < 0.5 else random.choice(pool)
+
+
+def _default_distraction_reason(state: str, level: str) -> str:
+    if state in {"专注跟随", "基本跟随"}:
+        return ""
+    fallback = {
+        "low": "对该知识点兴趣低，且前置基础不足导致放弃跟随",
+        "mid-low": "概念抽象度偏高，注意力出现断续",
+        "mid": "在步骤较长处出现短时分心",
+        "mid-high": "在重复性讲解环节短暂走神",
+        "high": "在已掌握内容段落注意力下降",
+    }
+    return fallback.get(level, "注意力受到课堂外因素影响")
+
+
 def _apply_level_variability(
     reactions: list[StudentReaction], subject: str, grade: str = "七年级"
 ) -> list[StudentReaction]:
@@ -437,6 +467,7 @@ def _apply_level_variability(
 
         fallback_confusions = profile.weaknesses if profile is not None else []
         fallback_errors = profile.likely_errors if profile is not None else []
+        listening_state = _normalize_listening_state_by_level(level, reaction.listening_state)
 
         adjusted.append(
             StudentReaction(
@@ -455,6 +486,13 @@ def _apply_level_variability(
                     error_target,
                     "该层学生可能出现类似步骤性错误",
                 ),
+                listening_state=listening_state,
+                distraction_reason=(
+                    reaction.distraction_reason.strip()
+                    if reaction.distraction_reason.strip()
+                    else _default_distraction_reason(listening_state, level)
+                ),
+                missed_key_points=_dedupe_keep_order(reaction.missed_key_points)[:4],
             )
         )
 
@@ -487,6 +525,9 @@ def build_report_from_parsed(
                 confusion_points=_as_list(item.get("confusion_points"))[:6],
                 likely_questions=_as_list(item.get("likely_questions"))[:6],
                 error_predictions=_as_list(item.get("error_predictions"))[:6],
+                listening_state=str(item.get("listening_state", "基本跟随")),
+                distraction_reason=str(item.get("distraction_reason", "")).strip(),
+                missed_key_points=_as_list(item.get("missed_key_points"))[:4],
             )
         )
 

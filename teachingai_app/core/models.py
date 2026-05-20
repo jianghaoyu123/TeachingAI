@@ -19,6 +19,9 @@ class StudentReaction:
     confusion_points: List[str]
     likely_questions: List[str]
     error_predictions: List[str]
+    listening_state: str = "基本跟随"
+    distraction_reason: str = ""
+    missed_key_points: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -65,6 +68,9 @@ class ModuleStudentInteraction:
     confusion_points: List[str] = field(default_factory=list)
     likely_questions: List[str] = field(default_factory=list)
     error_predictions: List[str] = field(default_factory=list)
+    listening_state: str = "基本跟随"
+    distraction_reason: str = ""
+    missed_key_points: List[str] = field(default_factory=list)
     confidence_score: int = 60
     consistency_note: str = ""
 

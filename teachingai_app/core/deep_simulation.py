@@ -21,7 +21,7 @@ def _emit(callback: ProgressCallback | None, message: str, current: int, total: 
         callback(message, current, total)
 
 
-def _module_count_for_material(text: str) -> int:
+def _fallback_module_count_for_material(text: str) -> int:
     length = len(text.strip())
     if length < 2500:
         return 3
@@ -36,7 +36,6 @@ def _run_teacher_agent(
     subject: str,
     lesson_topic: str,
     grade: str,
-    module_count: int,
     provider: str,
     api_key: str,
     base_url: str,
@@ -48,7 +47,7 @@ def _run_teacher_agent(
         "必须只输出JSON，不要输出其他文字。"
     )
     user_prompt = f"""
-请将教师提供的材料整理为一份可直接用于授课的课堂讲稿（逐字稿风格），并划分为 {module_count} 个教学模块。
+请将教师提供的材料整理为一份可直接用于授课的课堂讲稿（逐字稿风格），并由你自主决定划分为几个教学模块。
 
 学科: {subject}
 课题: {lesson_topic}
@@ -64,7 +63,7 @@ def _run_teacher_agent(
 
 请严格输出JSON:
 {{
-  "teacher_script": "完整课堂讲稿，含导入、讲解、练习与小结，分段清晰",
+    "teacher_script": "整课逐字稿，含导入、讲解、互动提问、练习反馈、小结与作业布置，分段清晰",
   "modules": [
     {{
       "module_id": "m1",
@@ -77,7 +76,9 @@ def _run_teacher_agent(
 }}
 
 要求:
-- modules 数量必须为 {module_count}
+- modules 数量由你根据教学内容灵活决定，通常建议 3-8 个
+- 划分依据优先考虑：知识点边界、认知跨度、讲练评节奏、前后依赖关系
+- teacher_script 必须是可直接上课的整课讲稿，不能只写课堂引入；建议总长度不少于 1200 字
 - 每个模块 teacher_script 要具体，便于学生智能体据此产生真实课堂反应
 - module_id 使用 m1, m2, ... 格式
 """.strip()
@@ -133,6 +134,19 @@ def _run_teacher_agent(
     modules.sort(key=lambda m: m.order)
     if not modules:
         raise LLMApiError("教师智能体未生成有效教学模块。")
+
+    # Guardrail for extreme outputs.
+    if len(modules) > 10:
+        modules = modules[:10]
+
+    # Some models return a very short overview paragraph for teacher_script.
+    # In that case, synthesize a practical whole-class script from module scripts.
+    min_script_len = max(500, len(modules) * 220)
+    if len(teacher_script) < min_script_len:
+        merged_parts: list[str] = []
+        for module in modules:
+            merged_parts.append(f"【模块{module.order}：{module.title}】\n{module.teacher_script}".strip())
+        teacher_script = "\n\n".join(part for part in merged_parts if part).strip() or teacher_script
 
     return teacher_script, modules
 
@@ -253,6 +267,9 @@ def _run_module_student_agents(
     {{
       "profile_name": "必须与下列姓名之一完全一致: {", ".join(profile_names)}",
       "engagement": "低|中低|中|中高|高",
+            "listening_state": "专注跟随|基本跟随|间歇走神|明显走神|关键段未听到",
+            "distraction_reason": "若走神请说明原因，如兴趣不足/前置缺口/课堂疲劳；若无可空字符串",
+            "missed_key_points": ["因走神或注意力断裂而漏听的关键点"],
       "verbal_response": "学生在课堂上可能说的话或简短反馈（1-3句）",
       "confusion_points": ["困惑点"],
       "likely_questions": ["可能向老师提出的问题"],
@@ -300,6 +317,9 @@ def _run_module_student_agents(
                 confusion_points=_as_str_list(item.get("confusion_points"))[:5],
                 likely_questions=_as_str_list(item.get("likely_questions"))[:5],
                 error_predictions=_as_str_list(item.get("error_predictions"))[:5],
+                listening_state=str(item.get("listening_state", "基本跟随")).strip() or "基本跟随",
+                distraction_reason=str(item.get("distraction_reason", "")).strip(),
+                missed_key_points=_as_str_list(item.get("missed_key_points"))[:4],
                 confidence_score=max(0, min(100, _safe_int(item.get("confidence_score", 58), 58))),
                 consistency_note=str(item.get("consistency_note", "")).strip(),
             )
@@ -319,6 +339,7 @@ def _run_module_student_agents(
                 confusion_points=profile.weaknesses[:3],
                 likely_questions=[],
                 error_predictions=profile.likely_errors[:3],
+                listening_state="基本跟随",
                 confidence_score=55,
                 consistency_note="使用画像默认项补全。",
             )
@@ -334,6 +355,9 @@ def _format_round_interactions(interactions: list[ModuleStudentInteraction]) -> 
             "\n".join(
                 [
                     f"- 学生: {inter.profile_name} | 参与度: {inter.engagement}",
+                    f"  听课状态: {inter.listening_state}",
+                    f"  分心原因: {inter.distraction_reason or '无'}",
+                    f"  漏听要点: {'; '.join(inter.missed_key_points[:3]) if inter.missed_key_points else '无'}",
                     f"  首轮发言: {inter.verbal_response}",
                     f"  困惑: {'; '.join(inter.confusion_points[:4])}",
                     f"  提问: {'; '.join(inter.likely_questions[:4])}",
@@ -392,6 +416,9 @@ def _run_module_deliberation_agent(
     {{
       "profile_name": "必须与下列姓名之一完全一致: {", ".join(profile_names)}",
       "engagement": "低|中低|中|中高|高",
+            "listening_state": "专注跟随|基本跟随|间歇走神|明显走神|关键段未听到",
+            "distraction_reason": "若走神请说明原因；若无可空字符串",
+            "missed_key_points": ["复议后确认仍漏听的关键点"],
       "verbal_response": "第二轮复议后学生在课堂上可能说的话（1-3句）",
       "confusion_points": ["复议后仍存在的困惑点"],
       "likely_questions": ["复议后最关键问题"],
@@ -445,6 +472,9 @@ def _run_module_deliberation_agent(
                 confusion_points=_as_str_list(item.get("confusion_points"))[:5],
                 likely_questions=_as_str_list(item.get("likely_questions"))[:5],
                 error_predictions=_as_str_list(item.get("error_predictions"))[:5],
+                listening_state=str(item.get("listening_state", "基本跟随")).strip() or "基本跟随",
+                distraction_reason=str(item.get("distraction_reason", "")).strip(),
+                missed_key_points=_as_str_list(item.get("missed_key_points"))[:4],
                 confidence_score=max(0, min(100, _safe_int(item.get("confidence_score", 68), 68))),
                 consistency_note=str(item.get("consistency_note", "")).strip(),
             )
@@ -485,6 +515,7 @@ def _run_module_deliberation_agent(
                 confusion_points=profile.weaknesses[:3],
                 likely_questions=[],
                 error_predictions=profile.likely_errors[:3],
+                    listening_state="基本跟随",
                     confidence_score=60,
                     consistency_note="讨论轮缺失，已回退第一轮/画像。",
             )
@@ -534,6 +565,9 @@ def _summarize_interactions_for_aggregator(
         for inter in module_items:
             chunks.append(
                 f"- {inter.profile_name} | 参与度 {inter.engagement}\n"
+                f"  听课状态: {inter.listening_state}\n"
+                f"  分心原因: {inter.distraction_reason or '无'}\n"
+                f"  漏听要点: {'; '.join(inter.missed_key_points[:3]) if inter.missed_key_points else '无'}\n"
                 f"  课堂发言: {inter.verbal_response}\n"
                 f"  困惑: {'; '.join(inter.confusion_points[:3])}\n"
                 f"  提问: {'; '.join(inter.likely_questions[:3])}\n"
@@ -637,6 +671,9 @@ def _run_aggregator_agent(
     {{
       "profile_name": "学生姓名（与画像一致）",
       "engagement": "低|中低|中|中高|高",
+            "listening_state": "专注跟随|基本跟随|间歇走神|明显走神|关键段未听到",
+            "distraction_reason": "若存在走神请说明主要原因；若无可空",
+            "missed_key_points": ["整课中因注意力问题漏听的关键点"],
       "confusion_points": ["整课汇总的困惑点，去重后3-6条"],
       "likely_questions": ["整课可能提问"],
       "error_predictions": ["整课典型错误预测"]
@@ -700,21 +737,30 @@ def analyze_deep_with_llm(
 ) -> SimulationReport:
     profiles = get_profiles_for_subject(subject, grade)
     student_memory = _init_student_memory(profiles)
-    module_count = _module_count_for_material(text)
-    total_steps = 2 + module_count * 2  # teacher + per-module round1+round2 + aggregator
-
-    _emit(progress_callback, "教师智能体：正在生成课堂讲稿与教学模块…", 0, total_steps)
+    _emit(progress_callback, "教师智能体：正在根据知识点自动划分教学模块…", 0, 4)
     teacher_script, modules = _run_teacher_agent(
         text=text,
         subject=subject,
         lesson_topic=lesson_topic,
         grade=grade,
-        module_count=module_count,
         provider=provider,
         api_key=api_key,
         base_url=base_url,
         model=model,
     )
+
+    if not modules:
+        raise LLMApiError("未生成有效模块。")
+
+    # If model returns too few modules unexpectedly, fallback to heuristic target reminder via truncation guard.
+    min_expected = 2
+    if len(modules) < min_expected:
+        fallback_count = _fallback_module_count_for_material(text)
+        raise LLMApiError(
+            f"模型返回模块数过少（{len(modules)}）。建议重试；当前内容通常应划分为约 {fallback_count} 个模块。"
+        )
+
+    total_steps = 2 + len(modules) * 2  # teacher + per-module round1+round2 + aggregator
 
     all_interactions: list[ModuleStudentInteraction] = []
     module_deliberations: list[ModuleDeliberationRecord] = []
