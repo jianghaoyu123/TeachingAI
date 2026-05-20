@@ -251,7 +251,7 @@ def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str, improv
     "lesson_plan_change_summary": [
         "概括说明 AI 对原教案做了哪些关键修改，每条一句话"
     ],
-    "revised_lesson_plan": "基于上述建议修改后的完整新教案或课堂流程稿，要求分点清晰，可直接给老师参考使用。请特别注意教案改进方向的要求。"
+    "revised_lesson_plan": "基于上述建议修改后的完整新教案，要求：1) 保持与原教案相同的结构和详细程度；2) 保留教学过程中的具体教学步骤、提问、例题和互动设计；3) 根据优化建议对原教案进行针对性修改；4) 分点清晰，层次分明，可直接给老师参考使用。请特别注意教案改进方向的要求。"
 }}
 """.strip()
 
