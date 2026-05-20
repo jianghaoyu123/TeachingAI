@@ -835,6 +835,19 @@ def run_app() -> None:
                 running=False,
             )
         else:
+            progress_bar = st.progress(0, text="快速模式：正在准备分析...")
+            for step, desc in enumerate(
+                [
+                    "正在解析教学内容...",
+                    "正在调用AI模型...",
+                    "正在生成学生模拟反馈...",
+                    "正在整理优化建议...",
+                ],
+                start=1,
+            ):
+                progress_bar.progress(step * 25, text=desc)
+                time.sleep(0.3)
+            rate_limit_status = st.empty()
             rate_limit_status.info("快速模式：正在模拟学生反应并生成优化建议...")
             report = _call_with_rate_limit_retry(
                 analyze_with_model_api,
@@ -849,6 +862,7 @@ def run_app() -> None:
                 model=model_name,
                 improvement_focus=improvement_focus,
             )
+            progress_bar.progress(100, text="分析完成！")
     except LLMRateLimitError:
         st.warning(
             "⚠️ 免费模型当前请求人数过多，已等待5分钟仍不可用。\n\n"
