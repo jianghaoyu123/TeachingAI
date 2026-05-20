@@ -723,9 +723,7 @@ def run_app() -> None:
 
     if simulation_running:
         st.info("⏳ 模拟正在进行中，请稍候...")
-        return
-
-    if not run_clicked:
+    elif not run_clicked:
         st.session_state["simulation_running"] = False
         if api_ready:
             if isinstance(latest_report, SimulationReport):
@@ -747,7 +745,12 @@ def run_app() -> None:
             st.info("当前未完成 API 配置，按钮已禁用。")
         return
 
-    st.session_state["simulation_running"] = True
+    if not st.session_state.get("simulation_triggered", False):
+        st.session_state["simulation_running"] = True
+        st.session_state["simulation_triggered"] = True
+        st.rerun()
+    
+    st.session_state["simulation_triggered"] = False
 
     text_chunks: list[str] = []
     pptx_sources: list[tuple[str, bytes]] = []
