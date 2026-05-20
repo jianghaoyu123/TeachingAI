@@ -7,10 +7,10 @@ import time
 import streamlit as st
 import streamlit.components.v1 as components
 
-from teachingai_app.core.analysis_pipeline import analyze_deep_with_model_api, analyze_with_model_api
+from teachingai_app.core.analysis_pipeline import analyze_deep_with_model_api, analyze_exam_with_model_api, analyze_with_model_api
 from teachingai_app.core.ingestion import ParseError, merge_text_sources, parse_file
 from teachingai_app.core.llm_api import LLMApiError, PROVIDER_DEFAULTS
-from teachingai_app.core.models import SimulationReport
+from teachingai_app.core.models import ExamReport, SimulationReport
 from teachingai_app.core.pptx_revision import PptxRevisionError, build_revised_pptx_payload
 from teachingai_app.ui.constants import (
     EXPORT_OPTIONS,
@@ -21,7 +21,7 @@ from teachingai_app.ui.constants import (
     SUBJECT_OPTIONS,
 )
 from teachingai_app.ui.profiles_sidebar import render_profile_editor
-from teachingai_app.ui.render import render_simulation_results
+from teachingai_app.ui.render import render_exam_results, render_simulation_results
 
 
 def _mount_app_chrome_styles() -> None:
@@ -90,7 +90,15 @@ def _render_classroom_hero(analysis_mode: str, latest_report: SimulationReport |
     if isinstance(latest_report, SimulationReport) and latest_report.analysis_mode == "deep":
         module_count = len(latest_report.lesson_modules)
 
-    if analysis_mode == "deep":
+    if analysis_mode == "exam":
+        phase_chips = [
+            "阶段 1 输入试卷",
+            "阶段 2 题目解析",
+            "阶段 3 学生作答模拟",
+            "阶段 4 教学建议",
+        ]
+        subtitle = "试卷分析模式：解析题目结构，模拟各层级学生作答，识别教学薄弱点。"
+    elif analysis_mode == "deep":
         module_stage = f"阶段 2 分模块讲解（{module_count} 模块）" if module_count > 0 else "阶段 2 分模块讲解"
         phase_chips = [
             "阶段 1 输入材料",
@@ -516,10 +524,12 @@ def run_app() -> None:
     st.subheader("分析模式")
     analysis_mode = st.radio(
         "分析模式",
-        options=["quick", "deep"],
-        format_func=lambda m: "⚡ 快速模式 — 一次分析，速度较快"
-        if m == "quick"
-        else "🧠 深度思考模式 — 多轮讨论与裁决预演，更真实",
+        options=["quick", "deep", "exam"],
+        format_func=lambda m: (
+            "⚡ 快速模式 — 一次分析，速度较快" if m == "quick"
+            else "🧠 深度思考模式 — 多轮讨论与裁决预演，更真实" if m == "deep"
+            else "📝 试卷分析模式 — 上传试题，模拟学生作答"
+        ),
         index=0,
         horizontal=True,
         label_visibility="collapsed",
@@ -530,6 +540,11 @@ def run_app() -> None:
             "深度模式流程：教师智能体生成讲稿并分模块 → 第一轮学生反应（带跨模块记忆）"
             " → 第二轮讨论(反方挑战+教学观察员进行对抗式复核与课堂可行性把关） → 汇总报告。"
             "耗时与 API 调用次数显著高于快速模式。"
+        )
+    elif analysis_mode == "exam":
+        st.info(
+            "试卷分析模式流程：解析题目结构（题型/分值/知识点）→ 模拟各层级学生作答 → 给出逐题诊断与教学改进建议。"
+            "共约 3 次 API 调用。支持 TXT/Markdown/DOCX/PDF 格式试卷，也可直接粘贴题目文本。"
         )
     else:
         st.caption("快速模式适合备课初期快速摸底；如需分环节、分学生的细颗粒度反馈，可选用深度思考模式。")
@@ -550,7 +565,14 @@ def run_app() -> None:
 
     if not run_clicked:
         if api_ready:
-            if isinstance(latest_report, SimulationReport):
+            if analysis_mode == "exam":
+                latest_exam = st.session_state.get("latest_exam_report")
+                if isinstance(latest_exam, ExamReport):
+                    st.caption("显示最近一次试卷分析结果。可修改参数后再次点击【开始预演与优化】更新。")
+                    render_exam_results(latest_exam)
+                else:
+                    st.info("请先上传试卷文件或粘贴题目文本，然后点击「开始预演与优化」。")
+            elif isinstance(latest_report, SimulationReport):
                 st.caption("显示最近一次推理结果。可修改参数后再次点击“开始预演与优化”更新。")
                 mode_name = "深度思考模式" if latest_report.analysis_mode == "deep" else "快速模式"
                 st.caption(
@@ -595,7 +617,31 @@ def run_app() -> None:
 
     report: SimulationReport
     try:
-        if analysis_mode == "deep":
+        if analysis_mode == "exam":
+            progress_bar = st.progress(0, text="试卷分析模式启动…")
+
+            def on_exam_progress(message: str, current: int, total: int) -> None:
+                ratio = current / total if total > 0 else 0.0
+                progress_bar.progress(min(ratio, 1.0), text=message)
+
+            with st.spinner("正在分析试卷…"):
+                exam_report = analyze_exam_with_model_api(
+                    text=merged_text,
+                    subject=subject,
+                    exam_topic=lesson_topic,
+                    grade=grade,
+                    provider=provider,
+                    api_key=api_key,
+                    base_url=base_url,
+                    model=model_name,
+                    progress_callback=on_exam_progress,
+                )
+            progress_bar.progress(1.0, text="试卷分析完成")
+            st.session_state["latest_exam_report"] = exam_report
+            st.caption(f"当前分析来源: 模型 API（{provider} / {model_name} / 试卷分析模式）")
+            render_exam_results(exam_report)
+            return
+        elif analysis_mode == "deep":
             _mount_live_panel_styles()
             progress_bar = st.progress(0, text="深度思考模式启动…")
             panel_placeholder = st.empty()
