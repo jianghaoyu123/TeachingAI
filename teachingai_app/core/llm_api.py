@@ -31,12 +31,6 @@ def get_glm_api_key_from_env() -> str | None:
     return os.environ.get("LLM_GLM_KEY") or None
 
 
-GLM_FREE_MODELS = {
-    "glm-4-flash": "GLM-4-FLASH（免费额度）",
-    "glm-4.7b-flash": "GLM-4.7B-FLASH（免费额度）",
-}
-
-
 PROVIDER_DEFAULTS = {
     "deepseek": {
         "base_url": "https://api.deepseek.com",
