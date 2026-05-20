@@ -303,19 +303,16 @@ def _ensure_api_settings() -> None:
     current_mode = str(st.session_state.get("api_mode", "custom"))
 
     if current_mode == "free_glm":
+        st.session_state["api_base_url"] = PROVIDER_DEFAULTS["glm"]["base_url"]
+        st.session_state["api_provider"] = "glm"
         if env_glm_key:
             st.session_state["api_key"] = env_glm_key
-            st.session_state["api_base_url"] = PROVIDER_DEFAULTS["glm"]["base_url"]
-            st.session_state["api_provider"] = "glm"
             st.session_state["api_model_choice"] = "glm-4-flash"
             st.session_state["api_model_name"] = "glm-4-flash"
         else:
-            st.session_state["api_mode"] = "custom"
-            st.session_state["api_provider"] = "deepseek"
             st.session_state["api_key"] = ""
-            st.session_state["api_base_url"] = PROVIDER_DEFAULTS["deepseek"]["base_url"]
-            st.session_state["api_model_choice"] = PROVIDER_DEFAULTS["deepseek"]["model"]
-            st.session_state["api_model_name"] = PROVIDER_DEFAULTS["deepseek"]["model"]
+            st.session_state["api_model_choice"] = "glm-4-flash"
+            st.session_state["api_model_name"] = "glm-4-flash"
     else:
         if "api_provider" not in st.session_state:
             st.session_state["api_provider"] = "deepseek"
@@ -545,20 +542,19 @@ def run_app() -> None:
         )
 
         if api_mode == "free_glm":
+            st.success("🎁 使用免费API模型（GLM系列）")
+            free_model_options = [opt[0] for opt in FREE_GL_MODELS.items()]
+            free_model_choice = st.selectbox(
+                "选择免费模型",
+                options=free_model_options,
+                format_func=lambda x: FREE_GL_MODELS.get(x, x),
+                key="api_model_choice",
+            )
+            st.session_state["api_model_choice"] = free_model_choice
+            st.session_state["api_model_name"] = free_model_choice
+            st.caption(f"当前模型：{FREE_GL_MODELS.get(free_model_choice, free_model_choice)}")
             if not env_glm_key:
-                st.error("⚠️ 未检测到免费API Key，请切换到「用户个人API模型」模式")
-            else:
-                st.success("🎁 使用免费API模型（GLM系列）")
-                free_model_options = [opt[0] for opt in FREE_GL_MODELS.items()]
-                free_model_choice = st.selectbox(
-                    "选择免费模型",
-                    options=free_model_options,
-                    format_func=lambda x: FREE_GL_MODELS.get(x, x),
-                    key="api_model_choice",
-                )
-                st.session_state["api_model_choice"] = free_model_choice
-                st.session_state["api_model_name"] = free_model_choice
-                st.caption(f"当前模型：{FREE_GL_MODELS.get(free_model_choice, free_model_choice)}")
+                st.warning("⚠️ 未检测到 LLM_GLM_KEY 环境变量，免费模型暂时不可用。请切换到「用户个人API模型」模式。")
         else:
             st.info("🔑 使用用户个人API模型")
             provider_options = [opt[0] for opt in PROVIDER_OPTIONS_FOR_CUSTOM]
