@@ -869,6 +869,9 @@ def run_app() -> None:
                 improvement_focus=improvement_focus,
             )
             progress_bar.progress(100, text="分析完成！")
+            time.sleep(1)
+            progress_bar.empty()
+            rate_limit_status.empty()
     except LLMRateLimitError:
         st.session_state["simulation_running"] = False
         st.warning(
