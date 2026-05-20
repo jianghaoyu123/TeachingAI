@@ -582,7 +582,7 @@ def run_app() -> None:
             if not env_glm_key:
                 st.warning("⚠️ 未检测到 LLM_GLM_KEY 环境变量，可能因为软件为本地模式运行，免费模型暂时不可用。请切换到「用户个人API模型」模式。")
         else:
-            st.info("🔑 使用用户个人API模型 (先选择模型提供商)")
+            st.info("🔑 使用用户个人API模型")
             provider_options = [opt[0] for opt in PROVIDER_OPTIONS_FOR_CUSTOM]
 
             current_provider = str(st.session_state.get("api_provider", "deepseek"))
@@ -592,7 +592,7 @@ def run_app() -> None:
                 provider_index = 0
 
             selected_provider = st.selectbox(
-                "模型提供商",
+                "模型提供商 (先选我)",
                 options=provider_options,
                 format_func=lambda x: dict(PROVIDER_OPTIONS_FOR_CUSTOM).get(x, x),
                 index=provider_index,
