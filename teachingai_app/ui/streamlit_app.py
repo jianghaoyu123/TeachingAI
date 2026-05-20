@@ -745,6 +745,17 @@ def run_app() -> None:
             st.info("当前未完成 API 配置，按钮已禁用。")
         return
 
+    # 先检查是否有教案文件或文字输入
+    has_content = False
+    if uploaded_files:
+        has_content = True
+    if manual_text.strip():
+        has_content = True
+    
+    if not has_content:
+        st.error("请先上传教案文件或粘贴教案文字，然后再开始模拟。")
+        return
+
     if not st.session_state.get("simulation_triggered", False):
         st.session_state["simulation_running"] = True
         st.session_state["simulation_triggered"] = True
