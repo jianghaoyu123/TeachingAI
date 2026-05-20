@@ -507,6 +507,37 @@ def _build_cached_revised_pptx_payload(report: SimulationReport) -> tuple[bytes,
         return None
 
 
+MAX_RATE_LIMIT_WAIT_SECONDS = 300
+RATE_LIMIT_WAIT_INTERVAL = 5
+
+
+def _call_with_rate_limit_retry(
+    api_call_func,
+    status_container: st.empty,
+    *args,
+    **kwargs,
+):
+    start_time = time.time()
+    while True:
+        try:
+            return api_call_func(*args, **kwargs)
+        except LLMRateLimitError:
+            elapsed = time.time() - start_time
+            remaining = MAX_RATE_LIMIT_WAIT_SECONDS - elapsed
+            if remaining <= 0:
+                status_container.error(
+                    "⚠️ 等待超时（已等待5分钟），免费模型仍然不可用。\n\n"
+                    "建议切换到「用户个人API模型」模式，使用您自己的 API Key 以获得更稳定的体验。"
+                )
+                raise LLMRateLimitError("Rate limit wait timeout")
+            status_container.info(
+                f"⏳ 当前免费模型访问人数过多，正在排队中...\n\n"
+                f"预计还需等待: {int(remaining)} 秒\n\n"
+                "您可以关闭此页面，稍后再试。"
+            )
+            time.sleep(RATE_LIMIT_WAIT_INTERVAL)
+
+
 def run_app() -> None:
     st.set_page_config(page_title="AI虚拟学生教学预演", page_icon="📘", layout="wide")
     _mount_browser_watchdog()
@@ -737,6 +768,7 @@ def run_app() -> None:
         return
 
     report: SimulationReport
+    rate_limit_status = st.empty()
     try:
         if analysis_mode == "deep":
             _mount_live_panel_styles()
@@ -774,7 +806,9 @@ def run_app() -> None:
                     running=True,
                 )
 
-            report = analyze_deep_with_model_api(
+            report = _call_with_rate_limit_retry(
+                analyze_deep_with_model_api,
+                rate_limit_status,
                 text=merged_text,
                 subject=subject,
                 lesson_topic=lesson_topic,
@@ -801,28 +835,30 @@ def run_app() -> None:
                 running=False,
             )
         else:
-            with st.spinner("快速模式：正在模拟学生反应并生成优化建议..."):
-                report = analyze_with_model_api(
-                    text=merged_text,
-                    subject=subject,
-                    lesson_topic=lesson_topic,
-                    grade=grade,
-                    provider=provider,
-                    api_key=api_key,
-                    base_url=base_url,
-                    model=model_name,
-                    improvement_focus=improvement_focus,
-                )
-    except LLMRateLimitError as exc:
+            rate_limit_status.info("快速模式：正在模拟学生反应并生成优化建议...")
+            report = _call_with_rate_limit_retry(
+                analyze_with_model_api,
+                rate_limit_status,
+                text=merged_text,
+                subject=subject,
+                lesson_topic=lesson_topic,
+                grade=grade,
+                provider=provider,
+                api_key=api_key,
+                base_url=base_url,
+                model=model_name,
+                improvement_focus=improvement_focus,
+            )
+    except LLMRateLimitError:
         st.warning(
-            "⚠️ 免费模型当前请求过于频繁（并发数或QPM达到上限），请稍后再试。\n\n"
-            "如果希望拥有更快速、更强大的体验，请点击左侧「打开API设置窗口」切换到自定义API Key模式。"
+            "⚠️ 免费模型当前请求人数过多，已等待5分钟仍不可用。\n\n"
+            "建议切换到「用户个人API模型」模式，使用您自己的 API Key 以获得更稳定的体验。"
         )
         return
     except LLMApiError as exc:
         st.error(
             f"模型调用失败: {exc}\n\n"
-            "如果问题持续存在，请点击左侧「打开API设置窗口」切换到自定义API Key模式。"
+            "如果问题持续存在，请点击左侧「API模式」切换到用户个人API模型，使用您自己的API Key。"
         )
         return
 
