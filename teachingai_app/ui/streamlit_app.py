@@ -607,14 +607,17 @@ def run_app() -> None:
         enable_ocr = True
         st.info("当前版本仅支持在线模型 API 分析。")
 
-    subject = st.selectbox("学科", SUBJECT_OPTIONS, index=0, key="subject_select")
-    grade = st.selectbox(
-        "年级",
-        GRADE_OPTIONS,
-        index=7,
-        format_func=lambda g: str(GRADE_DISPLAY_LABELS.get(g, g)),
-        key="grade_select",
-    )
+    col1, col2 = st.columns(2)
+    with col1:
+        subject = st.selectbox("学科", SUBJECT_OPTIONS, index=0, key="subject_select")
+    with col2:
+        grade = st.selectbox(
+            "年级",
+            GRADE_OPTIONS,
+            index=7,
+            format_func=lambda g: str(GRADE_DISPLAY_LABELS.get(g, g)),
+            key="grade_select",
+        )
 
     lesson_topic = st.text_input("课题", key="lesson_topic_input", value="一元一次方程")
     uploaded_files = st.file_uploader(
