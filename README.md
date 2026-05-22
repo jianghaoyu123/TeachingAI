@@ -1,5 +1,7 @@
 # AI Virtual Student Teaching Lab
 
+Language: English | [中文](README_CN.md)
+
 A lesson-preparation tool for teachers: upload a lesson plan, verbatim script, or PPT to simulate reactions from different student groups and receive teaching-design improvement suggestions. Student profiles are automatically generated based on grade, subject, and ability level, and can also be fully customized. You can specify which student level to prioritize when generating improvement suggestions.
 
 Live App: https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
