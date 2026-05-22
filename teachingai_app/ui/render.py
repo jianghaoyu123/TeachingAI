@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+import re
 from typing import Any
 
 import streamlit as st
@@ -9,6 +10,13 @@ from teachingai_app.core.models import SimulationReport
 from teachingai_app.core.profiles import get_profiles_for_subject
 from teachingai_app.core.reporting import build_revised_plan_payload, build_student_report_payload, format_revised_lesson_plan
 from teachingai_app.ui.constants import PROFILE_LEVEL_FULL_LABELS
+
+
+_PROFILE_LEVEL_SUFFIX_RE = re.compile(r"\s*[（(](low|mid-low|mid|mid-high|high)[)）]\s*$", re.IGNORECASE)
+
+
+def _normalize_profile_name(name: str) -> str:
+    return _PROFILE_LEVEL_SUFFIX_RE.sub("", str(name or "").strip()).strip()
 
 
 def reaction_attention_level(
@@ -153,11 +161,13 @@ def _mount_virtual_classroom_theme() -> None:
 def _collect_student_names(report: SimulationReport) -> list[str]:
     names: list[str] = []
     for reaction in report.reactions:
-        if reaction.profile_name and reaction.profile_name not in names:
-            names.append(reaction.profile_name)
+        normalized_name = _normalize_profile_name(reaction.profile_name)
+        if normalized_name and normalized_name not in names:
+            names.append(normalized_name)
     for inter in report.module_interactions:
-        if inter.profile_name and inter.profile_name not in names:
-            names.append(inter.profile_name)
+        normalized_name = _normalize_profile_name(inter.profile_name)
+        if normalized_name and normalized_name not in names:
+            names.append(normalized_name)
     return names
 
 
@@ -174,10 +184,11 @@ def _aggregate_interaction_counts(report: SimulationReport) -> dict[str, dict[st
     error_buckets: dict[str, set[str]] = {}
 
     for inter in report.module_interactions:
-        confusion_buckets.setdefault(inter.profile_name, set()).update(
+        normalized_name = _normalize_profile_name(inter.profile_name)
+        confusion_buckets.setdefault(normalized_name, set()).update(
             [item.strip() for item in inter.confusion_points if item.strip()]
         )
-        error_buckets.setdefault(inter.profile_name, set()).update(
+        error_buckets.setdefault(normalized_name, set()).update(
             [item.strip() for item in inter.error_predictions if item.strip()]
         )
 
@@ -297,7 +308,7 @@ def _render_virtual_timeline(report: SimulationReport) -> None:
             module_items = [
                 item
                 for item in interactions_by_module.get(module.module_id, [])
-                if not selected_student_set or item.profile_name in selected_student_set
+                if not selected_student_set or _normalize_profile_name(item.profile_name) in selected_student_set
             ]
             if not module_items:
                 st.caption("该环节暂无学生互动记录。")
@@ -308,7 +319,7 @@ def _render_virtual_timeline(report: SimulationReport) -> None:
                 st.markdown(
                     f"""
                     <div class="vc-qa vc-qa-student">
-                        <div class="vc-qa-who">🙋 {inter.profile_name} · 参与度 {inter.engagement} · 置信度 {inter.confidence_score}</div>
+                        <div class="vc-qa-who">🙋 {_normalize_profile_name(inter.profile_name)} · 参与度 {inter.engagement} · 置信度 {inter.confidence_score}</div>
                         <div class="vc-qa-text">听课状态: {inter.listening_state}</div>
                         <div class="vc-qa-text">分心原因: {inter.distraction_reason or '无'}</div>
                         <div class="vc-qa-text">漏听要点: {missed_preview}</div>
@@ -385,11 +396,13 @@ def render_simulation_results(
     if report.reactions:
         profiles_for_display = get_profiles_for_subject(report.subject, report.grade)
         profile_level_by_name = {p.name: p.level for p in profiles_for_display}
+        profile_by_name = {p.name: p for p in profiles_for_display}
 
         def display_name_with_level(profile_name: str) -> str:
-            level = profile_level_by_name.get(profile_name, "mid")
+            normalized_name = _normalize_profile_name(profile_name)
+            level = profile_level_by_name.get(normalized_name, "mid")
             level_cn = PROFILE_LEVEL_FULL_LABELS.get(level, "中等稳定型")
-            return f"{profile_name}（{level_cn}）"
+            return f"{normalized_name}（{level_cn}）"
 
         summary_cols = st.columns(len(report.reactions))
         for col, reaction in zip(summary_cols, report.reactions):
@@ -431,6 +444,15 @@ def render_simulation_results(
                         unsafe_allow_html=True,
                     )
                 with top_col2:
+                    profile = profile_by_name.get(_normalize_profile_name(reaction.profile_name))
+                    if profile is not None:
+                        st.caption(
+                            "量化画像: "
+                            f"活跃度 {profile.activity_level}/100 | "
+                            f"正确率 {profile.baseline_success_rate}/100 | "
+                            f"专注 {profile.focus_stability}/100 | "
+                            f"覆盖 {profile.knowledge_coverage}/100"
+                        )
                     if reaction.distraction_reason:
                         st.markdown(f"**走神/注意力说明**：{reaction.distraction_reason}")
                     if reaction.missed_key_points:
@@ -455,7 +477,10 @@ def render_simulation_results(
         st.write(f"学科: {report.subject} | 年级: {report.grade} | 课题: {report.lesson_topic}")
         st.write(f"分析模式: {mode_label}")
         st.subheader("关键知识点")
-        st.write("、".join(report.extracted_key_points) if report.extracted_key_points else "未提取到")
+        if report.extracted_key_points:
+            st.markdown("\n".join(f"- {point}" for point in report.extracted_key_points))
+        else:
+            st.write("未提取到")
         st.subheader("题目难度判断")
         if report.difficulty:
             st.metric("综合难度", report.difficulty.overall_level)
@@ -476,13 +501,11 @@ def render_simulation_results(
                 st.write(f"置信等级: {report.confidence.overall_level}")
                 for item in report.confidence.rationale:
                     st.write(f"- {item}")
-                if report.confidence.profile_confidence:
-                    st.markdown("**分学生置信说明**")
-                    st.markdown("\n".join(f"- {item}" for item in report.confidence.profile_confidence))
             else:
                 st.info("未返回置信度结果。")
         else:
             st.caption("ℹ️ 置信度评估仅在深度思考模式下可用")
+
     with col2:
         st.subheader("优化建议")
         for item in report.suggestions:

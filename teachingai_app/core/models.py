@@ -10,6 +10,10 @@ class StudentProfile:
     weaknesses: List[str]
     likely_errors: List[str]
     support_needs: List[str]
+    activity_level: int = 50
+    baseline_success_rate: int = 60
+    focus_stability: int = 60
+    knowledge_coverage: int = 50
 
 
 @dataclass

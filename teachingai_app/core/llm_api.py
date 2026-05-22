@@ -26,6 +26,21 @@ class LLMRateLimitError(LLMApiError):
     pass
 
 
+_PROFILE_LEVEL_SUFFIX_RE = re.compile(r"\s*[（(](low|mid-low|mid|mid-high|high)[)）]\s*$", re.IGNORECASE)
+
+
+def normalize_profile_name(raw_name: str, known_names: set[str] | None = None) -> str:
+    name = str(raw_name or "").strip()
+    if not name:
+        return ""
+    if known_names and name in known_names:
+        return name
+    cleaned = _PROFILE_LEVEL_SUFFIX_RE.sub("", name).strip()
+    if known_names and cleaned in known_names:
+        return cleaned
+    return cleaned
+
+
 def get_glm_api_key_from_env() -> str | None:
     import os
     return os.environ.get("LLM_GLM_KEY") or None
@@ -186,6 +201,13 @@ def _build_profile_context(subject: str, grade: str) -> str:
                     f"  薄弱点: {'; '.join(p.weaknesses)}",
                     f"  典型错误: {'; '.join(p.likely_errors)}",
                     f"  支持需求: {'; '.join(p.support_needs)}",
+                    (
+                        "  量化画像: "
+                        f"学习活跃度={p.activity_level}/100; "
+                        f"基线正确率={p.baseline_success_rate}/100; "
+                        f"专注稳定性={p.focus_stability}/100; "
+                        f"知识覆盖度={p.knowledge_coverage}/100"
+                    ),
                 ]
             )
         )
@@ -551,14 +573,16 @@ def build_report_from_parsed(
     module_deliberations: list | None = None,
 ) -> SimulationReport:
     key_points = _as_list(parsed.get("key_points"))[:12]
+    profile_names = {p.name for p in get_profiles_for_subject(subject, grade)}
 
     reactions: list[StudentReaction] = []
     for item in parsed.get("reactions", []):
         if not isinstance(item, dict):
             continue
+        profile_name = normalize_profile_name(item.get("profile_name", "未命名画像"), profile_names)
         reactions.append(
             StudentReaction(
-                profile_name=str(item.get("profile_name", "未命名画像")),
+                profile_name=profile_name or "未命名画像",
                 engagement=str(item.get("engagement", "中")),
                 confusion_points=_as_list(item.get("confusion_points"))[:6],
                 likely_questions=_as_list(item.get("likely_questions"))[:6],

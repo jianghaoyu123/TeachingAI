@@ -509,6 +509,69 @@ MAX_RATE_LIMIT_WAIT_SECONDS = 300
 RATE_LIMIT_WAIT_INTERVAL = 5
 
 
+def _topic_tokens(topic: str) -> list[str]:
+    tokens: list[str] = []
+    raw = (topic or "").strip()
+    if not raw:
+        return tokens
+    split_chars = "，,。.;；:：、()（）-_/\\\n\t "
+    current: list[str] = []
+    for ch in raw:
+        if ch in split_chars:
+            if current:
+                token = "".join(current).strip()
+                if token:
+                    tokens.append(token)
+                current = []
+        else:
+            current.append(ch)
+    if current:
+        token = "".join(current).strip()
+        if token:
+            tokens.append(token)
+    return [t for t in tokens if len(t) >= 2]
+
+
+def _material_consistency_check(subject: str, lesson_topic: str, material: str) -> tuple[bool, str, float]:
+    text = (material or "").strip()
+    if not text:
+        return False, "未检测到可分析文本。", 0.0
+
+    subject_keywords: dict[str, list[str]] = {
+        "数学": ["方程", "函数", "代数", "几何", "不等式", "分式", "概率", "统计", "解", "计算", "一次函数", "二次函数", "一元一次方程"],
+        "语文": ["课文", "阅读", "写作", "作文", "古诗", "文言文", "修辞", "段落", "中心思想", "语文"],
+        "英语": ["grammar", "vocabulary", "reading", "listening", "speaking", "writing", "tense", "sentence", "英语"],
+        "物理": ["力", "速度", "加速度", "电路", "电压", "电流", "能量", "功", "压强", "物理"],
+        "化学": ["元素", "化合物", "分子", "原子", "反应", "酸", "碱", "盐", "化学方程式", "化学"],
+        "生物": ["细胞", "遗传", "生态", "光合作用", "呼吸作用", "生物", "组织", "器官"],
+        "历史": ["朝代", "历史", "变法", "战争", "制度", "文明", "史料", "年代"],
+        "地理": ["地形", "气候", "经纬", "区域", "地理", "河流", "人口", "资源"],
+        "政治": ["法律", "道德", "公民", "权利", "义务", "政治", "经济生活", "国家"],
+    }
+
+    keywords = subject_keywords.get(subject, [])
+    subject_hits = sum(1 for kw in keywords if kw and kw in text)
+    subject_ratio = subject_hits / max(1, len(keywords))
+
+    topic_tokens = _topic_tokens(lesson_topic)
+    topic_hits = sum(1 for token in topic_tokens if token in text)
+    topic_ratio = topic_hits / max(1, len(topic_tokens)) if topic_tokens else 0.0
+
+    # Weighted consistency score; topic evidence has higher weight than generic subject evidence.
+    score = 0.35 * min(1.0, subject_ratio * 2.8) + 0.65 * topic_ratio
+
+    if score >= 0.22:
+        return True, "", score
+
+    detail = (
+        f"当前材料与“{subject} / {lesson_topic}”匹配度较低（评分 {score:.2f}）。"
+        f"\n- 学科命中: {subject_hits}/{max(1, len(keywords))}"
+        f"\n- 主题命中: {topic_hits}/{max(1, len(topic_tokens)) if topic_tokens else 1}"
+        "\n请检查学科、课题和上传教案是否一致。"
+    )
+    return False, detail, score
+
+
 def _call_with_rate_limit_retry(
     api_call_func,
     status_container: st.empty,
@@ -768,6 +831,10 @@ def run_app() -> None:
     
     text_chunks: list[str] = []
     pptx_sources: list[tuple[str, bytes]] = []
+    parsed_success_files: list[str] = []
+    parsed_empty_files: list[str] = []
+    parsed_failures: list[str] = []
+
     if uploaded_files:
         for file in uploaded_files:
             file_bytes = file.getvalue()
@@ -775,9 +842,13 @@ def run_app() -> None:
                 pptx_sources.append((file.name, file_bytes))
             try:
                 parsed = parse_file(file.name, file_bytes, enable_ocr=enable_ocr)
-                if parsed:
+                if parsed and parsed.strip():
                     text_chunks.append(parsed)
+                    parsed_success_files.append(file.name)
+                else:
+                    parsed_empty_files.append(file.name)
             except ParseError as exc:
+                parsed_failures.append(f"{file.name}: {exc}")
                 st.warning(f"{file.name} 解析失败: {exc}")
     if manual_text.strip():
         text_chunks.append(manual_text)
@@ -785,8 +856,40 @@ def run_app() -> None:
     merged_text = merge_text_sources(text_chunks)
     if not merged_text.strip():
         st.session_state["simulation_running"] = False
-        st.error("未检测到可分析文本，请上传文件或粘贴内容。")
+        # Give a precise diagnosis instead of a generic "missing lesson plan" message.
+        if uploaded_files:
+            detail_lines: list[str] = ["上传资料未能提取到可分析文本。"]
+            if parsed_empty_files:
+                detail_lines.append(
+                    "以下文件读取成功但未提取到文本（可能是图片型 PDF/PPT，图片识别未生效或识别为空）："
+                )
+                detail_lines.append("- " + "\n- ".join(parsed_empty_files[:8]))
+            if parsed_failures:
+                detail_lines.append("以下文件解析失败：")
+                detail_lines.append("- " + "\n- ".join(parsed_failures[:8]))
+            if not parsed_empty_files and not parsed_failures:
+                detail_lines.append("请检查文件内容是否为可复制文本，或改用粘贴文本方式输入。")
+            detail_lines.append("建议：")
+            detail_lines.append("- 对图片型 PDF/PPT 先进行 OCR 或导出可复制文本后再上传")
+            detail_lines.append("- 或直接在下方文本框粘贴教案内容")
+            st.error("\n".join(detail_lines))
+        else:
+            st.error("未检测到可分析文本，请上传文件或粘贴内容。")
         return
+
+    is_consistent, consistency_message, consistency_score = _material_consistency_check(
+        subject=subject,
+        lesson_topic=lesson_topic,
+        material=merged_text,
+    )
+    if not is_consistent:
+        st.session_state["simulation_running"] = False
+        st.error(
+            "检测到学科/课题与教案内容可能不一致，已阻止本次预演。\n\n"
+            + consistency_message
+        )
+        return
+
     if not api_key.strip():
         st.session_state["simulation_running"] = False
         st.error("请先在侧边栏第一行打开 API 设置窗口并填写 API Key。")
@@ -794,6 +897,7 @@ def run_app() -> None:
 
     report: SimulationReport
     rate_limit_status = st.empty()
+
     try:
         if analysis_mode == "deep":
             _mount_live_panel_styles()

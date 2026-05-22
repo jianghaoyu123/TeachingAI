@@ -3,7 +3,14 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from .llm_api import LLMApiError, _build_profile_context, build_report_from_parsed, invoke_llm, parse_llm_json
+from .llm_api import (
+    LLMApiError,
+    _build_profile_context,
+    build_report_from_parsed,
+    invoke_llm,
+    normalize_profile_name,
+    parse_llm_json,
+)
 from .models import (
     LessonModule,
     ModuleDeliberationRecord,
@@ -14,6 +21,7 @@ from .models import (
 from .profiles import get_profiles_for_subject
 
 ProgressCallback = Callable[[str, int, int], None]
+TeacherFeedback = dict[str, dict[str, Any]]
 
 
 def _emit(callback: ProgressCallback | None, message: str, current: int, total: int) -> None:
@@ -162,6 +170,13 @@ def _format_student_agent_specs(profiles: list[StudentProfile]) -> str:
                     f"- 薄弱点: {'; '.join(p.weaknesses[:4])}",
                     f"- 典型错误倾向: {'; '.join(p.likely_errors[:4])}",
                     f"- 需要的教学支持: {'; '.join(p.support_needs[:3])}",
+                    (
+                        "- 量化画像: "
+                        f"学习活跃度={p.activity_level}/100, "
+                        f"基线正确率={p.baseline_success_rate}/100, "
+                        f"专注稳定性={p.focus_stability}/100, "
+                        f"知识覆盖度={p.knowledge_coverage}/100"
+                    ),
                 ]
             )
         )
@@ -179,9 +194,10 @@ def _init_student_memory(profiles: list[StudentProfile]) -> dict[str, dict[str, 
     memory: dict[str, dict[str, Any]] = {}
     for profile in profiles:
         memory[profile.name] = {
-            "open_confusions": [],
-            "recurring_errors": [],
-            "resolved_points": [],
+            "confusion_strength": {},
+            "error_strength": {},
+            "resolved_strength": {},
+            "teacher_feedback_notes": [],
             "last_module": "",
         }
     return memory
@@ -201,6 +217,86 @@ def _merge_unique(items: list[str], incoming: list[str], limit: int = 8) -> list
     return merged
 
 
+def _bucket_to_ranked_list(bucket: dict[str, float], limit: int = 8) -> list[str]:
+    pairs = sorted(bucket.items(), key=lambda kv: kv[1], reverse=True)
+    return [str(key).strip() for key, _ in pairs if str(key).strip()][:limit]
+
+
+def _reinforce_bucket(bucket: dict[str, float], items: list[str], gain: float, limit: int = 12) -> None:
+    for raw in items:
+        item = str(raw).strip()
+        if not item:
+            continue
+        bucket[item] = float(bucket.get(item, 0.0)) + gain
+    if len(bucket) > limit:
+        ranked = sorted(bucket.items(), key=lambda kv: kv[1], reverse=True)[:limit]
+        bucket.clear()
+        bucket.update({k: v for k, v in ranked})
+
+
+def _decay_memory_state(
+    student_memory: dict[str, dict[str, Any]],
+    *,
+    decay: float = 0.86,
+    forget_threshold: float = 0.35,
+) -> list[str]:
+    updates: list[str] = []
+    for student, mem in student_memory.items():
+        forgotten: list[str] = []
+        for key in ("confusion_strength", "error_strength", "resolved_strength"):
+            bucket = mem.get(key, {})
+            if not isinstance(bucket, dict):
+                continue
+            for item in list(bucket.keys()):
+                bucket[item] = float(bucket[item]) * decay
+                if bucket[item] < forget_threshold:
+                    forgotten.append(item)
+                    bucket.pop(item, None)
+        if forgotten:
+            updates.append(f"{student} 记忆衰减后淡化: {'; '.join(forgotten[:2])}")
+    return updates[:10]
+
+
+def _apply_teacher_feedback(
+    student_memory: dict[str, dict[str, Any]],
+    teacher_feedback: TeacherFeedback,
+) -> list[str]:
+    updates: list[str] = []
+    for student, feedback in teacher_feedback.items():
+        if student not in student_memory or not isinstance(feedback, dict):
+            continue
+        mem = student_memory[student]
+        confusion_bucket = mem.setdefault("confusion_strength", {})
+        error_bucket = mem.setdefault("error_strength", {})
+        resolved_bucket = mem.setdefault("resolved_strength", {})
+
+        reinforce_confusions = _as_str_list(feedback.get("reinforce_confusions"))[:6]
+        reinforce_errors = _as_str_list(feedback.get("reinforce_errors"))[:6]
+        resolve_confusions = _as_str_list(feedback.get("resolve_confusions"))[:6]
+        resolve_errors = _as_str_list(feedback.get("resolve_errors"))[:6]
+        note = str(feedback.get("note", "")).strip()
+
+        _reinforce_bucket(confusion_bucket, reinforce_confusions, gain=1.2)
+        _reinforce_bucket(error_bucket, reinforce_errors, gain=1.2)
+
+        for item in resolve_confusions:
+            confusion_bucket.pop(item, None)
+        _reinforce_bucket(resolved_bucket, resolve_confusions, gain=1.1)
+
+        for item in resolve_errors:
+            error_bucket.pop(item, None)
+        _reinforce_bucket(resolved_bucket, resolve_errors, gain=1.0)
+
+        if note:
+            notes = mem.setdefault("teacher_feedback_notes", [])
+            notes.append(note)
+            mem["teacher_feedback_notes"] = notes[-4:]
+
+        updates.append(f"教师纠偏已应用到 {student}")
+
+    return updates[:12]
+
+
 def _memory_context_for_prompt(
     profiles: list[StudentProfile],
     student_memory: dict[str, dict[str, Any]],
@@ -208,9 +304,10 @@ def _memory_context_for_prompt(
     lines: list[str] = []
     for profile in profiles:
         mem = student_memory.get(profile.name, {})
-        open_confusions = mem.get("open_confusions", [])
-        recurring_errors = mem.get("recurring_errors", [])
-        resolved_points = mem.get("resolved_points", [])
+        open_confusions = _bucket_to_ranked_list(mem.get("confusion_strength", {}), 4)
+        recurring_errors = _bucket_to_ranked_list(mem.get("error_strength", {}), 4)
+        resolved_points = _bucket_to_ranked_list(mem.get("resolved_strength", {}), 4)
+        feedback_notes = mem.get("teacher_feedback_notes", [])
         last_module = str(mem.get("last_module", "")).strip() or "无"
         lines.append(
             "\n".join(
@@ -220,6 +317,7 @@ def _memory_context_for_prompt(
                     f"- 未解决困惑: {'; '.join(open_confusions[:4]) if open_confusions else '暂无'}",
                     f"- 反复错误: {'; '.join(recurring_errors[:4]) if recurring_errors else '暂无'}",
                     f"- 已解决点: {'; '.join(resolved_points[:4]) if resolved_points else '暂无'}",
+                    f"- 教师纠偏提示: {'; '.join(feedback_notes[-2:]) if feedback_notes else '暂无'}",
                 ]
             )
         )
@@ -304,7 +402,7 @@ def _run_module_student_agents(
     for item in items:
         if not isinstance(item, dict):
             continue
-        name = str(item.get("profile_name", "")).strip()
+        name = normalize_profile_name(item.get("profile_name", ""), {p.name for p in profiles})
         if not name:
             continue
         interactions.append(
@@ -459,7 +557,7 @@ def _run_module_deliberation_agent(
     for item in items:
         if not isinstance(item, dict):
             continue
-        name = str(item.get("profile_name", "")).strip()
+        name = normalize_profile_name(item.get("profile_name", ""), {p.name for p in profiles})
         if not name:
             continue
         interactions.append(
@@ -590,25 +688,39 @@ def _update_student_memory_with_module(
         mem = student_memory.setdefault(
             inter.profile_name,
             {
-                "open_confusions": [],
-                "recurring_errors": [],
-                "resolved_points": [],
+                "confusion_strength": {},
+                "error_strength": {},
+                "resolved_strength": {},
+                "teacher_feedback_notes": [],
                 "last_module": "",
             },
         )
-        previous_open = list(mem.get("open_confusions", []))
-        current_open = _merge_unique([], inter.confusion_points, limit=8)
-        resolved = [item for item in previous_open if item and item not in current_open][:6]
+        confusion_bucket = mem.setdefault("confusion_strength", {})
+        error_bucket = mem.setdefault("error_strength", {})
+        resolved_bucket = mem.setdefault("resolved_strength", {})
 
-        mem["open_confusions"] = current_open
-        mem["recurring_errors"] = _merge_unique(mem.get("recurring_errors", []), inter.error_predictions, 8)
-        mem["resolved_points"] = _merge_unique(mem.get("resolved_points", []), resolved, 8)
+        previous_open = set(_bucket_to_ranked_list(confusion_bucket, 12))
+        current_open = _merge_unique([], inter.confusion_points, limit=12)
+        resolved = [item for item in previous_open if item and item not in set(current_open)][:8]
+
+        _reinforce_bucket(confusion_bucket, current_open, gain=1.0)
+        _reinforce_bucket(error_bucket, inter.error_predictions, gain=1.0)
+        _reinforce_bucket(resolved_bucket, resolved, gain=0.8)
+
+        for item in resolved:
+            if item in confusion_bucket:
+                confusion_bucket[item] = max(0.0, float(confusion_bucket[item]) - 0.9)
+                if confusion_bucket[item] < 0.35:
+                    confusion_bucket.pop(item, None)
+
         mem["last_module"] = module_title
 
         if resolved:
             updates.append(f"{inter.profile_name} 在本模块解决了: {'; '.join(resolved[:2])}")
         if inter.confusion_points:
             updates.append(f"{inter.profile_name} 新增待解决困惑: {'; '.join(inter.confusion_points[:2])}")
+        if inter.error_predictions:
+            updates.append(f"{inter.profile_name} 错误模式被强化: {'; '.join(inter.error_predictions[:2])}")
     return updates[:12]
 
 
@@ -734,9 +846,17 @@ def analyze_deep_with_llm(
     model: str,
     progress_callback: ProgressCallback | None = None,
     improvement_focus: str = "all",
+    teacher_feedback: TeacherFeedback | None = None,
 ) -> SimulationReport:
     profiles = get_profiles_for_subject(subject, grade)
     student_memory = _init_student_memory(profiles)
+    teacher_feedback = teacher_feedback or {}
+
+    if teacher_feedback:
+        feedback_updates = _apply_teacher_feedback(student_memory, teacher_feedback)
+        if feedback_updates:
+            _emit(progress_callback, "已加载教师纠偏反馈，正在更新记忆先验…", 0, 4)
+
     _emit(progress_callback, "教师智能体：正在根据知识点自动划分教学模块…", 0, 4)
     teacher_script, modules = _run_teacher_agent(
         text=text,
@@ -765,6 +885,7 @@ def analyze_deep_with_llm(
     all_interactions: list[ModuleStudentInteraction] = []
     module_deliberations: list[ModuleDeliberationRecord] = []
     for step_idx, module in enumerate(modules, start=1):
+        forgetting_updates = _decay_memory_state(student_memory)
         round1_step = 1 + (step_idx - 1) * 2
         round2_step = round1_step + 1
         _emit(
@@ -812,6 +933,11 @@ def analyze_deep_with_llm(
         deliberation_record.memory_updates = _merge_unique(
             deliberation_record.memory_updates,
             memory_updates,
+            8,
+        )
+        deliberation_record.memory_updates = _merge_unique(
+            deliberation_record.memory_updates,
+            forgetting_updates,
             8,
         )
         module_deliberations.append(deliberation_record)

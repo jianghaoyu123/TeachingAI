@@ -44,6 +44,7 @@ def analyze_deep_with_model_api(
     model: str,
     progress_callback: ProgressCallback | None = None,
     improvement_focus: str = "all",
+    teacher_feedback: dict[str, dict[str, object]] | None = None,
 ) -> SimulationReport:
     return analyze_deep_with_llm(
         text=text,
@@ -56,4 +57,5 @@ def analyze_deep_with_model_api(
         model=model,
         progress_callback=progress_callback,
         improvement_focus=improvement_focus,
+        teacher_feedback=teacher_feedback,
     )

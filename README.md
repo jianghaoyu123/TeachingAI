@@ -36,8 +36,17 @@ The Deep Mode UI displays a progress bar. After completion you can expand "Deep 
 - Two analysis modes:
   - **Quick Mode**: Completes student reaction simulation and optimization suggestions in a single call (faster)
   - **Deep Thinking Mode**: Teacher agent generates script and splits into modules → Round 1 student reactions → Round 2 discussion / devil's advocate / arbitration → aggregated report (more realistic, takes longer)
+- Deep Mode memory mechanism (new):
+  - **Memory reinforcement**: repeated confusions/errors are strengthened across modules
+  - **Memory decay/forgetting**: weak memories decay over modules to reduce stale bias
 - Student profiles automatically switch by grade, subject, and ability level: humanities profiles emphasize reading comprehension and evidence expression; STEM profiles emphasize step-by-step reasoning and condition verification
 - Profile editing panel: customize and save student profiles
+- Quantitative profile indicators (editable per student):
+  - `activity_level` (learning activity)
+  - `baseline_success_rate` (baseline correctness)
+  - `focus_stability` (attention stability)
+  - `knowledge_coverage` (knowledge coverage)
+- Built-in quantitative defaults are level-aware (high > mid-high > mid > mid-low > low) so stronger profiles start with higher activity/accuracy/focus/coverage priors
 - Profile template JSON import/export: easy sharing and reuse across teaching-research groups
 - Supports multiple model APIs: DeepSeek, Qwen, GLM, OpenAI, Gemini, Claude, Kimi, MiniMax
 - Outputs:
@@ -78,6 +87,7 @@ streamlit run app.py
 - To customize classroom profiles, edit and save them in the sidebar under "Edit Current Subject Student Profiles"
 - In the profile editor, "Required Teaching Support" refers to additional explanation scaffolding, prompting strategies, or practice arrangements the teacher can provide
 - "Strengths" indicates what this type of student typically does well; "Weaknesses" indicates where they are most likely to get stuck; "Common Errors" indicates the most frequent mistakes in class and homework
+- In the profile editor, each student also has four 0-100 quantitative indicators (`activity_level`, `baseline_success_rate`, `focus_stability`, `knowledge_coverage`) to better constrain simulation differences between levels
 - Export the current student profiles as JSON, or import a JSON file to overwrite the current subject template
 - "OCR (Image PDF/PPT)" is enabled by default
 - Select "Quick Mode" or "Deep Thinking Mode" above the "Start Rehearsal & Optimization" button on the main page
@@ -141,6 +151,7 @@ Notes:
 - For Kimi's international endpoint, change the Base URL to `https://api.moonshot.ai/v1`; for MiniMax's international endpoint, use `https://api.minimax.io/v1`.
 - The system prompt automatically injects "subject + grade + topic" information to make suggestions more relevant to the specific teaching context.
 - Custom profiles are saved to the local file `teachingai_app/data/custom_profiles.json` and take priority in model prompts.
+- For built-in templates, quantitative defaults are assigned by level. For custom templates, user-edited quantitative values are preserved; missing fields are backfilled by level defaults.
 - OCR depends on PaddleOCR and PyMuPDF; if dependencies are missing, the system automatically falls back to plain text extraction.
 
 ## Architecture

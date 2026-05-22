@@ -29,10 +29,23 @@ def _profile_to_dict(profile: StudentProfile) -> dict:
         "weaknesses": profile.weaknesses,
         "likely_errors": profile.likely_errors,
         "support_needs": profile.support_needs,
+        "activity_level": int(profile.activity_level),
+        "baseline_success_rate": int(profile.baseline_success_rate),
+        "focus_stability": int(profile.focus_stability),
+        "knowledge_coverage": int(profile.knowledge_coverage),
     }
 
 
 def _profile_from_dict(data: dict) -> StudentProfile:
+    def _bounded_int(value: object, default: int, *, allow_missing_sentinel: bool = False) -> int:
+        try:
+            parsed = int(value)
+        except (TypeError, ValueError):
+            return default
+        if allow_missing_sentinel and parsed < 0:
+            return -1
+        return max(0, min(100, parsed))
+
     return StudentProfile(
         name=str(data.get("name", "未命名画像")),
         level=str(data.get("level", "mid")),
@@ -40,6 +53,10 @@ def _profile_from_dict(data: dict) -> StudentProfile:
         weaknesses=[str(v) for v in data.get("weaknesses", []) if str(v).strip()],
         likely_errors=[str(v) for v in data.get("likely_errors", []) if str(v).strip()],
         support_needs=[str(v) for v in data.get("support_needs", []) if str(v).strip()],
+        activity_level=_bounded_int(data.get("activity_level", -1), -1, allow_missing_sentinel=True),
+        baseline_success_rate=_bounded_int(data.get("baseline_success_rate", -1), -1, allow_missing_sentinel=True),
+        focus_stability=_bounded_int(data.get("focus_stability", -1), -1, allow_missing_sentinel=True),
+        knowledge_coverage=_bounded_int(data.get("knowledge_coverage", -1), -1, allow_missing_sentinel=True),
     )
 
 
@@ -130,13 +147,50 @@ def _apply_default_student_names(profiles: list[StudentProfile]) -> list[Student
     return named
 
 
+def _apply_quant_defaults(profiles: list[StudentProfile]) -> list[StudentProfile]:
+    return _apply_quant_defaults_by_level(profiles, force_by_level=False)
+
+
+def _level_quant_defaults(level: str) -> tuple[int, int, int, int]:
+    # (activity_level, baseline_success_rate, focus_stability, knowledge_coverage)
+    level_defaults = {
+        "low": (42, 38, 40, 35),
+        "mid-low": (52, 50, 48, 46),
+        "mid": (62, 62, 60, 58),
+        "mid-high": (72, 74, 72, 68),
+        "high": (82, 86, 82, 78),
+    }
+    return level_defaults.get(level, level_defaults["mid"])
+
+
+def _apply_quant_defaults_by_level(
+    profiles: list[StudentProfile], *, force_by_level: bool
+) -> list[StudentProfile]:
+    named = deepcopy(profiles)
+    for profile in named:
+        activity_default, success_default, focus_default, coverage_default = _level_quant_defaults(profile.level)
+
+        def _normalize(value: int, default_value: int) -> int:
+            if force_by_level:
+                return default_value
+            if int(value) < 0:
+                return default_value
+            return max(0, min(100, int(value)))
+
+        profile.activity_level = _normalize(profile.activity_level, activity_default)
+        profile.baseline_success_rate = _normalize(profile.baseline_success_rate, success_default)
+        profile.focus_stability = _normalize(profile.focus_stability, focus_default)
+        profile.knowledge_coverage = _normalize(profile.knowledge_coverage, coverage_default)
+    return named
+
+
 def get_builtin_profiles_for_subject(subject: str, grade: str = "七年级") -> list[StudentProfile]:
     profiles = get_catalog_profiles(subject, grade)
-    return _apply_default_student_names(profiles)
+    return _apply_quant_defaults_by_level(_apply_default_student_names(profiles), force_by_level=True)
 
 
 def get_profiles_for_subject(subject: str, grade: str = "七年级") -> list[StudentProfile]:
     custom = _read_custom_templates()
     if subject in custom and custom[subject]:
-        return custom[subject]
+        return _apply_quant_defaults(custom[subject])
     return get_builtin_profiles_for_subject(subject, grade)
