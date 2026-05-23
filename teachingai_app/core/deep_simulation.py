@@ -177,6 +177,7 @@ def _format_student_agent_specs(profiles: list[StudentProfile]) -> str:
                         f"专注稳定性={p.focus_stability}/100, "
                         f"知识覆盖度={p.knowledge_coverage}/100"
                     ),
+                    "- 量化画像字段定义(必须严格按此含义解释): 学习活跃度=主动回应/提问/参与倾向；基线正确率=未点拨前答对概率；专注稳定性=长讲解下持续跟随能力；知识覆盖度=前置知识完整度",
                 ]
             )
         )

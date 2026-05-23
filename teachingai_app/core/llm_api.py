@@ -191,7 +191,14 @@ def _build_http_error_message(status_code: int, body_text: str) -> str:
 def _build_profile_context(subject: str, grade: str) -> str:
     profiles = get_profiles_for_subject(subject, grade)
     band_label = get_grade_band_label(grade)
-    chunks: list[str] = [f"学段参考: {band_label}（当前年级: {grade}）"]
+    chunks: list[str] = [
+        f"学段参考: {band_label}（当前年级: {grade}）",
+        "量化画像字段定义:",
+        "- 学习活跃度: 越高，越可能主动回应、提问、参与",
+        "- 基线正确率: 越高，表示该学生在还没被点拨前也更容易答对",
+        "- 专注稳定性: 越高，表示在较长讲解中更不容易掉线或走神",
+        "- 知识覆盖度: 越高，表示已掌握的前置知识更完整",
+    ]
     for p in profiles:
         chunks.append(
             "\n".join(
