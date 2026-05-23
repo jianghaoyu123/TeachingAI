@@ -183,3 +183,8 @@ teachingai_app/
 - Deep Mode: configurable discussion rounds, intermediate result caching, parallel student agent calls to reduce wait time
 - Integrate school-level local question banks and real error data to validate prediction accuracy
 - Support more private model gateways or enterprise deployment options such as Azure OpenAI
+
+## Contributor
+
+- Haoyu Jiang
+- Xijie Hu
