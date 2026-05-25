@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+import json
+import re
+from pathlib import Path
+from typing import Any
+
 import streamlit as st
 
 from teachingai_app.core.models import StudentProfile
@@ -21,6 +26,112 @@ from teachingai_app.ui.constants import (
 
 def _parse_multiline_list(raw: str) -> list[str]:
     return [line.strip() for line in raw.splitlines() if line.strip()]
+
+
+def _safe_filename_stem(raw_name: str, *, fallback: str) -> str:
+    cleaned = re.sub(r'[\\/:*?"<>|]+', "_", raw_name).strip(" .")
+    return cleaned or fallback
+
+
+def _open_save_json_dialog(*, title: str, default_filename: str) -> str:
+    try:
+        from tkinter import Tk, filedialog
+    except Exception as exc:  # pragma: no cover
+        raise RuntimeError("当前环境无法打开系统文件窗口。") from exc
+
+    root = Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)
+    try:
+        selected = filedialog.asksaveasfilename(
+            title=title,
+            initialfile=default_filename,
+            defaultextension=".json",
+            filetypes=[("JSON 文件", "*.json"), ("所有文件", "*.*")],
+        )
+    finally:
+        root.destroy()
+    return str(selected).strip()
+
+
+def _open_import_json_dialog(*, title: str) -> str:
+    try:
+        from tkinter import Tk, filedialog
+    except Exception as exc:  # pragma: no cover
+        raise RuntimeError("当前环境无法打开系统文件窗口。") from exc
+
+    root = Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)
+    try:
+        selected = filedialog.askopenfilename(
+            title=title,
+            filetypes=[("JSON 文件", "*.json"), ("所有文件", "*.*")],
+        )
+    finally:
+        root.destroy()
+    return str(selected).strip()
+
+
+def _build_student_profile_payload(item: dict, subject: str, grade: str) -> str:
+    payload = {
+        "subject": subject,
+        "grade": grade,
+        "profile": {
+            "name": str(item.get("name", "")).strip() or "未命名学生",
+            "level": str(item.get("level", "mid")),
+            "strengths": list(item.get("strengths", [])),
+            "weaknesses": list(item.get("weaknesses", [])),
+            "likely_errors": list(item.get("likely_errors", [])),
+            "support_needs": list(item.get("support_needs", [])),
+            "activity_level": int(item.get("activity_level", 50)),
+            "baseline_success_rate": int(item.get("baseline_success_rate", 60)),
+            "focus_stability": int(item.get("focus_stability", 60)),
+            "knowledge_coverage": int(item.get("knowledge_coverage", 50)),
+        },
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)
+
+
+def _parse_imported_student_profile(json_text: str) -> dict:
+    data = json.loads(json_text)
+    if not isinstance(data, dict):
+        raise ValueError("导入文件格式错误：根节点必须是对象。")
+
+    raw_profile = data.get("profile")
+    if raw_profile is None:
+        raw_profile = data
+    if not isinstance(raw_profile, dict):
+        raise ValueError("导入文件格式错误：缺少 profile 对象。")
+
+    level = str(raw_profile.get("level", "mid"))
+    if level not in PROFILE_LEVEL_OPTIONS:
+        level = "mid"
+
+    def _safe_int(value: Any, default: int) -> int:
+        try:
+            parsed = int(value)
+        except (TypeError, ValueError):
+            return default
+        return max(0, min(100, parsed))
+
+    def _safe_str_list(value: Any) -> list[str]:
+        if not isinstance(value, list):
+            return []
+        return [str(v).strip() for v in value if str(v).strip()]
+
+    return {
+        "name": str(raw_profile.get("name", "")).strip() or "未命名学生",
+        "level": level,
+        "strengths": _safe_str_list(raw_profile.get("strengths", [])),
+        "weaknesses": _safe_str_list(raw_profile.get("weaknesses", [])),
+        "likely_errors": _safe_str_list(raw_profile.get("likely_errors", [])),
+        "support_needs": _safe_str_list(raw_profile.get("support_needs", [])),
+        "activity_level": _safe_int(raw_profile.get("activity_level", 50), 50),
+        "baseline_success_rate": _safe_int(raw_profile.get("baseline_success_rate", 60), 60),
+        "focus_stability": _safe_int(raw_profile.get("focus_stability", 60), 60),
+        "knowledge_coverage": _safe_int(raw_profile.get("knowledge_coverage", 50), 50),
+    }
 
 
 def _profile_to_editor_item(profile: StudentProfile, student_id: int) -> dict:
@@ -206,7 +317,7 @@ def _render_profile_editor_contents(subject: str, grade: str) -> None:
                     )
                     st.caption("越高，表示已掌握的前置知识更完整。")
 
-                if st.button("恢复该学生为当前层级默认项", key=f"{editor_key}_reset_{sid}", use_container_width=True):
+                if st.button("恢复该学生为当前层级默认参数", key=f"{editor_key}_reset_{sid}", use_container_width=True):
                     template = level_template_map.get(level)
                     if template is not None:
                         updated: list[dict] = []
@@ -318,7 +429,7 @@ def _render_profile_editor_contents(subject: str, grade: str) -> None:
                         )
                         st.caption("越高，表示已掌握的前置知识更完整。")
 
-                    if st.button("恢复该学生为当前层级默认项", key=f"{editor_key}_reset_{sid}", use_container_width=True):
+                    if st.button("恢复该学生为当前层级默认参数", key=f"{editor_key}_reset_{sid}", use_container_width=True):
                         template = level_template_map.get(level)
                         if template is not None:
                             updated: list[dict] = []
@@ -368,42 +479,105 @@ def _render_profile_editor_contents(subject: str, grade: str) -> None:
         ]
         buffer = st.session_state[editor_key]
 
-    save_button_label = "保存当前学生配置" if focus_student_id is not None else "保存当前学科学生配置"
-    if st.button(save_button_label, key=f"save_profiles_{key_scope}", use_container_width=True):
-        profiles_to_save = [
-            StudentProfile(
-                name=str(item.get("name", "")).strip() or f"学生{idx}",
-                level=str(item.get("level", "mid")),
-                strengths=list(item.get("strengths", [])),
-                weaknesses=list(item.get("weaknesses", [])),
-                likely_errors=list(item.get("likely_errors", [])),
-                support_needs=list(item.get("support_needs", [])),
-                activity_level=int(item.get("activity_level", 50)),
-                baseline_success_rate=int(item.get("baseline_success_rate", 60)),
-                focus_stability=int(item.get("focus_stability", 60)),
-                knowledge_coverage=int(item.get("knowledge_coverage", 50)),
-            )
-            for idx, item in enumerate(st.session_state[editor_key], start=1)
-        ]
-        save_custom_profiles_for_subject(subject, profiles_to_save)
-        st.session_state[editor_key] = [
-            _profile_to_editor_item(profile, idx + 1) for idx, profile in enumerate(profiles_to_save)
-        ]
-        st.session_state[next_id_key] = len(profiles_to_save) + 1
-        st.success("学生配置已保存，后续分析会优先使用该自定义模板。")
+    if focus_student_id is not None:
+        current_student = next(
+            (row for row in st.session_state[editor_key] if int(row["id"]) == int(focus_student_id)),
+            None,
+        )
+        if current_student is not None:
+            student_name = str(current_student.get("name", "未命名学生")).strip() or "未命名学生"
+            single_export_col, single_import_col = st.columns(2)
+            with single_export_col:
+                if st.button(
+                    "导出当前学生画像",
+                    key=f"export_single_profile_{key_scope}_{focus_student_id}",
+                    use_container_width=True,
+                ):
+                    try:
+                        safe_name = _safe_filename_stem(student_name, fallback="student")
+                        selected_path = _open_save_json_dialog(
+                            title="导出当前学生画像",
+                            default_filename=f"student_profile_{safe_name}.json",
+                        )
+                        if selected_path:
+                            Path(selected_path).write_text(
+                                _build_student_profile_payload(current_student, subject, grade),
+                                encoding="utf-8",
+                            )
+                            st.success(f"已导出当前学生画像: {selected_path}")
+                    except (OSError, RuntimeError) as exc:
+                        st.error(f"导出失败: {exc}")
+
+            with single_import_col:
+                if st.button(
+                    "导入当前学生画像",
+                    key=f"import_single_profile_{key_scope}_{focus_student_id}",
+                    use_container_width=True,
+                ):
+                    try:
+                        selected_path = _open_import_json_dialog(title="导入当前学生画像")
+                        if not selected_path:
+                            st.info("已取消导入。")
+                        else:
+                            imported_profile = _parse_imported_student_profile(Path(selected_path).read_text(encoding="utf-8"))
+                            updated_rows: list[dict] = []
+                            for row in st.session_state[editor_key]:
+                                if int(row["id"]) == int(focus_student_id):
+                                    merged_row = dict(row)
+                                    merged_row.update(imported_profile)
+                                    updated_rows.append(merged_row)
+                                else:
+                                    updated_rows.append(row)
+                            st.session_state[editor_key] = updated_rows
+                            st.success("当前学生画像导入成功。")
+                            st.rerun()
+                    except (ValueError, UnicodeDecodeError, json.JSONDecodeError, OSError, RuntimeError) as exc:
+                        st.error(f"导入失败: {exc}")
+
+
+def _save_profiles_from_editor_state(subject: str, key_scope: str, editor_key: str, next_id_key: str) -> None:
+    profiles_to_save = [
+        StudentProfile(
+            name=str(item.get("name", "")).strip() or f"学生{idx}",
+            level=str(item.get("level", "mid")),
+            strengths=list(item.get("strengths", [])),
+            weaknesses=list(item.get("weaknesses", [])),
+            likely_errors=list(item.get("likely_errors", [])),
+            support_needs=list(item.get("support_needs", [])),
+            activity_level=int(item.get("activity_level", 50)),
+            baseline_success_rate=int(item.get("baseline_success_rate", 60)),
+            focus_stability=int(item.get("focus_stability", 60)),
+            knowledge_coverage=int(item.get("knowledge_coverage", 50)),
+        )
+        for idx, item in enumerate(st.session_state[editor_key], start=1)
+    ]
+    save_custom_profiles_for_subject(subject, profiles_to_save)
+    st.session_state[editor_key] = [
+        _profile_to_editor_item(profile, idx + 1) for idx, profile in enumerate(profiles_to_save)
+    ]
+    st.session_state[next_id_key] = len(profiles_to_save) + 1
+    st.success("学生配置已保存，后续分析会优先使用该自定义模板。")
 
 
 @st.dialog("当前学科学生配置", width="large")
 def _render_profile_editor_dialog(subject: str, grade: str) -> None:
+    _, _, _, key_scope, editor_key, next_id_key, _ = _ensure_editor_state(subject, grade)
+    focus_student_id = st.session_state.get(f"profile_editor_focus_{key_scope}")
     st.caption(
         f"内置画像已按「{get_grade_band_label(grade)}」×「{subject}」匹配（教材进度参照广东深圳）；"
         "修改年级或学科后内置模板会随之切换。"
     )
     _render_profile_editor_contents(subject, grade)
 
-    if st.button("关闭窗口", key=f"close_profile_editor_{subject}_{grade}", use_container_width=True):
-        _set_profile_editor_open(subject, grade, False)
-        st.rerun()
+    bottom_save_col, bottom_close_col = st.columns(2)
+    save_button_label = "保存当前学生配置" if focus_student_id is not None else "保存当前学科学生配置"
+    with bottom_save_col:
+        if st.button(save_button_label, key=f"save_profiles_{key_scope}", use_container_width=True):
+            _save_profiles_from_editor_state(subject, key_scope, editor_key, next_id_key)
+    with bottom_close_col:
+        if st.button("关闭窗口", key=f"close_profile_editor_{subject}_{grade}", use_container_width=True):
+            _set_profile_editor_open(subject, grade, False)
+            st.rerun()
 
 
 def render_profile_editor(subject: str, grade: str) -> None:
@@ -564,35 +738,38 @@ def render_profile_editor(subject: str, grade: str) -> None:
             st.success("已恢复为内置模板。")
             st.rerun()
 
-    st.download_button(
-        label="导出当前学科画像模板(JSON)",
-        data=export_profiles_for_subject(subject, grade),
-        file_name=f"profile_template_{subject}.json",
-        mime="application/json",
-        use_container_width=True,
-    )
+    batch_export_col, batch_import_col = st.columns(2)
+    with batch_export_col:
+        if st.button("批量导出画像模板", key=f"export_profiles_{key_scope}", use_container_width=True):
+            try:
+                safe_subject = _safe_filename_stem(subject, fallback="subject")
+                selected_path = _open_save_json_dialog(
+                    title="批量导出画像模板",
+                    default_filename=f"profile_template_{safe_subject}.json",
+                )
+                if selected_path:
+                    Path(selected_path).write_text(export_profiles_for_subject(subject, grade), encoding="utf-8")
+                    st.success(f"已导出当前学科画像模板: {selected_path}")
+            except (OSError, RuntimeError) as exc:
+                st.error(f"导出失败: {exc}")
 
-    uploaded_profile_json = st.file_uploader(
-        "导入画像模板(JSON，覆盖当前学科)",
-        type=["json"],
-        key=f"profile_import_{key_scope}",
-    )
-    if uploaded_profile_json is not None and st.button(
-        "应用导入模板",
-        key=f"apply_profile_import_{key_scope}",
-        use_container_width=True,
-    ):
-        try:
-            import_profiles_for_subject(
-                subject=subject,
-                json_text=uploaded_profile_json.getvalue().decode("utf-8", errors="ignore"),
-            )
-            st.session_state.pop(editor_key, None)
-            st.session_state.pop(next_id_key, None)
-            st.success("导入成功，当前学科已更新为导入模板。")
-            st.rerun()
-        except (ValueError, UnicodeDecodeError) as exc:
-            st.error(f"导入失败: {exc}")
+    with batch_import_col:
+        if st.button("批量导入画像模板", key=f"apply_profile_import_{key_scope}", use_container_width=True):
+            try:
+                selected_path = _open_import_json_dialog(title="批量导入画像模板")
+                if not selected_path:
+                    st.info("已取消导入。")
+                else:
+                    import_profiles_for_subject(
+                        subject=subject,
+                        json_text=Path(selected_path).read_text(encoding="utf-8"),
+                    )
+                    st.session_state.pop(editor_key, None)
+                    st.session_state.pop(next_id_key, None)
+                    st.success("导入成功，当前学科已更新为导入模板。")
+                    st.rerun()
+            except (ValueError, UnicodeDecodeError, json.JSONDecodeError, OSError, RuntimeError) as exc:
+                st.error(f"导入失败: {exc}")
 
     if is_dialog_open:
         _render_profile_editor_dialog(subject, grade)
