@@ -582,8 +582,9 @@ def _render_profile_editor_dialog(subject: str, grade: str) -> None:
 
 def render_profile_editor(subject: str, grade: str) -> None:
     _, _, _, key_scope, editor_key, next_id_key, buffer = _ensure_editor_state(subject, grade)
-    is_single_student_mode = st.session_state.get(f"profile_editor_focus_{key_scope}") is not None
-    is_dialog_open = bool(st.session_state.get(f"profile_editor_open_{key_scope}"))
+    focus_student_id = st.session_state.get(f"profile_editor_focus_{key_scope}")
+    is_single_student_mode = focus_student_id is not None
+    is_dialog_open = bool(st.session_state.get(f"profile_editor_open_{key_scope}")) and focus_student_id is not None
 
     st.markdown("##### 当前学科待模拟学生")
     st.caption(
