@@ -202,6 +202,24 @@ def _set_profile_editor_open(subject: str, grade: str, is_open: bool) -> None:
         st.session_state.pop(f"profile_editor_focus_{key_scope}", None)
 
 
+def _on_profile_editor_dismiss() -> None:
+    open_keys = [
+        key
+        for key in st.session_state.keys()
+        if isinstance(key, str) and key.startswith("profile_editor_open_")
+    ]
+    for key in open_keys:
+        st.session_state[key] = False
+
+    focus_keys = [
+        key
+        for key in st.session_state.keys()
+        if isinstance(key, str) and key.startswith("profile_editor_focus_")
+    ]
+    for key in focus_keys:
+        st.session_state.pop(key, None)
+
+
 def _profile_card_theme(level: str) -> tuple[str, str, str]:
     palette = {
         "low": ("#C2410C", "#FFF7ED", "#FDBA74"),
@@ -559,7 +577,7 @@ def _save_profiles_from_editor_state(subject: str, key_scope: str, editor_key: s
     st.success("学生配置已保存，后续分析会优先使用该自定义模板。")
 
 
-@st.dialog("当前学科学生配置", width="large")
+@st.dialog("当前学科学生配置", width="large", on_dismiss=_on_profile_editor_dismiss)
 def _render_profile_editor_dialog(subject: str, grade: str) -> None:
     _, _, _, key_scope, editor_key, next_id_key, _ = _ensure_editor_state(subject, grade)
     focus_student_id = st.session_state.get(f"profile_editor_focus_{key_scope}")
