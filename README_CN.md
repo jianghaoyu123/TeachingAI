@@ -5,7 +5,7 @@
 在线App地址：https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 (在线App默认挂的是GLM免费的Model，同一时间有最多使用人数的限制)
 
-'''mermaid
+```mermaid
 %%{init: {'themeVariables': { 'fontSize': '25px'}}}%%
 flowchart TD
 
@@ -69,7 +69,7 @@ H --> L[导出报告]
 I --> L
 J --> L
 K --> L
-'''
+```
 
 ### 1. 双模式分析：快速模式 + 深度思考模式
 
