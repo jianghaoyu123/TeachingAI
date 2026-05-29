@@ -37,7 +37,7 @@ https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 
 ---
 
-## 🚀 Quick Start (30秒跑起来)
+## 🚀 快速开始 (30秒跑起来)
 强烈推荐运行在线App: https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 
 或者本地运行安装：
@@ -49,7 +49,7 @@ pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
-## 细节
+## 实现细节
 ### 1. 双模式分析：快速模式 + 深度思考模式
 
 | 模式 | 做法 | 适用场景 |
