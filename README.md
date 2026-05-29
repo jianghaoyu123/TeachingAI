@@ -52,6 +52,7 @@ pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
+## Details
 ### 1. Dual Analysis Modes: Quick Mode + Deep Thinking Mode
 
 | Mode | Approach | Best For |
@@ -109,7 +110,7 @@ The Deep Mode UI displays a progress bar. After completion you can expand "Deep 
   - Deep Mode additions: module arbitration consensus / disagreements, cross-module memory updates, whole-class result confidence scores (with per-student explanations)
   - Student reaction report and revised lesson plan available as separate downloads (Markdown / HTML / Word)
 
-## Quick Start
+## How to run
 
 Using the live app is recommended: https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 
