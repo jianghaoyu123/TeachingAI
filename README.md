@@ -46,7 +46,7 @@ git clone https://github.com/jianghaoyu123/TeachingAI
 cd TeachingAI
 pip install -r requirements.txt
 python -m streamlit run app.py
-``
+```
 
 ### 1. Dual Analysis Modes: Quick Mode + Deep Thinking Mode
 
