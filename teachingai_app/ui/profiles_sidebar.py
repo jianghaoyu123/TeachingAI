@@ -30,6 +30,20 @@ from teachingai_app.ui.constants import (
 )
 
 
+MATERIAL_STATUS_NONE = "未输入材料"
+MATERIAL_STATUS_PARSING = "材料解析中"
+MATERIAL_STATUS_READY = "已读取材料"
+MATERIAL_STATUS_KEY = "profile_editor_material_status"
+
+
+def _set_profile_editor_material_status(status: str) -> None:
+    st.session_state[MATERIAL_STATUS_KEY] = str(status or MATERIAL_STATUS_NONE)
+
+
+def get_profile_editor_material_status() -> str:
+    return str(st.session_state.get(MATERIAL_STATUS_KEY, MATERIAL_STATUS_NONE) or MATERIAL_STATUS_NONE)
+
+
 def _parse_multiline_list(raw: str) -> list[str]:
     return [line.strip() for line in raw.splitlines() if line.strip()]
 
@@ -408,6 +422,10 @@ def _get_profile_editor_material_text() -> str:
     manual_text = str(st.session_state.get("manual_text_input", "")).strip()
     uploaded_files = st.session_state.get("lesson_files_uploader") or []
 
+    if not uploaded_files and not manual_text:
+        _set_profile_editor_material_status(MATERIAL_STATUS_NONE)
+        return ""
+
     file_signatures: list[tuple[str, int]] = []
     text_chunks: list[str] = []
     for file in uploaded_files:
@@ -419,9 +437,15 @@ def _get_profile_editor_material_text() -> str:
     cache_state_key = "profile_editor_material_cache"
     cache: dict[str, str] = st.session_state.setdefault(cache_state_key, {})
     if cache_key in cache:
+        _set_profile_editor_material_status(MATERIAL_STATUS_READY)
         return cache[cache_key]
 
     if uploaded_files:
+        # Two-phase refresh: show "材料解析中" in UI first, then start heavy parsing.
+        if get_profile_editor_material_status() != MATERIAL_STATUS_PARSING:
+            _set_profile_editor_material_status(MATERIAL_STATUS_PARSING)
+            st.rerun()
+        _set_profile_editor_material_status(MATERIAL_STATUS_PARSING)
         with st.spinner("系统正在解析材料，请稍后..."):
             for file in uploaded_files:
                 try:
@@ -437,6 +461,7 @@ def _get_profile_editor_material_text() -> str:
     merged_text = merge_text_sources(text_chunks)
     cache[cache_key] = merged_text
     st.session_state[cache_state_key] = cache
+    _set_profile_editor_material_status(MATERIAL_STATUS_READY)
     return merged_text
 
 
