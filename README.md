@@ -36,10 +36,10 @@ TeachingAI:
 👉 Example output:  
 
 > Class simulation record
-<img src="doc/课堂环节记录.png" width="50%">
+<img src="doc/class_sim.png" width="50%">
 
 > Student simulation result
-<img src="doc/学生模拟结果.png" width="50%">
+<img src="doc/student_sim.png" width="50%">
 
 ## 🚀 Quick Start
 
