@@ -1,0 +1,1104 @@
+{
+  "meta": {
+    "version": 1,
+    "source": "generated-from-python-profile-catalog",
+    "generated_at": "2026-05-29T09:59:00.351976+00:00",
+    "region": "shenzhen"
+  },
+  "subject": "化学",
+  "bands": {
+    "primary_lower": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对颜色变化、气泡等实验现象好奇",
+          "愿意安全参与演示实验",
+          "能描述‘变了吗’",
+          "喜欢动手"
+        ],
+        "weaknesses": [
+          "无系统化学概念",
+          "分不清物理变化与化学变化",
+          "词汇量少",
+          "记录能力弱"
+        ],
+        "likely_errors": [
+          "认为所有变化都是化学变化",
+          "混淆溶解与反应",
+          "实验安全规则记不住",
+          "结论与现象不符"
+        ],
+        "support_needs": [
+          "生活化学现象观察",
+          "安全规则图示",
+          "现象描述句式",
+          "对比实验（对照）"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "科学课实验参与",
+          "能跟读元素名称",
+          "小组合作",
+          "对生活中的化学好奇"
+        ],
+        "weaknesses": [
+          "符号、式子陌生",
+          "微观想象弱"
+        ],
+        "likely_errors": [
+          "化学式书写错误",
+          "实验步骤遗漏"
+        ],
+        "support_needs": [
+          "分子模型教具",
+          "实验报告模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "科学探究任务完成",
+          "能归纳简单规律",
+          "测量较认真",
+          "科普阅读"
+        ],
+        "weaknesses": [
+          "抽象符号多时不适应"
+        ],
+        "likely_errors": [
+          "混淆混合物纯净物"
+        ],
+        "support_needs": [
+          "宏观—微观类比"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "观察细",
+          "提问多",
+          "实验规范"
+        ],
+        "weaknesses": [
+          "书写解释简略"
+        ],
+        "likely_errors": [
+          "结论过度推广"
+        ],
+        "support_needs": [
+          "小课题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "探究热情高",
+          "逻辑初成",
+          "表达清"
+        ],
+        "weaknesses": [
+          "耐心不足"
+        ],
+        "likely_errors": [
+          "变量控制不严"
+        ],
+        "support_needs": [
+          "科技活动"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "primary_upper": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对实验现象有兴趣",
+          "愿意背诵部分知识点",
+          "课堂跟做实验",
+          "作业完成"
+        ],
+        "weaknesses": [
+          "化学用语（式子、方程式）困难",
+          "微观粒子想象弱",
+          "计算（相对质量、浓度）弱",
+          "概念多而混"
+        ],
+        "likely_errors": [
+          "化学方程式不配平",
+          "化合价判断错",
+          "实验操作顺序错",
+          "鉴别题选试剂乱选"
+        ],
+        "support_needs": [
+          "化学用语每日练",
+          "分子原子模型",
+          "实验步骤流程图",
+          "概念对比表"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "课内基础能对",
+          "实验操作中等",
+          "愿意问",
+          "订正"
+        ],
+        "weaknesses": [
+          "推断题、计算题弱",
+          "金属、酸碱盐综合差"
+        ],
+        "likely_errors": [
+          "CO2性质与制法混淆",
+          "酸碱中和计算错",
+          "过滤操作不规范"
+        ],
+        "support_needs": [
+          "专题突破",
+          "中考真题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "主干知识中等",
+          "实验较稳",
+          "跟班复习"
+        ],
+        "weaknesses": [
+          "综合推断难"
+        ],
+        "likely_errors": [
+          "图像分析题"
+        ],
+        "support_needs": [
+          "中档保分"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "理解快",
+          "实验设计好",
+          "成绩中上"
+        ],
+        "weaknesses": [
+          "粗心"
+        ],
+        "likely_errors": [
+          "计算失误"
+        ],
+        "support_needs": [
+          "压轴"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛潜力",
+          "探究强"
+        ],
+        "weaknesses": [
+          "应试"
+        ],
+        "likely_errors": [
+          "跳步"
+        ],
+        "support_needs": [
+          "培优"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_7": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "实验课参与",
+          "基础记忆经反复可改善",
+          "对化学有兴趣点",
+          "课堂纪律",
+          "【深圳学段教材】初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。"
+        ],
+        "weaknesses": [
+          "化学方程式、计算全面弱",
+          "微观—宏观联系断裂",
+          "推断题无从入手",
+          "中考焦虑"
+        ],
+        "likely_errors": [
+          "方程式条件、配平、箭头错误",
+          "质量守恒不会用",
+          "实验探究题不会分析数据",
+          "酸碱盐转化关系混乱"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。",
+          "方程式分类打卡",
+          "实验探究模板",
+          "推断题突破口训练",
+          "计算题规范步骤"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题可对",
+          "实验操作",
+          "跟班",
+          "【深圳学段教材】初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。"
+        ],
+        "weaknesses": [
+          "综合弱"
+        ],
+        "likely_errors": [
+          "金属活动性顺序错",
+          "溶解度曲线"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。",
+          "专题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等稳定",
+          "知识体系",
+          "【深圳学段教材】初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "综合计算"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。",
+          "真题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "实验好",
+          "【深圳学段教材】初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "推断"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。",
+          "冲刺"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛潜力",
+          "【深圳学段教材】初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "粗心"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一化学·深圳：七年级多为科学课程中的物质与变化启蒙；正式化学多在九年级或八年级开设（因校而异）。",
+          "培优"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_8": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "实验课参与",
+          "基础记忆经反复可改善",
+          "对化学有兴趣点",
+          "课堂纪律",
+          "【深圳学段教材】初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。"
+        ],
+        "weaknesses": [
+          "化学方程式、计算全面弱",
+          "微观—宏观联系断裂",
+          "推断题无从入手",
+          "中考焦虑"
+        ],
+        "likely_errors": [
+          "方程式条件、配平、箭头错误",
+          "质量守恒不会用",
+          "实验探究题不会分析数据",
+          "酸碱盐转化关系混乱"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。",
+          "方程式分类打卡",
+          "实验探究模板",
+          "推断题突破口训练",
+          "计算题规范步骤"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题可对",
+          "实验操作",
+          "跟班",
+          "【深圳学段教材】初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。"
+        ],
+        "weaknesses": [
+          "综合弱"
+        ],
+        "likely_errors": [
+          "金属活动性顺序错",
+          "溶解度曲线"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。",
+          "专题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等稳定",
+          "知识体系",
+          "【深圳学段教材】初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "综合计算"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。",
+          "真题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "实验好",
+          "【深圳学段教材】初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "推断"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。",
+          "冲刺"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛潜力",
+          "【深圳学段教材】初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "粗心"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二化学·深圳：部分学校八年级开设化学启蒙或科学中的酸碱盐初步；多数在九年级系统学习人教版化学。",
+          "培优"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_9": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "实验课参与",
+          "基础记忆经反复可改善",
+          "对化学有兴趣点",
+          "课堂纪律",
+          "【深圳学段教材】初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。"
+        ],
+        "weaknesses": [
+          "化学方程式、计算全面弱",
+          "微观—宏观联系断裂",
+          "推断题无从入手",
+          "中考焦虑"
+        ],
+        "likely_errors": [
+          "方程式条件、配平、箭头错误",
+          "质量守恒不会用",
+          "实验探究题不会分析数据",
+          "酸碱盐转化关系混乱",
+          "化学方程式配平与条件遗漏",
+          "酸碱盐推断突破口找不到"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。",
+          "方程式分类打卡",
+          "实验探究模板",
+          "推断题突破口训练",
+          "计算题规范步骤",
+          "深圳中考化学方程式分类默写",
+          "实验操作与现象描述规范"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题可对",
+          "实验操作",
+          "跟班",
+          "【深圳学段教材】初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。"
+        ],
+        "weaknesses": [
+          "综合弱"
+        ],
+        "likely_errors": [
+          "金属活动性顺序错",
+          "溶解度曲线",
+          "化学方程式配平与条件遗漏",
+          "酸碱盐推断突破口找不到"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。",
+          "专题",
+          "深圳中考化学方程式分类默写",
+          "实验操作与现象描述规范"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等稳定",
+          "知识体系",
+          "【深圳学段教材】初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "综合计算",
+          "化学方程式配平与条件遗漏",
+          "酸碱盐推断突破口找不到"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。",
+          "真题",
+          "深圳中考化学方程式分类默写",
+          "实验操作与现象描述规范"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "实验好",
+          "【深圳学段教材】初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "推断",
+          "化学方程式配平与条件遗漏",
+          "酸碱盐推断突破口找不到"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。",
+          "冲刺",
+          "深圳中考化学方程式分类默写",
+          "实验操作与现象描述规范"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛潜力",
+          "【深圳学段教材】初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "粗心",
+          "化学方程式配平与条件遗漏",
+          "酸碱盐推断突破口找不到"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三化学·深圳：人教版上下册物质构成、酸碱盐、金属、溶液与深圳中考化学实验与计算综合。",
+          "培优",
+          "深圳中考化学方程式分类默写",
+          "实验操作与现象描述规范"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_10": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背方程式、知识点",
+          "实验课观察",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。"
+        ],
+        "weaknesses": [
+          "有机、反应原理、平衡全面难",
+          "计算（物质的量）弱",
+          "高考综合题空白多",
+          "选科后信心不足"
+        ],
+        "likely_errors": [
+          "有机推断官能团错",
+          "氧化还原配平错",
+          "实验题数据处理错",
+          "电化学综合不会",
+          "物质的量计算单位换算错",
+          "氧化还原配平错误"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。",
+          "必修核心+有机基础",
+          "物质的量计算专项",
+          "实验得分点",
+          "选填保分策略",
+          "必修一核心实验与计算专项"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题得分",
+          "跟班",
+          "【深圳学段教材】高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。"
+        ],
+        "weaknesses": [
+          "有机、原理"
+        ],
+        "likely_errors": [
+          "平衡移动",
+          "大题",
+          "物质的量计算单位换算错",
+          "氧化还原配平错误"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。",
+          "专题套卷",
+          "必修一核心实验与计算专项"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "有机合成",
+          "物质的量计算单位换算错",
+          "氧化还原配平错误"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。",
+          "真题",
+          "必修一核心实验与计算专项"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "80+潜力",
+          "【深圳学段教材】高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "计算",
+          "物质的量计算单位换算错",
+          "氧化还原配平错误"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。",
+          "冲刺",
+          "必修一核心实验与计算专项"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛强基",
+          "【深圳学段教材】高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。"
+        ],
+        "weaknesses": [
+          "平衡"
+        ],
+        "likely_errors": [
+          "创新",
+          "物质的量计算单位换算错",
+          "氧化还原配平错误"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一化学·深圳：必修一物质结构、氧化还原、离子反应；必修二元素周期律、化学键与反应速率初步。",
+          "大学先修",
+          "必修一核心实验与计算专项"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_11": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背方程式、知识点",
+          "实验课观察",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。"
+        ],
+        "weaknesses": [
+          "有机、反应原理、平衡全面难",
+          "计算（物质的量）弱",
+          "高考综合题空白多",
+          "选科后信心不足"
+        ],
+        "likely_errors": [
+          "有机推断官能团错",
+          "氧化还原配平错",
+          "实验题数据处理错",
+          "电化学综合不会",
+          "有机同分异构体漏写",
+          "化学平衡移动判断错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。",
+          "必修核心+有机基础",
+          "物质的量计算专项",
+          "实验得分点",
+          "选填保分策略",
+          "有机推断专题",
+          "工艺流程题框图转化训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题得分",
+          "跟班",
+          "【深圳学段教材】高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。"
+        ],
+        "weaknesses": [
+          "有机、原理"
+        ],
+        "likely_errors": [
+          "平衡移动",
+          "大题",
+          "有机同分异构体漏写",
+          "化学平衡移动判断错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。",
+          "专题套卷",
+          "有机推断专题",
+          "工艺流程题框图转化训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "有机合成",
+          "有机同分异构体漏写",
+          "化学平衡移动判断错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。",
+          "真题",
+          "有机推断专题",
+          "工艺流程题框图转化训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "80+潜力",
+          "【深圳学段教材】高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "计算",
+          "有机同分异构体漏写",
+          "化学平衡移动判断错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。",
+          "冲刺",
+          "有机推断专题",
+          "工艺流程题框图转化训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛强基",
+          "【深圳学段教材】高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。"
+        ],
+        "weaknesses": [
+          "平衡"
+        ],
+        "likely_errors": [
+          "创新",
+          "有机同分异构体漏写",
+          "化学平衡移动判断错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二化学·深圳：选择性必修有机化学、化学平衡、电化学与工艺流程题训练。",
+          "大学先修",
+          "有机推断专题",
+          "工艺流程题框图转化训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_12": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背方程式、知识点",
+          "实验课观察",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。"
+        ],
+        "weaknesses": [
+          "有机、反应原理、平衡全面难",
+          "计算（物质的量）弱",
+          "高考综合题空白多",
+          "选科后信心不足"
+        ],
+        "likely_errors": [
+          "有机推断官能团错",
+          "氧化还原配平错",
+          "实验题数据处理错",
+          "电化学综合不会",
+          "实验设计题控制变量不全",
+          "计算题中间式跳步失分"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。",
+          "必修核心+有机基础",
+          "物质的量计算专项",
+          "实验得分点",
+          "选填保分策略",
+          "广东高考化学大题专题",
+          "限时选考策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题得分",
+          "跟班",
+          "【深圳学段教材】高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。"
+        ],
+        "weaknesses": [
+          "有机、原理"
+        ],
+        "likely_errors": [
+          "平衡移动",
+          "大题",
+          "实验设计题控制变量不全",
+          "计算题中间式跳步失分"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。",
+          "专题套卷",
+          "广东高考化学大题专题",
+          "限时选考策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "有机合成",
+          "实验设计题控制变量不全",
+          "计算题中间式跳步失分"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。",
+          "真题",
+          "广东高考化学大题专题",
+          "限时选考策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "80+潜力",
+          "【深圳学段教材】高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "计算",
+          "实验设计题控制变量不全",
+          "计算题中间式跳步失分"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。",
+          "冲刺",
+          "广东高考化学大题专题",
+          "限时选考策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛强基",
+          "【深圳学段教材】高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。"
+        ],
+        "weaknesses": [
+          "平衡"
+        ],
+        "likely_errors": [
+          "创新",
+          "实验设计题控制变量不全",
+          "计算题中间式跳步失分"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三化学·深圳：大题专题（有机推断、实验设计、计算）、广东卷化学选考策略与限时训练。",
+          "大学先修",
+          "广东高考化学大题专题",
+          "限时选考策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ]
+  }
+}

@@ -1,0 +1,1088 @@
+{
+  "meta": {
+    "version": 1,
+    "source": "generated-from-python-profile-catalog",
+    "generated_at": "2026-05-29T09:59:00.351976+00:00",
+    "region": "shenzhen"
+  },
+  "subject": "生物",
+  "bands": {
+    "primary_lower": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对动植物、人体外形好奇",
+          "愿意观察、绘画",
+          "能说出常见生物名称",
+          "课堂自然课参与"
+        ],
+        "weaknesses": [
+          "生命科学词汇少",
+          "结构—功能关系不懂",
+          "注意力短",
+          "怕血腥或敏感话题"
+        ],
+        "likely_errors": [
+          "混淆植物动物细胞",
+          "把习惯当生理（‘吃饭才消化’说不清机制）",
+          "实验记录乱",
+          "结论跳跃"
+        ],
+        "support_needs": [
+          "图片、模型、视频",
+          "观察记录表",
+          "生活联系（健康习惯）",
+          "敏感内容适度处理"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能完成观察任务",
+          "小组合作",
+          "科普兴趣"
+        ],
+        "weaknesses": [
+          "抽象概念弱"
+        ],
+        "likely_errors": [
+          "分类标准混乱"
+        ],
+        "support_needs": [
+          "分类游戏"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "科学课稳定",
+          "能归纳"
+        ],
+        "weaknesses": [
+          "系统概念少"
+        ],
+        "likely_errors": [
+          "生态关系混淆"
+        ],
+        "support_needs": [
+          "思维导图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "观察细",
+          "提问"
+        ],
+        "weaknesses": [
+          "书写"
+        ],
+        "likely_errors": [
+          "过度概括"
+        ],
+        "support_needs": [
+          "探究"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "探究热情"
+        ],
+        "weaknesses": [
+          "耐心"
+        ],
+        "likely_errors": [
+          "设计不严"
+        ],
+        "support_needs": [
+          "项目"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "primary_upper": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对显微镜、解剖模型好奇",
+          "愿意背术语",
+          "实验课参与",
+          "生活健康话题感兴趣"
+        ],
+        "weaknesses": [
+          "细胞结构、遗传概念抽象",
+          "图表（曲线、遗传图解）弱",
+          "综合题弱",
+          "术语记忆困难"
+        ],
+        "likely_errors": [
+          "光合呼吸混淆",
+          "遗传图解符号错",
+          "生态系统成分分不清",
+          "实验对照组找错"
+        ],
+        "support_needs": [
+          "模型+口诀",
+          "遗传图解分步练",
+          "图表阅读专项",
+          "实验设计模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "实验操作",
+          "跟班"
+        ],
+        "weaknesses": [
+          "遗传计算"
+        ],
+        "likely_errors": [
+          "基因型表现型"
+        ],
+        "support_needs": [
+          "专题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "课标中等"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "生态分析"
+        ],
+        "support_needs": [
+          "中考真题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "实验"
+        ],
+        "support_needs": [
+          "冲刺"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛潜力"
+        ],
+        "weaknesses": [
+          "应试"
+        ],
+        "likely_errors": [
+          "粗心"
+        ],
+        "support_needs": [
+          "培优"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_7": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "实验课愿意动手",
+          "对人体、环境话题感兴趣",
+          "基础记忆经反复可改善",
+          "课堂参与",
+          "【深圳学段教材】初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。"
+        ],
+        "weaknesses": [
+          "遗传、生态、生理综合弱",
+          "图表分析差",
+          "专业术语混",
+          "中考复习量大时焦虑"
+        ],
+        "likely_errors": [
+          "遗传概率计算错",
+          "食物链营养级错",
+          "实验变量控制错",
+          "识图题细胞结构标错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。",
+          "遗传图解模板",
+          "生态案例图",
+          "实验探究句式",
+          "术语分类记忆"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础可对",
+          "实验",
+          "跟班",
+          "【深圳学段教材】初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "进化",
+          "免疫"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。",
+          "专题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "综合"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。",
+          "真题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "实验"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。",
+          "冲刺"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛",
+          "【深圳学段教材】初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "跳步"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一生物·深圳：七年级科学/生物启蒙，细胞、植物与人体结构基础（因校使用科学或生物分科）。",
+          "培优"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_8": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "实验课愿意动手",
+          "对人体、环境话题感兴趣",
+          "基础记忆经反复可改善",
+          "课堂参与",
+          "【深圳学段教材】初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。"
+        ],
+        "weaknesses": [
+          "遗传、生态、生理综合弱",
+          "图表分析差",
+          "专业术语混",
+          "中考复习量大时焦虑"
+        ],
+        "likely_errors": [
+          "遗传概率计算错",
+          "食物链营养级错",
+          "实验变量控制错",
+          "识图题细胞结构标错",
+          "遗传图解性状与基因对应错",
+          "生态系统食物链漏环节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。",
+          "遗传图解模板",
+          "生态案例图",
+          "实验探究句式",
+          "术语分类记忆",
+          "八年级生物实验与图表题",
+          "深圳地方法规相关案例阅读"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础可对",
+          "实验",
+          "跟班",
+          "【深圳学段教材】初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "进化",
+          "免疫",
+          "遗传图解性状与基因对应错",
+          "生态系统食物链漏环节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。",
+          "专题",
+          "八年级生物实验与图表题",
+          "深圳地方法规相关案例阅读"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "综合",
+          "遗传图解性状与基因对应错",
+          "生态系统食物链漏环节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。",
+          "真题",
+          "八年级生物实验与图表题",
+          "深圳地方法规相关案例阅读"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "实验",
+          "遗传图解性状与基因对应错",
+          "生态系统食物链漏环节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。",
+          "冲刺",
+          "八年级生物实验与图表题",
+          "深圳地方法规相关案例阅读"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛",
+          "【深圳学段教材】初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "跳步",
+          "遗传图解性状与基因对应错",
+          "生态系统食物链漏环节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二生物·深圳：人教版八下遗传与变异、生态系统；深圳地方法规与生态文明教育常融入课堂。",
+          "培优",
+          "八年级生物实验与图表题",
+          "深圳地方法规相关案例阅读"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_9": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "实验课愿意动手",
+          "对人体、环境话题感兴趣",
+          "基础记忆经反复可改善",
+          "课堂参与",
+          "【深圳学段教材】初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。"
+        ],
+        "weaknesses": [
+          "遗传、生态、生理综合弱",
+          "图表分析差",
+          "专业术语混",
+          "中考复习量大时焦虑"
+        ],
+        "likely_errors": [
+          "遗传概率计算错",
+          "食物链营养级错",
+          "实验变量控制错",
+          "识图题细胞结构标错",
+          "中考生物图表分析题读数错",
+          "概念辨析题混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。",
+          "遗传图解模板",
+          "生态案例图",
+          "实验探究句式",
+          "术语分类记忆",
+          "深圳中考生物开卷定位训练",
+          "实验探究题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础可对",
+          "实验",
+          "跟班",
+          "【深圳学段教材】初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "进化",
+          "免疫",
+          "中考生物图表分析题读数错",
+          "概念辨析题混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。",
+          "专题",
+          "深圳中考生物开卷定位训练",
+          "实验探究题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "综合",
+          "中考生物图表分析题读数错",
+          "概念辨析题混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。",
+          "真题",
+          "深圳中考生物开卷定位训练",
+          "实验探究题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "实验",
+          "中考生物图表分析题读数错",
+          "概念辨析题混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。",
+          "冲刺",
+          "深圳中考生物开卷定位训练",
+          "实验探究题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛",
+          "【深圳学段教材】初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "跳步",
+          "中考生物图表分析题读数错",
+          "概念辨析题混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三生物·深圳：中考生物（深圳中考计入总分或等级，以当年政策为准）与实验、图表分析题。",
+          "培优",
+          "深圳中考生物开卷定位训练",
+          "实验探究题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_10": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背知识点",
+          "实验观察",
+          "跟课",
+          "对医学、环保话题好奇",
+          "【深圳学段教材】高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。"
+        ],
+        "weaknesses": [
+          "遗传、调节、生态全面难",
+          "长题干阅读弱",
+          "高考实验设计空白",
+          "选科信心不足"
+        ],
+        "likely_errors": [
+          "遗传系谱分析错",
+          "光合呼吸曲线",
+          "内环境稳态概念混",
+          "实验题不会变量",
+          "有丝分裂与减数分裂图像混淆",
+          "遗传概率计算漏情况"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。",
+          "必修核心清单",
+          "实验得分点",
+          "遗传专题",
+          "选填保分",
+          "必修一、二实验与长题干训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。"
+        ],
+        "weaknesses": [
+          "遗传生态"
+        ],
+        "likely_errors": [
+          "大题",
+          "有丝分裂与减数分裂图像混淆",
+          "遗传概率计算漏情况"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。",
+          "套卷",
+          "必修一、二实验与长题干训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "实验",
+          "有丝分裂与减数分裂图像混淆",
+          "遗传概率计算漏情况"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。",
+          "真题",
+          "必修一、二实验与长题干训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "80+潜力",
+          "【深圳学段教材】高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "计算",
+          "有丝分裂与减数分裂图像混淆",
+          "遗传概率计算漏情况"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。",
+          "冲刺",
+          "必修一、二实验与长题干训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛强基",
+          "【深圳学段教材】高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。"
+        ],
+        "weaknesses": [
+          "平衡"
+        ],
+        "likely_errors": [
+          "创新",
+          "有丝分裂与减数分裂图像混淆",
+          "遗传概率计算漏情况"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一生物·深圳：必修一分子与细胞、必修二遗传与进化；实验设计与图表分析能力培养。",
+          "科研启蒙",
+          "必修一、二实验与长题干训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_11": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背知识点",
+          "实验观察",
+          "跟课",
+          "对医学、环保话题好奇",
+          "【深圳学段教材】高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。"
+        ],
+        "weaknesses": [
+          "遗传、调节、生态全面难",
+          "长题干阅读弱",
+          "高考实验设计空白",
+          "选科信心不足"
+        ],
+        "likely_errors": [
+          "遗传系谱分析错",
+          "光合呼吸曲线",
+          "内环境稳态概念混",
+          "实验题不会变量",
+          "稳态调节曲线分析错",
+          "基因工程步骤排序错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。",
+          "必修核心清单",
+          "实验得分点",
+          "遗传专题",
+          "选填保分",
+          "选择性必修专题+深圳生物赋分策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。"
+        ],
+        "weaknesses": [
+          "遗传生态"
+        ],
+        "likely_errors": [
+          "大题",
+          "稳态调节曲线分析错",
+          "基因工程步骤排序错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。",
+          "套卷",
+          "选择性必修专题+深圳生物赋分策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "实验",
+          "稳态调节曲线分析错",
+          "基因工程步骤排序错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。",
+          "真题",
+          "选择性必修专题+深圳生物赋分策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "80+潜力",
+          "【深圳学段教材】高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "计算",
+          "稳态调节曲线分析错",
+          "基因工程步骤排序错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。",
+          "冲刺",
+          "选择性必修专题+深圳生物赋分策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛强基",
+          "【深圳学段教材】高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。"
+        ],
+        "weaknesses": [
+          "平衡"
+        ],
+        "likely_errors": [
+          "创新",
+          "稳态调节曲线分析错",
+          "基因工程步骤排序错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二生物·深圳：选择性必修稳态调节、生物技术、生态工程；深圳高考生物赋分选科常见。",
+          "科研启蒙",
+          "选择性必修专题+深圳生物赋分策略"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_12": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背知识点",
+          "实验观察",
+          "跟课",
+          "对医学、环保话题好奇",
+          "【深圳学段教材】高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。"
+        ],
+        "weaknesses": [
+          "遗传、调节、生态全面难",
+          "长题干阅读弱",
+          "高考实验设计空白",
+          "选科信心不足"
+        ],
+        "likely_errors": [
+          "遗传系谱分析错",
+          "光合呼吸曲线",
+          "内环境稳态概念混",
+          "实验题不会变量",
+          "实验设计题变量控制不严",
+          "信息题耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。",
+          "必修核心清单",
+          "实验得分点",
+          "遗传专题",
+          "选填保分",
+          "高考生物真题限时",
+          "实验设计得分点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。"
+        ],
+        "weaknesses": [
+          "遗传生态"
+        ],
+        "likely_errors": [
+          "大题",
+          "实验设计题变量控制不严",
+          "信息题耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。",
+          "套卷",
+          "高考生物真题限时",
+          "实验设计得分点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "实验",
+          "实验设计题变量控制不严",
+          "信息题耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。",
+          "真题",
+          "高考生物真题限时",
+          "实验设计得分点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "80+潜力",
+          "【深圳学段教材】高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "计算",
+          "实验设计题变量控制不严",
+          "信息题耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。",
+          "冲刺",
+          "高考生物真题限时",
+          "实验设计得分点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "竞赛强基",
+          "【深圳学段教材】高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。"
+        ],
+        "weaknesses": [
+          "平衡"
+        ],
+        "likely_errors": [
+          "创新",
+          "实验设计题变量控制不严",
+          "信息题耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三生物·深圳：遗传题、实验设计题、长题干信息题限时；对标新高考生物综合考查。",
+          "科研启蒙",
+          "高考生物真题限时",
+          "实验设计得分点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ]
+  }
+}

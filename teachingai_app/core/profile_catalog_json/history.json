@@ -1,0 +1,1099 @@
+{
+  "meta": {
+    "version": 1,
+    "source": "generated-from-python-profile-catalog",
+    "generated_at": "2026-05-29T09:59:00.351976+00:00",
+    "region": "shenzhen"
+  },
+  "subject": "历史",
+  "bands": {
+    "primary_lower": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "喜欢听历史故事、神话传说",
+          "能记住主要人物名字",
+          "愿意看图说话",
+          "课堂故事环节专注"
+        ],
+        "weaknesses": [
+          "时间先后混乱",
+          "分不清故事与史实",
+          "词汇量少影响表达",
+          "不爱写字"
+        ],
+        "likely_errors": [
+          "把传说当历史",
+          "朝代顺序错",
+          "人物关系张冠李戴",
+          "只看图画不读文字"
+        ],
+        "support_needs": [
+          "历史故事时间轴卡片",
+          "人物关系图",
+          "口头复述再简单记录",
+          "图文对照阅读"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能复述课文故事",
+          "对地图有兴趣",
+          "小组讨论"
+        ],
+        "weaknesses": [
+          "因果弱"
+        ],
+        "likely_errors": [
+          "混淆事件"
+        ],
+        "support_needs": [
+          "时间轴"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "课内达标",
+          "能回答基础问题"
+        ],
+        "weaknesses": [
+          "概括弱"
+        ],
+        "likely_errors": [
+          "原因片面"
+        ],
+        "support_needs": [
+          "思维导图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "阅读广",
+          "表达好"
+        ],
+        "weaknesses": [
+          "深度"
+        ],
+        "likely_errors": [
+          "过度想象"
+        ],
+        "support_needs": [
+          "博物馆"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "兴趣浓",
+          "能讲述"
+        ],
+        "weaknesses": [
+          "规范"
+        ],
+        "likely_errors": [
+          "史料混淆"
+        ],
+        "support_needs": [
+          "拓展阅读"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "primary_upper": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对中国古代史故事感兴趣",
+          "能记住部分年代、人物",
+          "愿意完成填空式作业",
+          "课堂视频投入"
+        ],
+        "weaknesses": [
+          "史料意识弱",
+          "论述题不会写",
+          "中外史混",
+          "时间空间定位差"
+        ],
+        "likely_errors": [
+          "把电视剧当史实",
+          "朝代更替顺序错",
+          "材料题只抄原文",
+          "评价人物绝对化"
+        ],
+        "support_needs": [
+          "时间轴+疆域简图",
+          "材料题“观点+依据”",
+          "历史人物多角度评价表",
+          "区分史实与文艺作品"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础记忆",
+          "跟班"
+        ],
+        "weaknesses": [
+          "材料题"
+        ],
+        "likely_errors": [
+          "原因不全"
+        ],
+        "support_needs": [
+          "专题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考主干"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "观点空泛"
+        ],
+        "support_needs": [
+          "真题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "时空"
+        ],
+        "support_needs": [
+          "冲刺"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "素养好"
+        ],
+        "weaknesses": [
+          "应试"
+        ],
+        "likely_errors": [
+          "过度"
+        ],
+        "support_needs": [
+          "史论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_7": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对故事性内容感兴趣",
+          "愿意背时间、人物",
+          "课堂听讲",
+          "作业完成",
+          "【深圳学段教材】初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。"
+        ],
+        "weaknesses": [
+          "史料解读弱",
+          "论述题不会分点",
+          "中外通史线索乱",
+          "开卷考试也不会找"
+        ],
+        "likely_errors": [
+          "材料题答非所问",
+          "原因影响答不全",
+          "史实错误",
+          "观点绝对化无依据",
+          "朝代顺序混乱",
+          "史料题未结合材料"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。",
+          "时空坐标训练",
+          "材料题答题模板",
+          "论述“观点+史实+小结”",
+          "错题按类型归类",
+          "七年级中国古代史时间轴",
+          "深圳博物馆/地方史素材拓展"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。"
+        ],
+        "weaknesses": [
+          "材料论述"
+        ],
+        "likely_errors": [
+          "时空",
+          "朝代顺序混乱",
+          "史料题未结合材料"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。",
+          "专题",
+          "七年级中国古代史时间轴",
+          "深圳博物馆/地方史素材拓展"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "论述",
+          "朝代顺序混乱",
+          "史料题未结合材料"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。",
+          "真题",
+          "七年级中国古代史时间轴",
+          "深圳博物馆/地方史素材拓展"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "比较",
+          "朝代顺序混乱",
+          "史料题未结合材料"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。",
+          "冲刺",
+          "七年级中国古代史时间轴",
+          "深圳博物馆/地方史素材拓展"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "史论潜力",
+          "【深圳学段教材】初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "朝代顺序混乱",
+          "史料题未结合材料"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一历史·深圳：部编版七上中国古代史（史前—隋唐），时间轴与史料阅读入门。",
+          "拓展",
+          "七年级中国古代史时间轴",
+          "深圳博物馆/地方史素材拓展"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_8": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对故事性内容感兴趣",
+          "愿意背时间、人物",
+          "课堂听讲",
+          "作业完成",
+          "【深圳学段教材】初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。"
+        ],
+        "weaknesses": [
+          "史料解读弱",
+          "论述题不会分点",
+          "中外通史线索乱",
+          "开卷考试也不会找"
+        ],
+        "likely_errors": [
+          "材料题答非所问",
+          "原因影响答不全",
+          "史实错误",
+          "观点绝对化无依据",
+          "条约内容与影响张冠李戴",
+          "近代史事件因果颠倒"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。",
+          "时空坐标训练",
+          "材料题答题模板",
+          "论述“观点+史实+小结”",
+          "错题按类型归类",
+          "八年级近现代史专题",
+          "材料题分点作答训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。"
+        ],
+        "weaknesses": [
+          "材料论述"
+        ],
+        "likely_errors": [
+          "时空",
+          "条约内容与影响张冠李戴",
+          "近代史事件因果颠倒"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。",
+          "专题",
+          "八年级近现代史专题",
+          "材料题分点作答训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "论述",
+          "条约内容与影响张冠李戴",
+          "近代史事件因果颠倒"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。",
+          "真题",
+          "八年级近现代史专题",
+          "材料题分点作答训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "比较",
+          "条约内容与影响张冠李戴",
+          "近代史事件因果颠倒"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。",
+          "冲刺",
+          "八年级近现代史专题",
+          "材料题分点作答训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "史论潜力",
+          "【深圳学段教材】初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "条约内容与影响张冠李戴",
+          "近代史事件因果颠倒"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二历史·深圳：部编版中国近现代史，条约、革命与建设主线；深圳地方史素材偶融入。",
+          "拓展",
+          "八年级近现代史专题",
+          "材料题分点作答训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_9": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对故事性内容感兴趣",
+          "愿意背时间、人物",
+          "课堂听讲",
+          "作业完成",
+          "【深圳学段教材】初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。"
+        ],
+        "weaknesses": [
+          "史料解读弱",
+          "论述题不会分点",
+          "中外通史线索乱",
+          "开卷考试也不会找"
+        ],
+        "likely_errors": [
+          "材料题答非所问",
+          "原因影响答不全",
+          "史实错误",
+          "观点绝对化无依据",
+          "世界史时空定位错",
+          "中考开卷翻书耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。",
+          "时空坐标训练",
+          "材料题答题模板",
+          "论述“观点+史实+小结”",
+          "错题按类型归类",
+          "深圳中考历史专题索引",
+          "开卷速查与观点题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。"
+        ],
+        "weaknesses": [
+          "材料论述"
+        ],
+        "likely_errors": [
+          "时空",
+          "世界史时空定位错",
+          "中考开卷翻书耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。",
+          "专题",
+          "深圳中考历史专题索引",
+          "开卷速查与观点题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "论述",
+          "世界史时空定位错",
+          "中考开卷翻书耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。",
+          "真题",
+          "深圳中考历史专题索引",
+          "开卷速查与观点题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "比较",
+          "世界史时空定位错",
+          "中考开卷翻书耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。",
+          "冲刺",
+          "深圳中考历史专题索引",
+          "开卷速查与观点题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "史论潜力",
+          "【深圳学段教材】初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "世界史时空定位错",
+          "中考开卷翻书耗时过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三历史·深圳：世界史与中考专题，材料题“背景—措施—影响”答题模板与深圳中考开卷策略。",
+          "拓展",
+          "深圳中考历史专题索引",
+          "开卷速查与观点题模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_10": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背时间、事件",
+          "对历史故事有兴趣",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。"
+        ],
+        "weaknesses": [
+          "通史线索乱",
+          "论述题薄弱",
+          "选修专题深度不够",
+          "高考题量大焦虑"
+        ],
+        "likely_errors": [
+          "选择题史实错",
+          "大题史论不分",
+          "小论文不会论证",
+          "时空定位错",
+          "通史阶段特征概括不全",
+          "论述题史论结合弱"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。",
+          "通史框架图",
+          "论述模板",
+          "选修知识清单",
+          "选择排错训练",
+          "纲要上重大事件因果链整理"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "材料",
+          "通史阶段特征概括不全",
+          "论述题史论结合弱"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。",
+          "套卷",
+          "纲要上重大事件因果链整理"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "比较",
+          "通史阶段特征概括不全",
+          "论述题史论结合弱"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。",
+          "真题",
+          "纲要上重大事件因果链整理"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "论述",
+          "通史阶段特征概括不全",
+          "论述题史论结合弱"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。",
+          "冲刺",
+          "纲要上重大事件因果链整理"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "史论素养",
+          "【深圳学段教材】高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "通史阶段特征概括不全",
+          "论述题史论结合弱"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一历史·深圳：中外历史纲要上，通史脉络与时空观念；论述题初步训练。",
+          "强基",
+          "纲要上重大事件因果链整理"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_11": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背时间、事件",
+          "对历史故事有兴趣",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。"
+        ],
+        "weaknesses": [
+          "通史线索乱",
+          "论述题薄弱",
+          "选修专题深度不够",
+          "高考题量大焦虑"
+        ],
+        "likely_errors": [
+          "选择题史实错",
+          "大题史论不分",
+          "小论文不会论证",
+          "时空定位错",
+          "专题史比较题维度单一",
+          "小论文结构松散"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。",
+          "通史框架图",
+          "论述模板",
+          "选修知识清单",
+          "选择排错训练",
+          "选择性必修专题对比表"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "材料",
+          "专题史比较题维度单一",
+          "小论文结构松散"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。",
+          "套卷",
+          "选择性必修专题对比表"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "比较",
+          "专题史比较题维度单一",
+          "小论文结构松散"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。",
+          "真题",
+          "选择性必修专题对比表"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "论述",
+          "专题史比较题维度单一",
+          "小论文结构松散"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。",
+          "冲刺",
+          "选择性必修专题对比表"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "史论素养",
+          "【深圳学段教材】高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "专题史比较题维度单一",
+          "小论文结构松散"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二历史·深圳：纲要下与选择性必修专题史，大题材料分析与观点论证。",
+          "强基",
+          "选择性必修专题对比表"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_12": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背时间、事件",
+          "对历史故事有兴趣",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。"
+        ],
+        "weaknesses": [
+          "通史线索乱",
+          "论述题薄弱",
+          "选修专题深度不够",
+          "高考题量大焦虑"
+        ],
+        "likely_errors": [
+          "选择题史实错",
+          "大题史论不分",
+          "小论文不会论证",
+          "时空定位错",
+          "选择题排除法不熟练",
+          "大题术语不规范"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。",
+          "通史框架图",
+          "论述模板",
+          "选修知识清单",
+          "选择排错训练",
+          "高考历史真题+时政热点",
+          "广东卷历史大题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "材料",
+          "选择题排除法不熟练",
+          "大题术语不规范"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。",
+          "套卷",
+          "高考历史真题+时政热点",
+          "广东卷历史大题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "比较",
+          "选择题排除法不熟练",
+          "大题术语不规范"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。",
+          "真题",
+          "高考历史真题+时政热点",
+          "广东卷历史大题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "论述",
+          "选择题排除法不熟练",
+          "大题术语不规范"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。",
+          "冲刺",
+          "高考历史真题+时政热点",
+          "广东卷历史大题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "史论素养",
+          "【深圳学段教材】高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "选择题排除法不熟练",
+          "大题术语不规范"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三历史·深圳：高考历史选择题排除法、大题小论文与广东卷历史热点专题。",
+          "强基",
+          "高考历史真题+时政热点",
+          "广东卷历史大题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ]
+  }
+}

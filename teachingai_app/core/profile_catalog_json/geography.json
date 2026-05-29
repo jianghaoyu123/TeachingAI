@@ -1,0 +1,1094 @@
+{
+  "meta": {
+    "version": 1,
+    "source": "generated-from-python-profile-catalog",
+    "generated_at": "2026-05-29T09:59:00.351976+00:00",
+    "region": "shenzhen"
+  },
+  "subject": "地理",
+  "bands": {
+    "primary_lower": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对地图、天气、家乡环境好奇",
+          "能辨认常见地理事物",
+          "愿意户外观察",
+          "课堂图片投入"
+        ],
+        "weaknesses": [
+          "空间定位弱",
+          "分不清左右、方向",
+          "词汇少",
+          "读图能力弱"
+        ],
+        "likely_errors": [
+          "上下左右与东南西北混淆",
+          "把图片当全部事实",
+          "气候与天气混淆",
+          "记录观察不完整"
+        ],
+        "support_needs": [
+          "教室方向游戏",
+          "简单地图符号",
+          "天气日记",
+          "图文对照"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能读简单地图",
+          "小组合作"
+        ],
+        "weaknesses": [
+          "抽象弱"
+        ],
+        "likely_errors": [
+          "比例尺"
+        ],
+        "support_needs": [
+          "实地观察"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "课内达标"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "气候"
+        ],
+        "support_needs": [
+          "思维导图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "观察细"
+        ],
+        "weaknesses": [
+          "书写"
+        ],
+        "likely_errors": [
+          "因果"
+        ],
+        "support_needs": [
+          "项目"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "兴趣高"
+        ],
+        "weaknesses": [
+          "耐心"
+        ],
+        "likely_errors": [
+          "过度"
+        ],
+        "support_needs": [
+          "拓展"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "primary_upper": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对中国地形、行政区有兴趣",
+          "愿意背名称",
+          "读图经提示可完成",
+          "生活地理敏感"
+        ],
+        "weaknesses": [
+          "等高线、气候图看不懂",
+          "区域特征记不住",
+          "综合题弱",
+          "空间联想差"
+        ],
+        "likely_errors": [
+          "气候类型分布记混",
+          "河流流向判断错",
+          "农业区位因素答不全",
+          "统计图表读错"
+        ],
+        "support_needs": [
+          "地图填绘",
+          "气候图分步读",
+          "区域对比表",
+          "图表三步法"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础记忆"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "读图"
+        ],
+        "support_needs": [
+          "专题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "区位"
+        ],
+        "support_needs": [
+          "真题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "综合"
+        ],
+        "support_needs": [
+          "冲刺"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "素养好"
+        ],
+        "weaknesses": [
+          "应试"
+        ],
+        "likely_errors": [
+          "粗心"
+        ],
+        "support_needs": [
+          "拓展"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_7": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对旅游、灾害、环境话题感兴趣",
+          "愿意背区域名称",
+          "课堂听讲",
+          "作业完成",
+          "【深圳学段教材】初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。"
+        ],
+        "weaknesses": [
+          "读图综合弱",
+          "气候、地形、人文地理线索乱",
+          "综合题不会组织",
+          "开卷找材料慢"
+        ],
+        "likely_errors": [
+          "经纬度定位错",
+          "气候成因答片面",
+          "可持续发展措施空泛",
+          "统计图读错坐标",
+          "经纬网定位错误",
+          "气候类型判读混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。",
+          "经纬网训练",
+          "气候成因模板",
+          "区域案例卡片",
+          "综合题分点",
+          "地图判读每日一练",
+          "七年级自然地理核心图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。"
+        ],
+        "weaknesses": [
+          "综合读图"
+        ],
+        "likely_errors": [
+          "区位",
+          "经纬网定位错误",
+          "气候类型判读混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。",
+          "专题",
+          "地图判读每日一练",
+          "七年级自然地理核心图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "论述",
+          "经纬网定位错误",
+          "气候类型判读混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。",
+          "真题",
+          "地图判读每日一练",
+          "七年级自然地理核心图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "综合",
+          "经纬网定位错误",
+          "气候类型判读混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。",
+          "冲刺",
+          "地图判读每日一练",
+          "七年级自然地理核心图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "地理竞赛潜力",
+          "【深圳学段教材】初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "经纬网定位错误",
+          "气候类型判读混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一地理·深圳：七年级地球与地图、陆地与海洋、天气与气候（人教版或湘教版因校而异）。",
+          "拓展",
+          "地图判读每日一练",
+          "七年级自然地理核心图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_8": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对旅游、灾害、环境话题感兴趣",
+          "愿意背区域名称",
+          "课堂听讲",
+          "作业完成",
+          "【深圳学段教材】初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。"
+        ],
+        "weaknesses": [
+          "读图综合弱",
+          "气候、地形、人文地理线索乱",
+          "综合题不会组织",
+          "开卷找材料慢"
+        ],
+        "likely_errors": [
+          "经纬度定位错",
+          "气候成因答片面",
+          "可持续发展措施空泛",
+          "统计图读错坐标",
+          "中国省级行政区定位错",
+          "人口与城市区位分析不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。",
+          "经纬网训练",
+          "气候成因模板",
+          "区域案例卡片",
+          "综合题分点",
+          "八年级中国地理分区专题",
+          "简答题得分点模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。"
+        ],
+        "weaknesses": [
+          "综合读图"
+        ],
+        "likely_errors": [
+          "区位",
+          "中国省级行政区定位错",
+          "人口与城市区位分析不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。",
+          "专题",
+          "八年级中国地理分区专题",
+          "简答题得分点模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "论述",
+          "中国省级行政区定位错",
+          "人口与城市区位分析不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。",
+          "真题",
+          "八年级中国地理分区专题",
+          "简答题得分点模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "综合",
+          "中国省级行政区定位错",
+          "人口与城市区位分析不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。",
+          "冲刺",
+          "八年级中国地理分区专题",
+          "简答题得分点模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "地理竞赛潜力",
+          "【深圳学段教材】初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "中国省级行政区定位错",
+          "人口与城市区位分析不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二地理·深圳：中国地理分区、人口与城市、区域发展；读图定位与综合题表述。",
+          "拓展",
+          "八年级中国地理分区专题",
+          "简答题得分点模板"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_9": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对旅游、灾害、环境话题感兴趣",
+          "愿意背区域名称",
+          "课堂听讲",
+          "作业完成",
+          "【深圳学段教材】初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。"
+        ],
+        "weaknesses": [
+          "读图综合弱",
+          "气候、地形、人文地理线索乱",
+          "综合题不会组织",
+          "开卷找材料慢"
+        ],
+        "likely_errors": [
+          "经纬度定位错",
+          "气候成因答片面",
+          "可持续发展措施空泛",
+          "统计图读错坐标",
+          "世界地理区域特征混淆",
+          "开卷题翻书时间过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。",
+          "经纬网训练",
+          "气候成因模板",
+          "区域案例卡片",
+          "综合题分点",
+          "深圳中考地理图表速查",
+          "综合题建模训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。"
+        ],
+        "weaknesses": [
+          "综合读图"
+        ],
+        "likely_errors": [
+          "区位",
+          "世界地理区域特征混淆",
+          "开卷题翻书时间过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。",
+          "专题",
+          "深圳中考地理图表速查",
+          "综合题建模训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "论述",
+          "世界地理区域特征混淆",
+          "开卷题翻书时间过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。",
+          "真题",
+          "深圳中考地理图表速查",
+          "综合题建模训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。"
+        ],
+        "weaknesses": [
+          "时间"
+        ],
+        "likely_errors": [
+          "综合",
+          "世界地理区域特征混淆",
+          "开卷题翻书时间过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。",
+          "冲刺",
+          "深圳中考地理图表速查",
+          "综合题建模训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "地理竞赛潜力",
+          "【深圳学段教材】初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "偏激",
+          "世界地理区域特征混淆",
+          "开卷题翻书时间过长"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三地理·深圳：世界地理、深圳中考地理（开卷）与图表判读、简答题得分点。",
+          "拓展",
+          "深圳中考地理图表速查",
+          "综合题建模训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_10": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背区域、术语",
+          "对自然、人文话题好奇",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。"
+        ],
+        "weaknesses": [
+          "自然地理原理弱",
+          "区域综合差",
+          "选修模块深",
+          "高考题策略缺"
+        ],
+        "likely_errors": [
+          "大气环流、洋流混乱",
+          "区位分析不全",
+          "地理过程排序错",
+          "选修答非所问",
+          "大气环流与气候成因分析不全",
+          "人文地理术语不准"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。",
+          "核心原理图",
+          "区域案例库",
+          "选修知识清单",
+          "选择保分",
+          "必修一自然地理过程示意图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "大题",
+          "大气环流与气候成因分析不全",
+          "人文地理术语不准"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。",
+          "套卷",
+          "必修一自然地理过程示意图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "过程",
+          "大气环流与气候成因分析不全",
+          "人文地理术语不准"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。",
+          "真题",
+          "必修一自然地理过程示意图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "综合",
+          "大气环流与气候成因分析不全",
+          "人文地理术语不准"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。",
+          "冲刺",
+          "必修一自然地理过程示意图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "地理奥赛潜力",
+          "【深圳学段教材】高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "创新",
+          "大气环流与气候成因分析不全",
+          "人文地理术语不准"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一地理·深圳：必修一自然地理（大气、水、地貌）与必修二人文地理基础。",
+          "科研",
+          "必修一自然地理过程示意图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_11": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背区域、术语",
+          "对自然、人文话题好奇",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。"
+        ],
+        "weaknesses": [
+          "自然地理原理弱",
+          "区域综合差",
+          "选修模块深",
+          "高考题策略缺"
+        ],
+        "likely_errors": [
+          "大气环流、洋流混乱",
+          "区位分析不全",
+          "地理过程排序错",
+          "选修答非所问",
+          "区域发展条件分析漏点",
+          "地理信息技术题读图错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。",
+          "核心原理图",
+          "区域案例库",
+          "选修知识清单",
+          "选择保分",
+          "选择性必修区域案例（含粤港澳大湾区）"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "大题",
+          "区域发展条件分析漏点",
+          "地理信息技术题读图错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。",
+          "套卷",
+          "选择性必修区域案例（含粤港澳大湾区）"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "过程",
+          "区域发展条件分析漏点",
+          "地理信息技术题读图错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。",
+          "真题",
+          "选择性必修区域案例（含粤港澳大湾区）"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "综合",
+          "区域发展条件分析漏点",
+          "地理信息技术题读图错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。",
+          "冲刺",
+          "选择性必修区域案例（含粤港澳大湾区）"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "地理奥赛潜力",
+          "【深圳学段教材】高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "创新",
+          "区域发展条件分析漏点",
+          "地理信息技术题读图错"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二地理·深圳：选择性必修区域发展、资源环境与国家安全；地理信息技术应用。",
+          "科研",
+          "选择性必修区域案例（含粤港澳大湾区）"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_12": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背区域、术语",
+          "对自然、人文话题好奇",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。"
+        ],
+        "weaknesses": [
+          "自然地理原理弱",
+          "区域综合差",
+          "选修模块深",
+          "高考题策略缺"
+        ],
+        "likely_errors": [
+          "大气环流、洋流混乱",
+          "区位分析不全",
+          "地理过程排序错",
+          "选修答非所问",
+          "综合题答题逻辑跳跃",
+          "选修模块概念混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。",
+          "核心原理图",
+          "区域案例库",
+          "选修知识清单",
+          "选择保分",
+          "高考地理真题限时",
+          "大湾区与可持续发展热点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "大题",
+          "综合题答题逻辑跳跃",
+          "选修模块概念混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。",
+          "套卷",
+          "高考地理真题限时",
+          "大湾区与可持续发展热点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "过程",
+          "综合题答题逻辑跳跃",
+          "选修模块概念混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。",
+          "真题",
+          "高考地理真题限时",
+          "大湾区与可持续发展热点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。"
+        ],
+        "weaknesses": [
+          "波动"
+        ],
+        "likely_errors": [
+          "综合",
+          "综合题答题逻辑跳跃",
+          "选修模块概念混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。",
+          "冲刺",
+          "高考地理真题限时",
+          "大湾区与可持续发展热点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "地理奥赛潜力",
+          "【深圳学段教材】高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "创新",
+          "综合题答题逻辑跳跃",
+          "选修模块概念混淆"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三地理·深圳：高考地理综合题建模、区位分析模板与广东卷地理热点（大湾区、可持续发展）。",
+          "科研",
+          "高考地理真题限时",
+          "大湾区与可持续发展热点"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ]
+  }
+}

@@ -1,0 +1,1089 @@
+{
+  "meta": {
+    "version": 1,
+    "source": "generated-from-python-profile-catalog",
+    "generated_at": "2026-05-29T09:59:00.351976+00:00",
+    "region": "shenzhen"
+  },
+  "subject": "政治",
+  "bands": {
+    "primary_lower": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对班级规则、礼貌、合作话题有感受",
+          "愿意参与情景表演",
+          "能说出对错",
+          "课堂活动积极"
+        ],
+        "weaknesses": [
+          "抽象道德概念弱",
+          "说不清理由",
+          "注意力短",
+          "怕批评"
+        ],
+        "likely_errors": [
+          "绝对化判断（好人坏人）",
+          "把个人喜好当标准",
+          "复述口号无理解",
+          "情境判断片面"
+        ],
+        "support_needs": [
+          "生活情境讨论",
+          "角色扮演",
+          "图文故事",
+          "正向反馈"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能跟读课文",
+          "小组合作"
+        ],
+        "weaknesses": [
+          "说理弱"
+        ],
+        "likely_errors": [
+          "混淆概念"
+        ],
+        "support_needs": [
+          "案例讨论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "课内达标"
+        ],
+        "weaknesses": [
+          "深度"
+        ],
+        "likely_errors": [
+          "片面"
+        ],
+        "support_needs": [
+          "思维导图"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "表达好"
+        ],
+        "weaknesses": [
+          "规范"
+        ],
+        "likely_errors": [
+          "绝对"
+        ],
+        "support_needs": [
+          "辩论启蒙"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "参与积极"
+        ],
+        "weaknesses": [
+          "耐心"
+        ],
+        "likely_errors": [
+          "偏激"
+        ],
+        "support_needs": [
+          "项目"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "primary_upper": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对法律、权利、网络、环保话题有感受",
+          "愿意参与课堂讨论",
+          "能背诵部分观点",
+          "生活经验丰富"
+        ],
+        "weaknesses": [
+          "理论联系实际弱",
+          "辨析题不会分析",
+          "开放性题目空泛",
+          "书面表达弱"
+        ],
+        "likely_errors": [
+          "只背结论不说理由",
+          "案例与知识点对不上",
+          "评价绝对化",
+          "材料题抄原文"
+        ],
+        "support_needs": [
+          "案例—知识点配对",
+          "辨析题“正确/错误+理由”",
+          "观点分点",
+          "时事小评论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础记忆"
+        ],
+        "weaknesses": [
+          "分析"
+        ],
+        "likely_errors": [
+          "混淆"
+        ],
+        "support_needs": [
+          "专题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "空泛"
+        ],
+        "support_needs": [
+          "真题"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "偏激"
+        ],
+        "support_needs": [
+          "冲刺"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "表达强"
+        ],
+        "weaknesses": [
+          "应试"
+        ],
+        "likely_errors": [
+          "过度"
+        ],
+        "support_needs": [
+          "辩论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_7": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对时事、法律、道德话题感兴趣",
+          "愿意背知识点",
+          "课堂讨论参与",
+          "作业完成",
+          "【深圳学段教材】初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。"
+        ],
+        "weaknesses": [
+          "理论深度弱",
+          "材料分析题不会",
+          "论述题分点差",
+          "开卷找知识点慢"
+        ],
+        "likely_errors": [
+          "选择题概念混淆",
+          "辨析题理由不充分",
+          "材料题答非所问",
+          "探究题空泛无措施",
+          "法治概念与生活情境脱节",
+          "辨析题只表态无论据"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。",
+          "核心概念对比表",
+          "材料题“知识+材料”",
+          "论述分点模板",
+          "时事与课本联系",
+          "七年级道德与法治情境题",
+          "深圳文明校园案例讨论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。"
+        ],
+        "weaknesses": [
+          "材料"
+        ],
+        "likely_errors": [
+          "辨析",
+          "法治概念与生活情境脱节",
+          "辨析题只表态无论据"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。",
+          "专题",
+          "七年级道德与法治情境题",
+          "深圳文明校园案例讨论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "论述",
+          "法治概念与生活情境脱节",
+          "辨析题只表态无论据"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。",
+          "真题",
+          "七年级道德与法治情境题",
+          "深圳文明校园案例讨论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。"
+        ],
+        "weaknesses": [
+          "开放"
+        ],
+        "likely_errors": [
+          "偏激",
+          "法治概念与生活情境脱节",
+          "辨析题只表态无论据"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。",
+          "冲刺",
+          "七年级道德与法治情境题",
+          "深圳文明校园案例讨论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "辩论潜力",
+          "【深圳学段教材】初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "绝对",
+          "法治概念与生活情境脱节",
+          "辨析题只表态无论据"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初一道德与法治·深圳：部编版七上成长的节拍、青春时光，法治意识与心理健康教育结合。",
+          "拓展",
+          "七年级道德与法治情境题",
+          "深圳文明校园案例讨论"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_8": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对时事、法律、道德话题感兴趣",
+          "愿意背知识点",
+          "课堂讨论参与",
+          "作业完成",
+          "【深圳学段教材】初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。"
+        ],
+        "weaknesses": [
+          "理论深度弱",
+          "材料分析题不会",
+          "论述题分点差",
+          "开卷找知识点慢"
+        ],
+        "likely_errors": [
+          "选择题概念混淆",
+          "辨析题理由不充分",
+          "材料题答非所问",
+          "探究题空泛无措施",
+          "权利义务关系混淆",
+          "材料题抄书不概括"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。",
+          "核心概念对比表",
+          "材料题“知识+材料”",
+          "论述分点模板",
+          "时事与课本联系",
+          "宪法专题+材料概括训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。"
+        ],
+        "weaknesses": [
+          "材料"
+        ],
+        "likely_errors": [
+          "辨析",
+          "权利义务关系混淆",
+          "材料题抄书不概括"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。",
+          "专题",
+          "宪法专题+材料概括训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "论述",
+          "权利义务关系混淆",
+          "材料题抄书不概括"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。",
+          "真题",
+          "宪法专题+材料概括训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。"
+        ],
+        "weaknesses": [
+          "开放"
+        ],
+        "likely_errors": [
+          "偏激",
+          "权利义务关系混淆",
+          "材料题抄书不概括"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。",
+          "冲刺",
+          "宪法专题+材料概括训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "辩论潜力",
+          "【深圳学段教材】初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "绝对",
+          "权利义务关系混淆",
+          "材料题抄书不概括"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初二道德与法治·深圳：宪法与权利义务、网络生活与法治实践；深圳文明城市建设相关案例。",
+          "拓展",
+          "宪法专题+材料概括训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "junior_9": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对时事、法律、道德话题感兴趣",
+          "愿意背知识点",
+          "课堂讨论参与",
+          "作业完成",
+          "【深圳学段教材】初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。"
+        ],
+        "weaknesses": [
+          "理论深度弱",
+          "材料分析题不会",
+          "论述题分点差",
+          "开卷找知识点慢"
+        ],
+        "likely_errors": [
+          "选择题概念混淆",
+          "辨析题理由不充分",
+          "材料题答非所问",
+          "探究题空泛无措施",
+          "时政热点与教材联系不上",
+          "中考开卷定位慢"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。",
+          "核心概念对比表",
+          "材料题“知识+材料”",
+          "论述分点模板",
+          "时事与课本联系",
+          "深圳本地时政与国策专题",
+          "中考主观题术语库"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础题",
+          "【深圳学段教材】初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。"
+        ],
+        "weaknesses": [
+          "材料"
+        ],
+        "likely_errors": [
+          "辨析",
+          "时政热点与教材联系不上",
+          "中考开卷定位慢"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。",
+          "专题",
+          "深圳本地时政与国策专题",
+          "中考主观题术语库"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "中考中等",
+          "【深圳学段教材】初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。"
+        ],
+        "weaknesses": [
+          "综合"
+        ],
+        "likely_errors": [
+          "论述",
+          "时政热点与教材联系不上",
+          "中考开卷定位慢"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。",
+          "真题",
+          "深圳本地时政与国策专题",
+          "中考主观题术语库"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "中上",
+          "【深圳学段教材】初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。"
+        ],
+        "weaknesses": [
+          "开放"
+        ],
+        "likely_errors": [
+          "偏激",
+          "时政热点与教材联系不上",
+          "中考开卷定位慢"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。",
+          "冲刺",
+          "深圳本地时政与国策专题",
+          "中考主观题术语库"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "辩论潜力",
+          "【深圳学段教材】初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "绝对",
+          "时政热点与教材联系不上",
+          "中考开卷定位慢"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：初三道德与法治·深圳：国情国策、文化建设与中考时政热点（关注深圳本地重大政策与案例）。",
+          "拓展",
+          "深圳本地时政与国策专题",
+          "中考主观题术语库"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_10": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背知识点",
+          "对时事有兴趣",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。"
+        ],
+        "weaknesses": [
+          "哲学、经济学、政治理论抽象",
+          "材料论述弱",
+          "选修模块深",
+          "高考时间紧"
+        ],
+        "likely_errors": [
+          "选择题概念错",
+          "大题知识罗列无分析",
+          "哲学原理用错",
+          "时政术语不准",
+          "经济术语使用不准",
+          "哲学原理与材料脱节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。",
+          "核心概念图",
+          "材料题模板",
+          "时政热点清单",
+          "选择保分",
+          "必修一、二议题式学习笔记"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "材料",
+          "经济术语使用不准",
+          "哲学原理与材料脱节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。",
+          "套卷",
+          "必修一、二议题式学习笔记"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "哲学",
+          "经济术语使用不准",
+          "哲学原理与材料脱节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。",
+          "真题",
+          "必修一、二议题式学习笔记"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。"
+        ],
+        "weaknesses": [
+          "开放"
+        ],
+        "likely_errors": [
+          "偏激",
+          "经济术语使用不准",
+          "哲学原理与材料脱节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。",
+          "冲刺",
+          "必修一、二议题式学习笔记"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "政治素养",
+          "【深圳学段教材】高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "绝对",
+          "经济术语使用不准",
+          "哲学原理与材料脱节"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高一思想政治·深圳：必修一中国特色社会主义、必修二经济与社会；议题式教学常见。",
+          "强基",
+          "必修一、二议题式学习笔记"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_11": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背知识点",
+          "对时事有兴趣",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。"
+        ],
+        "weaknesses": [
+          "哲学、经济学、政治理论抽象",
+          "材料论述弱",
+          "选修模块深",
+          "高考时间紧"
+        ],
+        "likely_errors": [
+          "选择题概念错",
+          "大题知识罗列无分析",
+          "哲学原理用错",
+          "时政术语不准",
+          "法律题条文记忆混乱",
+          "文化类主观题要点不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。",
+          "核心概念图",
+          "材料题模板",
+          "时政热点清单",
+          "选择保分",
+          "选择性必修法律与生活案例"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "材料",
+          "法律题条文记忆混乱",
+          "文化类主观题要点不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。",
+          "套卷",
+          "选择性必修法律与生活案例"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "哲学",
+          "法律题条文记忆混乱",
+          "文化类主观题要点不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。",
+          "真题",
+          "选择性必修法律与生活案例"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。"
+        ],
+        "weaknesses": [
+          "开放"
+        ],
+        "likely_errors": [
+          "偏激",
+          "法律题条文记忆混乱",
+          "文化类主观题要点不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。",
+          "冲刺",
+          "选择性必修法律与生活案例"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "政治素养",
+          "【深圳学段教材】高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "绝对",
+          "法律题条文记忆混乱",
+          "文化类主观题要点不全"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高二思想政治·深圳：必修三政治与法治、必修四哲学与文化；选择性必修法律与生活等。",
+          "强基",
+          "选择性必修法律与生活案例"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ],
+    "senior_12": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意背知识点",
+          "对时事有兴趣",
+          "跟课",
+          "作业提交",
+          "【深圳学段教材】高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。"
+        ],
+        "weaknesses": [
+          "哲学、经济学、政治理论抽象",
+          "材料论述弱",
+          "选修模块深",
+          "高考时间紧"
+        ],
+        "likely_errors": [
+          "选择题概念错",
+          "大题知识罗列无分析",
+          "哲学原理用错",
+          "时政术语不准",
+          "时政题表述不规范",
+          "大题逻辑层次不清"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。",
+          "核心概念图",
+          "材料题模板",
+          "时政热点清单",
+          "选择保分",
+          "高考政治真题+年度时政汇编",
+          "广东卷主观题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "基础得分",
+          "【深圳学段教材】高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。"
+        ],
+        "weaknesses": [
+          "论述"
+        ],
+        "likely_errors": [
+          "材料",
+          "时政题表述不规范",
+          "大题逻辑层次不清"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。",
+          "套卷",
+          "高考政治真题+年度时政汇编",
+          "广东卷主观题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "及格—良好",
+          "【深圳学段教材】高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。"
+        ],
+        "weaknesses": [
+          "压轴"
+        ],
+        "likely_errors": [
+          "哲学",
+          "时政题表述不规范",
+          "大题逻辑层次不清"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。",
+          "真题",
+          "高考政治真题+年度时政汇编",
+          "广东卷主观题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "75+潜力",
+          "【深圳学段教材】高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。"
+        ],
+        "weaknesses": [
+          "开放"
+        ],
+        "likely_errors": [
+          "偏激",
+          "时政题表述不规范",
+          "大题逻辑层次不清"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。",
+          "冲刺",
+          "高考政治真题+年度时政汇编",
+          "广东卷主观题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "政治素养",
+          "【深圳学段教材】高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。"
+        ],
+        "weaknesses": [
+          "心态"
+        ],
+        "likely_errors": [
+          "绝对",
+          "时政题表述不规范",
+          "大题逻辑层次不清"
+        ],
+        "support_needs": [
+          "教学预演请对齐深圳本地进度：高三思想政治·深圳：高考主观题术语规范、时政热点与广东卷政治大题训练。",
+          "强基",
+          "高考政治真题+年度时政汇编",
+          "广东卷主观题训练"
+        ],
+        "activity_level": 50,
+        "baseline_success_rate": 60,
+        "focus_stability": 60,
+        "knowledge_coverage": 50
+      }
+    ]
+  }
+}

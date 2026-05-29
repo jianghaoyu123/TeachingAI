@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "version": 1,
+    "source": "generated-from-python-profile-catalog",
+    "generated_at": "2026-05-29T09:59:00.351976+00:00",
+    "region": "shenzhen"
+  },
+  "subjects": {
+    "数学": "math.json",
+    "语文": "chinese.json",
+    "英语": "english.json",
+    "物理": "physics.json",
+    "化学": "chemistry.json",
+    "生物": "biology.json",
+    "历史": "history.json",
+    "地理": "geography.json",
+    "政治": "politics.json"
+  }
+}
