@@ -41,6 +41,10 @@ TeachingAI:
 
 ## 🚀 Quick Start
 
+Run live app in https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
+
+or
+
 ```bash
 git clone https://github.com/jianghaoyu123/TeachingAI
 cd TeachingAI
