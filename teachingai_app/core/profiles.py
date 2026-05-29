@@ -5,7 +5,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from .models import StudentProfile
-from .profile_catalog import get_catalog_profiles, get_grade_band_label
+from .profile_runtime import get_catalog_profiles, get_grade_band_label
 
 DEFAULT_STUDENT_NAMES_BY_LEVEL = {
     "low": "李明",

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 from ..models import StudentProfile
 from ._bands import BAND_LABELS, resolve_grade_band
@@ -10,7 +11,7 @@ _JSON_PROFILE_CATALOG_DIR = Path(__file__).resolve().parent.parent / "profile_ca
 
 
 def _profile_from_json(item: dict) -> StudentProfile:
-    def _bounded_int(value: object, default: int) -> int:
+    def _bounded_int(value: Any, default: int) -> int:
         try:
             parsed = int(value)
         except (TypeError, ValueError):
