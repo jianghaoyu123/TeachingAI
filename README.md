@@ -19,8 +19,9 @@ Most AI tools for education:
 ❌ Ignore student differences  
 
 TeachingAI:
-✅ Simulates different student types (top / average / struggling)  
-✅ Recreates realistic classroom reactions  
+
+✅ Simulates different student types (Grade x Subject x Students level)  
+✅ Recreates realistic classroom reactions, support deep thinking mode 
 ✅ Identifies unclear, confusing, or boring parts of your lesson  
 
 👉 Like running a **virtual classroom rehearsal before the real class**
