@@ -35,7 +35,6 @@ Teachers often don't know:
 - If explanations are actually understood
 
 TeachingAI helps you catch these issues **before the real class happens**.
-``
 
 ---
 
