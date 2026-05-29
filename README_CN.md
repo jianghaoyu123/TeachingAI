@@ -1,76 +1,54 @@
-# AI Virtual Student Teaching Lab
 
-一个面向教师的备课工具：上传教案、逐字稿或 PPT 后，模拟不同学生群体反应，并输出教学设计优化建议。学生画像根据年级、学科、能力层级自动生成，也支持用户自定义。教学改进方向可指定重点照顾哪个层级的学生。
+# 🧠 TeachingAI — AI Virtual Student Lab
 
-在线App地址：https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
-(在线App默认挂的是GLM免费的Model，同一时间有最多使用人数的限制)
+> Upload your lesson plan → simulate real student reactions → improve your teaching design
 
-```mermaid
-%%{init: {'themeVariables': { 'fontSize': '25px'}}}%%
-flowchart TD
+🔥 一个用 AI 模拟“真实课堂学生反馈”的备课工具
 
-A[教师输入教案/课件] --> B[材料解析]
+---
 
-B --> C[加载模拟学生画像]
+## ✨ What makes it special?
 
-C --> D{选择分析模式}
+Most AI teaching tools:
+❌ 直接生成答案  
+❌ 不考虑学生差异  
 
-D -->|快速模式| E[单次分析]
+TeachingAI:
+✅ 模拟不同水平学生（好/中/差）  
+✅ 真实课堂互动 + 讨论  
+✅ 自动指出哪里讲不好、哪里太难  
 
-D -->|深度模式| F[多智能体预演]
+👉 就像你在上课前“预演一节课”
 
-subgraph F[多层深度思考]
-F1[教师智能体生成讲稿]
-F2[拆分教学模块]
-subgraph Fs[教学子模块]
-F3[模拟教师讲课]
-F4[模拟学生反应]
-F5[第一轮学生讨论]
-F6[反思、汇总和裁决]
-F7[第二轮学生讨论]
-F8[跨模块记忆更新]
-end
-F9[教研汇总]
-end
+---
 
-subgraph E[单次快速分析]
-E1[模拟教师讲课]
-E2[模拟学生反应]
-E3[教研汇总]
-end
+## 🎥 Demo
 
+👉 在线体验：
+https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 
-F1 --> F2
-F2 --> Fs
-F3 --> F4
-F4 --> F5
-F5 --> F6
-F6 --> F7
-F7 --> F8
-Fs --> F9
+👉 示例输出：
+> 课堂模拟记录
+![class simulation record](doc/课堂环节记录.png)
 
-E1 --> E2
-E2 --> E3
+> 学生模拟结果
+![Student simulation result](doc/学生模拟结果.png)
 
+---
 
+## 🚀 Quick Start (30秒跑起来)
+强烈推荐运行在线App: https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 
-E --> G
-F --> G
+或者本地运行安装：
 
-G[结构化结果生成]
-
-
-G --> H[课堂时间线回顾]
-G --> I[学生反应报告]
-G --> K[课堂内容分析]
-G --> J[教学优化建议]
-
-H --> L[导出报告]
-I --> L
-J --> L
-K --> L
+```bash
+git clone https://github.com/jianghaoyu123/TeachingAI
+cd TeachingAI
+pip install -r requirements.txt
+python -m streamlit run app.py
 ```
 
+##细节
 ### 1. 双模式分析：快速模式 + 深度思考模式
 
 | 模式 | 做法 | 适用场景 |
@@ -128,7 +106,7 @@ K --> L
   - 深度模式新增：模块裁决共识/分歧、跨模块记忆更新、整课结果置信度（含分学生说明）
   - 学生反应报告与修订后教案独立下载（Markdown / HTML / Word）
 
-## 快速开始
+## 运行方式
 
 推荐使用在线App使用，在线App地址：https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 
@@ -240,6 +218,72 @@ teachingai_app/
     reporting.py                # 报告导出（Markdown / HTML / Word）
   data/
     custom_profiles.json        # 用户保存的自定义画像（运行时生成）
+```
+
+```mermaid
+%%{init: {'themeVariables': { 'fontSize': '25px'}}}%%
+flowchart TD
+
+A[教师输入教案/课件] --> B[材料解析]
+
+B --> C[加载模拟学生画像]
+
+C --> D{选择分析模式}
+
+D -->|快速模式| E[单次分析]
+
+D -->|深度模式| F[多智能体预演]
+
+subgraph F[多层深度思考]
+F1[教师智能体生成讲稿]
+F2[拆分教学模块]
+subgraph Fs[教学子模块]
+F3[模拟教师讲课]
+F4[模拟学生反应]
+F5[第一轮学生讨论]
+F6[反思、汇总和裁决]
+F7[第二轮学生讨论]
+F8[跨模块记忆更新]
+end
+F9[教研汇总]
+end
+
+subgraph E[单次快速分析]
+E1[模拟教师讲课]
+E2[模拟学生反应]
+E3[教研汇总]
+end
+
+
+F1 --> F2
+F2 --> Fs
+F3 --> F4
+F4 --> F5
+F5 --> F6
+F6 --> F7
+F7 --> F8
+Fs --> F9
+
+E1 --> E2
+E2 --> E3
+
+
+
+E --> G
+F --> G
+
+G[结构化结果生成]
+
+
+G --> H[课堂时间线回顾]
+G --> I[学生反应报告]
+G --> K[课堂内容分析]
+G --> J[教学优化建议]
+
+H --> L[导出报告]
+I --> L
+J --> L
+K --> L
 ```
 
 ## 后续可扩展方向
