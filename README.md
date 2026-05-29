@@ -6,7 +6,7 @@ Language: English | [中文](README_CN.md)
 
 # 🧠 TeachingAI — AI Virtual Student Lab
 
-> Upload your lesson → simulate real student reactions → improve your teaching design
+> Simulate a real classroom before you teach
 
 🔥 An AI-powered lesson rehearsal tool for teachers
 
@@ -21,11 +21,21 @@ Most AI tools for education:
 
 TeachingAI:
 
-✅ Simulates different student types (Grade x Subject x Students level)  
+✅ Understand what your students actually get — before the class (Build virtual student based on Grade x Subject x Students level)  
 ✅ Recreates realistic classroom reactions, support deep thinking mode 
 ✅ Identifies unclear, confusing, or boring parts of your lesson  
 
 👉 Like running a **virtual classroom rehearsal before the real class**
+
+## 💡 Why this matters
+
+Teachers often don't know:
+- Which part students will find confusing
+- Whether the pace is too fast
+- If explanations are actually understood
+
+TeachingAI helps you catch these issues **before the real class happens**.
+``
 
 ---
 
@@ -53,6 +63,15 @@ cd TeachingAI
 pip install -r requirements.txt
 python -m streamlit run app.py
 ```
+
+## ⭐ If this helps you
+
+If you've ever struggled with:
+- Students not understanding your explanation
+- Lessons not going as expected
+
+Please consider giving this repo a ⭐ — it really helps early projects!
+
 
 ## Details
 ### 1. Dual Analysis Modes: Quick Mode + Deep Thinking Mode
