@@ -31,10 +31,10 @@ https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
 
 👉 示例输出：
 > 课堂模拟记录
-![class simulation record](doc/课堂环节记录.png)
+<img src="doc/课堂环节记录.png" width="50%">
 
 > 学生模拟结果
-![Student simulation result](doc/学生模拟结果.png)
+<img src="doc/学生模拟结果.png" width="50%">
 
 ---
 
