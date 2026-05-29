@@ -162,7 +162,6 @@ python -m streamlit run app.py
 - "Strengths" indicates what this type of student typically does well; "Weaknesses" indicates where they are most likely to get stuck; "Common Errors" indicates the most frequent mistakes in class and homework
 - In the profile editor, each student also has four 0-100 quantitative indicators (`activity_level`, `baseline_success_rate`, `focus_stability`, `knowledge_coverage`) to better constrain simulation differences between levels
 - Export the current student profiles as JSON, or import a JSON file to overwrite the current subject template
-- "OCR (Image PDF/PPT)" is enabled by default
 - Select "Quick Mode" or "Deep Thinking Mode" above the "Start Rehearsal & Optimization" button on the main page
 - Click "Start Rehearsal & Optimization"
 
