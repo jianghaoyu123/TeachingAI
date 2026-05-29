@@ -49,7 +49,7 @@ pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
-##细节
+## 细节
 ### 1. 双模式分析：快速模式 + 深度思考模式
 
 | 模式 | 做法 | 适用场景 |
