@@ -30,8 +30,13 @@ TeachingAI:
 ## 🎥 Demo
 
 👉 Live demo: https://teachingai-3ow6w6ubmhea2j5hfywdai.streamlit.app/
+
 👉 Example output:  
+
+> Class simulation record
 ![class simulation record](doc/课堂环节记录.png)
+
+> Student simulation result
 ![Student simulation result](doc/学生模拟结果.png)
 
 ## 🚀 Quick Start
