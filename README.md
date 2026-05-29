@@ -15,6 +15,7 @@ Language: English | [中文](README_CN.md)
 ## ✨ What makes it different?
 
 Most AI tools for education:
+
 ❌ Just generate answers  
 ❌ Ignore student differences  
 
@@ -35,10 +36,10 @@ TeachingAI:
 👉 Example output:  
 
 > Class simulation record
-![class simulation record](doc/课堂环节记录.png)
+<img src="doc/课堂环节记录.png" width="50%">
 
 > Student simulation result
-![Student simulation result](doc/学生模拟结果.png)
+<img src="doc/学生模拟结果" width="50%">
 
 ## 🚀 Quick Start
 
