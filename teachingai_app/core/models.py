@@ -107,3 +107,4 @@ class SimulationReport:
     lesson_modules: List[LessonModule] = field(default_factory=list)
     module_interactions: List[ModuleStudentInteraction] = field(default_factory=list)
     module_deliberations: List[ModuleDeliberationRecord] = field(default_factory=list)
+    applied_profiles: List[StudentProfile] = field(default_factory=list)

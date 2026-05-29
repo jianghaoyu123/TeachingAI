@@ -547,6 +547,7 @@ def _material_consistency_check(subject: str, lesson_topic: str, material: str) 
         "历史": ["朝代", "历史", "变法", "战争", "制度", "文明", "史料", "年代"],
         "地理": ["地形", "气候", "经纬", "区域", "地理", "河流", "人口", "资源"],
         "政治": ["法律", "道德", "公民", "权利", "义务", "政治", "经济生活", "国家"],
+        "班会": ["班级", "同伴", "纪律", "安全", "成长", "心理", "沟通", "合作", "责任", "班会"],
     }
 
     keywords = subject_keywords.get(subject, [])
@@ -697,7 +698,7 @@ def run_app() -> None:
         enable_ocr = True
         st.info("当前版本仅支持在线模型 API 分析。")
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns([1, 1, 1.2])
     with col1:
         subject = st.selectbox("学科", SUBJECT_OPTIONS, index=0, key="subject_select")
     with col2:
@@ -708,8 +709,15 @@ def run_app() -> None:
             format_func=lambda g: str(GRADE_DISPLAY_LABELS.get(g, g)),
             key="grade_select",
         )
+    with col3:
+        region_curriculum = st.text_input(
+            "教材地区",
+            key="region_curriculum_input",
+            value="广东深圳",
+            help="用于按地区教材进度动态生成本次学生画像修正层。",
+        ).strip() or "广东深圳"
 
-    lesson_topic = st.text_input("课题", key="lesson_topic_input", value="一元一次方程")
+    lesson_topic = st.text_input("课题", key="lesson_topic_input", value="")
     uploaded_files = st.file_uploader(
         "上传教案/逐字稿/PPT/PDF（可多选）",
         type=["txt", "md", "docx", "pptx", "pdf"],
@@ -726,7 +734,16 @@ def run_app() -> None:
 
     st.markdown("---")
     st.subheader("待模拟学生设置")
-    render_profile_editor(st.session_state.get("subject_select", ""), st.session_state.get("grade_select", ""))
+    render_profile_editor(
+        st.session_state.get("subject_select", ""),
+        st.session_state.get("grade_select", ""),
+        region_curriculum,
+        lesson_topic,
+        provider,
+        api_key,
+        base_url,
+        model_name,
+    )
     st.markdown("---")
     st.subheader("教案改进方向")
     improvement_focus_options = [
@@ -826,6 +843,10 @@ def run_app() -> None:
         st.rerun()
     
     st.session_state["simulation_triggered"] = False
+
+    if not lesson_topic.strip():
+        st.error("请输入课题名称后再开始预演。")
+        return
 
     st.info("模拟已开始...")
     
@@ -942,6 +963,7 @@ def run_app() -> None:
                 subject=subject,
                 lesson_topic=lesson_topic,
                 grade=grade,
+                region_curriculum=region_curriculum,
                 provider=provider,
                 api_key=api_key,
                 base_url=base_url,
@@ -985,6 +1007,7 @@ def run_app() -> None:
                 subject=subject,
                 lesson_topic=lesson_topic,
                 grade=grade,
+                region_curriculum=region_curriculum,
                 provider=provider,
                 api_key=api_key,
                 base_url=base_url,

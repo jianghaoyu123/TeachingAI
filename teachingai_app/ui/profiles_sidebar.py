@@ -2,11 +2,15 @@ from __future__ import annotations
 
 import json
 import re
+import sqlite3
+import uuid
 from pathlib import Path
 from typing import Any
 
 import streamlit as st
 
+from teachingai_app.core.ingestion import ParseError, merge_text_sources, parse_file
+from teachingai_app.core.llm_api import generate_topic_adjustments_with_llm
 from teachingai_app.core.models import StudentProfile
 from teachingai_app.core.profiles import (
     clear_custom_profiles_for_subject,
@@ -14,9 +18,11 @@ from teachingai_app.core.profiles import (
     get_builtin_profiles_for_subject,
     get_grade_band_label,
     get_profiles_for_subject,
+    get_profile_template_source,
     import_profiles_for_subject,
     save_custom_profiles_for_subject,
 )
+from teachingai_app.core.topic_profile_adjustments import TopicAdjustmentRule, describe_topic_adjustments
 from teachingai_app.ui.constants import (
     PROFILE_LEVEL_FULL_LABELS,
     PROFILE_LEVEL_LABELS,
@@ -150,26 +156,462 @@ def _profile_to_editor_item(profile: StudentProfile, student_id: int) -> dict:
     }
 
 
-def _ensure_editor_state(subject: str, grade: str) -> tuple[list[StudentProfile], list[StudentProfile], dict[str, StudentProfile], str, str, str, list[dict]]:
-    profiles = get_profiles_for_subject(subject, grade)
-    builtin_profiles = get_builtin_profiles_for_subject(subject, grade)
+def _normalize_lesson_topic(lesson_topic: str) -> str:
+    return str(lesson_topic or "").strip()
+
+
+def _build_editor_scope(subject: str, grade: str, lesson_topic: str) -> str:
+    normalized_topic = _normalize_lesson_topic(lesson_topic)
+    topic_scope = re.sub(r"\s+", "_", normalized_topic) if normalized_topic else "__empty_topic__"
+    return f"{subject}_{grade}_{topic_scope}"
+
+
+REALTIME_PROFILE_SNAPSHOT_DB_PATH = Path(__file__).resolve().parent.parent / "data" / "realtime_profile_snapshots.db"
+RUNTIME_SNAPSHOT_USER_ID_KEY = "runtime_snapshot_user_id"
+SNAPSHOT_TTL_SECONDS = 30 * 60
+SNAPSHOT_MAX_ROWS = 200
+
+
+def _current_region_curriculum() -> str:
+    return str(st.session_state.get("region_curriculum_input", "广东深圳")).strip() or "广东深圳"
+
+
+def _get_runtime_snapshot_user_id() -> str:
+    existing = str(st.session_state.get(RUNTIME_SNAPSHOT_USER_ID_KEY, "")).strip()
+    if existing:
+        return existing
+    generated = uuid.uuid4().hex
+    st.session_state[RUNTIME_SNAPSHOT_USER_ID_KEY] = generated
+    return generated
+
+
+def _profile_to_snapshot_dict(profile: StudentProfile) -> dict[str, Any]:
+    return {
+        "name": profile.name,
+        "level": profile.level,
+        "strengths": list(profile.strengths),
+        "weaknesses": list(profile.weaknesses),
+        "likely_errors": list(profile.likely_errors),
+        "support_needs": list(profile.support_needs),
+        "activity_level": int(profile.activity_level),
+        "baseline_success_rate": int(profile.baseline_success_rate),
+        "focus_stability": int(profile.focus_stability),
+        "knowledge_coverage": int(profile.knowledge_coverage),
+    }
+
+
+def _profile_from_snapshot_dict(data: dict[str, Any]) -> StudentProfile:
+    return StudentProfile(
+        name=str(data.get("name", "未命名学生")).strip() or "未命名学生",
+        level=str(data.get("level", "mid")),
+        strengths=[str(v).strip() for v in data.get("strengths", []) if str(v).strip()],
+        weaknesses=[str(v).strip() for v in data.get("weaknesses", []) if str(v).strip()],
+        likely_errors=[str(v).strip() for v in data.get("likely_errors", []) if str(v).strip()],
+        support_needs=[str(v).strip() for v in data.get("support_needs", []) if str(v).strip()],
+        activity_level=int(data.get("activity_level", 50)),
+        baseline_success_rate=int(data.get("baseline_success_rate", 60)),
+        focus_stability=int(data.get("focus_stability", 60)),
+        knowledge_coverage=int(data.get("knowledge_coverage", 50)),
+    )
+
+
+def _build_realtime_snapshot_key(
+    subject: str,
+    grade: str,
+    lesson_topic: str,
+    region_curriculum: str | None = None,
+    user_id: str | None = None,
+) -> str:
+    payload = {
+        "user_id": str(user_id or _get_runtime_snapshot_user_id()).strip() or "anonymous",
+        "subject": subject,
+        "grade": grade,
+        "lesson_topic": _normalize_lesson_topic(lesson_topic),
+        "region_curriculum": str(region_curriculum or _current_region_curriculum()).strip(),
+    }
+    return json.dumps(payload, ensure_ascii=False, sort_keys=True)
+
+
+def _build_legacy_realtime_snapshot_key(subject: str, grade: str, lesson_topic: str, region_curriculum: str | None = None) -> str:
+    payload = {
+        "subject": subject,
+        "grade": grade,
+        "lesson_topic": _normalize_lesson_topic(lesson_topic),
+        "region_curriculum": str(region_curriculum or _current_region_curriculum()).strip(),
+    }
+    return json.dumps(payload, ensure_ascii=False, sort_keys=True)
+
+
+def _get_snapshot_db_conn() -> sqlite3.Connection:
+    REALTIME_PROFILE_SNAPSHOT_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(REALTIME_PROFILE_SNAPSHOT_DB_PATH, timeout=10)
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS realtime_profile_snapshots (
+            snapshot_key TEXT PRIMARY KEY,
+            subject TEXT NOT NULL,
+            grade TEXT NOT NULL,
+            lesson_topic TEXT NOT NULL,
+            region_curriculum TEXT NOT NULL,
+            rules_signature TEXT NOT NULL,
+            profiles_json TEXT NOT NULL,
+            updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+        """
+    )
+    conn.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_realtime_profile_snapshots_scope
+        ON realtime_profile_snapshots(subject, grade, lesson_topic, region_curriculum)
+        """
+    )
+    _cleanup_snapshot_rows(conn)
+    return conn
+
+
+def _cleanup_snapshot_rows(conn: sqlite3.Connection) -> None:
+    # Remove stale snapshot records first (TTL cleanup).
+    conn.execute(
+        """
+        DELETE FROM realtime_profile_snapshots
+        WHERE updated_at < datetime('now', ?)
+        """,
+        (f"-{int(SNAPSHOT_TTL_SECONDS)} seconds",),
+    )
+
+    # Enforce a hard row cap by dropping the oldest rows.
+    row = conn.execute("SELECT COUNT(*) FROM realtime_profile_snapshots").fetchone()
+    total_rows = int(row[0]) if row and row[0] is not None else 0
+    overflow = total_rows - int(SNAPSHOT_MAX_ROWS)
+    if overflow > 0:
+        conn.execute(
+            """
+            DELETE FROM realtime_profile_snapshots
+            WHERE snapshot_key IN (
+                SELECT snapshot_key
+                FROM realtime_profile_snapshots
+                ORDER BY datetime(updated_at) ASC
+                LIMIT ?
+            )
+            """,
+            (overflow,),
+        )
+
+
+def _save_realtime_profile_snapshot(
+    *,
+    subject: str,
+    grade: str,
+    lesson_topic: str,
+    region_curriculum: str,
+    profiles: list[StudentProfile],
+    rules_signature: str,
+) -> None:
+    if not _normalize_lesson_topic(lesson_topic):
+        return
+    snapshot_key = _build_realtime_snapshot_key(subject, grade, lesson_topic, region_curriculum)
+    profiles_json = json.dumps(
+        [_profile_to_snapshot_dict(profile) for profile in profiles],
+        ensure_ascii=False,
+    )
+    with _get_snapshot_db_conn() as conn:
+        conn.execute(
+            """
+            INSERT INTO realtime_profile_snapshots (
+                snapshot_key,
+                subject,
+                grade,
+                lesson_topic,
+                region_curriculum,
+                rules_signature,
+                profiles_json,
+                updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT(snapshot_key) DO UPDATE SET
+                rules_signature = excluded.rules_signature,
+                profiles_json = excluded.profiles_json,
+                updated_at = CURRENT_TIMESTAMP
+            """,
+            (
+                snapshot_key,
+                subject,
+                grade,
+                _normalize_lesson_topic(lesson_topic),
+                str(region_curriculum or _current_region_curriculum()).strip(),
+                str(rules_signature or "[]"),
+                profiles_json,
+            ),
+        )
+
+
+def _load_realtime_profile_snapshot(
+    subject: str,
+    grade: str,
+    lesson_topic: str,
+    region_curriculum: str | None = None,
+) -> tuple[list[StudentProfile], str] | None:
+    snapshot_key = _build_realtime_snapshot_key(subject, grade, lesson_topic, region_curriculum)
+    with _get_snapshot_db_conn() as conn:
+        row = conn.execute(
+            """
+            SELECT profiles_json, rules_signature
+            FROM realtime_profile_snapshots
+            WHERE snapshot_key = ?
+            """,
+            (snapshot_key,),
+        ).fetchone()
+        if row is None:
+            legacy_snapshot_key = _build_legacy_realtime_snapshot_key(subject, grade, lesson_topic, region_curriculum)
+            row = conn.execute(
+                """
+                SELECT profiles_json, rules_signature
+                FROM realtime_profile_snapshots
+                WHERE snapshot_key = ?
+                """,
+                (legacy_snapshot_key,),
+            ).fetchone()
+    if row is None:
+        return None
+    raw_profiles_json, rules_signature = row
+    try:
+        raw_profiles = json.loads(str(raw_profiles_json or "[]"))
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(raw_profiles, list) or not raw_profiles:
+        return None
+    profiles = [_profile_from_snapshot_dict(item) for item in raw_profiles if isinstance(item, dict)]
+    if not profiles:
+        return None
+    return profiles, str(rules_signature or "[]")
+
+
+def _queue_snapshot_restore(
+    *,
+    subject: str,
+    grade: str,
+    lesson_topic: str,
+    region_curriculum: str,
+) -> bool:
+    snapshot = _load_realtime_profile_snapshot(subject, grade, lesson_topic, region_curriculum)
+    if snapshot is None:
+        return False
+    profiles, rules_signature = snapshot
+    key_scope = _build_editor_scope(subject, grade, lesson_topic)
+    st.session_state[f"profile_editor_pending_restore_{key_scope}"] = {
+        "profiles": [_profile_to_editor_item(profile, idx + 1) for idx, profile in enumerate(profiles)],
+        "rules_signature": rules_signature,
+    }
+    return True
+
+
+def _get_profile_editor_material_text() -> str:
+    manual_text = str(st.session_state.get("manual_text_input", "")).strip()
+    uploaded_files = st.session_state.get("lesson_files_uploader") or []
+
+    file_signatures: list[tuple[str, int]] = []
+    text_chunks: list[str] = []
+    for file in uploaded_files:
+        file_bytes = file.getvalue()
+        file_signatures.append((str(file.name), len(file_bytes)))
+
+    cache_payload = (tuple(file_signatures), manual_text)
+    cache_key = json.dumps(cache_payload, ensure_ascii=False)
+    cache_state_key = "profile_editor_material_cache"
+    cache: dict[str, str] = st.session_state.setdefault(cache_state_key, {})
+    if cache_key in cache:
+        return cache[cache_key]
+
+    if uploaded_files:
+        with st.spinner("系统正在解析材料，请稍后..."):
+            for file in uploaded_files:
+                try:
+                    parsed = parse_file(file.name, file.getvalue(), enable_ocr=True)
+                except ParseError:
+                    continue
+                if parsed and parsed.strip():
+                    text_chunks.append(parsed)
+
+    if manual_text:
+        text_chunks.append(manual_text)
+
+    merged_text = merge_text_sources(text_chunks)
+    cache[cache_key] = merged_text
+    st.session_state[cache_state_key] = cache
+    return merged_text
+
+
+def _get_profile_editor_topic_rules(
+    *,
+    subject: str,
+    grade: str,
+    lesson_topic: str,
+    region_curriculum: str,
+    provider: str,
+    api_key: str,
+    base_url: str,
+    model: str,
+) -> tuple[TopicAdjustmentRule, ...]:
+    normalized_topic = _normalize_lesson_topic(lesson_topic)
+    if not normalized_topic:
+        return ()
+    if get_profile_template_source(subject) == "custom":
+        return ()
+
+    material_text = _get_profile_editor_material_text()
+    if not material_text.strip():
+        return ()
+    if not str(api_key or "").strip():
+        return ()
+
+    cache_payload = (
+        subject,
+        grade,
+        normalized_topic,
+        str(region_curriculum or "").strip(),
+        str(provider or "").strip(),
+        str(base_url or "").strip(),
+        str(model or "").strip(),
+        material_text,
+    )
+    cache_key = json.dumps(cache_payload, ensure_ascii=False)
+    cache_state_key = "profile_editor_topic_rules_cache"
+    cache: dict[str, tuple[TopicAdjustmentRule, ...]] = st.session_state.setdefault(cache_state_key, {})
+    if cache_key in cache:
+        return cache[cache_key]
+
+    rules = generate_topic_adjustments_with_llm(
+        text=material_text,
+        subject=subject,
+        lesson_topic=normalized_topic,
+        grade=grade,
+        region_curriculum=region_curriculum,
+        provider=provider,
+        api_key=api_key,
+        base_url=base_url,
+        model=model,
+    )
+    cache[cache_key] = rules
+    st.session_state[cache_state_key] = cache
+    return rules
+
+
+def _topic_rules_signature(dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None) -> str:
+    if not dynamic_topic_rules:
+        return "[]"
+    payload = [
+        {
+            "keywords": list(rule.keywords),
+            "label": rule.label,
+            "strengths": list(rule.strengths),
+            "weaknesses": list(rule.weaknesses),
+            "likely_errors": list(rule.likely_errors),
+            "support_needs": list(rule.support_needs),
+            "activity_delta": rule.activity_delta,
+            "baseline_success_delta": rule.baseline_success_delta,
+            "focus_delta": rule.focus_delta,
+            "coverage_delta": rule.coverage_delta,
+            "level_overrides": {
+                level: {
+                    "strengths": list(adjustment.strengths),
+                    "weaknesses": list(adjustment.weaknesses),
+                    "likely_errors": list(adjustment.likely_errors),
+                    "support_needs": list(adjustment.support_needs),
+                    "activity_delta": adjustment.activity_delta,
+                    "baseline_success_delta": adjustment.baseline_success_delta,
+                    "focus_delta": adjustment.focus_delta,
+                    "coverage_delta": adjustment.coverage_delta,
+                }
+                for level, adjustment in rule.level_overrides
+            },
+        }
+        for rule in dynamic_topic_rules
+    ]
+    return json.dumps(payload, ensure_ascii=False, sort_keys=True)
+
+
+def _render_topic_adjustment_status(
+    *,
+    subject: str,
+    lesson_topic: str,
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...],
+    api_key: str,
+) -> None:
+    if get_profile_template_source(subject) == "custom":
+        st.info("当前学科正在使用你导入或保存的自定义学生画像；课题和材料变化时不会自动更新学生画像。")
+        return
+
+    normalized_topic = _normalize_lesson_topic(lesson_topic)
+    if not normalized_topic:
+        st.warning("请先输入课题名称。")
+        return
+
+    material_text = _get_profile_editor_material_text()
+    if not material_text.strip():
+        st.warning(f"当前课题：{normalized_topic}。上传文件或输入教案/逐字稿文本后，才会实时生成并更新学生画像。")
+        return
+    if not str(api_key or "").strip():
+        st.info(f"当前课题：{normalized_topic}。填写 API Key 后，学生配置面板会基于当前课题和材料实时更新学生画像。")
+        return
+
+    matched_labels = describe_topic_adjustments(subject, normalized_topic, dynamic_topic_rules)
+    if matched_labels:
+        st.success(f"当前课题：{normalized_topic}。主题内容：{'、'.join(matched_labels)}")
+        return
+    st.info(f"当前课题：{normalized_topic}。本次为根据课题内容更新学生画像，将直接使用基础画像。")
+
+
+def _ensure_editor_state(
+    subject: str,
+    grade: str,
+    lesson_topic: str = "",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
+) -> tuple[list[StudentProfile], list[StudentProfile], dict[str, StudentProfile], str, str, str, list[dict]]:
+    profiles = get_profiles_for_subject(subject, grade, lesson_topic, dynamic_topic_rules)
+    builtin_profiles = get_builtin_profiles_for_subject(subject, grade, lesson_topic, dynamic_topic_rules)
     level_template_map = {p.level: p for p in builtin_profiles}
-    key_scope = f"{subject}_{grade}"
+    key_scope = _build_editor_scope(subject, grade, lesson_topic)
     editor_key = f"profile_editor_state_{key_scope}"
     next_id_key = f"{editor_key}_next_id"
+    rules_signature_key = f"{editor_key}_rules_signature"
+    rules_signature = _topic_rules_signature(dynamic_topic_rules)
+    pending_restore_key = f"profile_editor_pending_restore_{key_scope}"
+    restored_from_pending = False
 
-    if editor_key not in st.session_state:
+    pending_restore = st.session_state.pop(pending_restore_key, None)
+    if isinstance(pending_restore, dict):
+        restored_profiles = pending_restore.get("profiles")
+        restored_signature = str(pending_restore.get("rules_signature", rules_signature))
+        if isinstance(restored_profiles, list) and restored_profiles:
+            st.session_state[editor_key] = restored_profiles
+            st.session_state[next_id_key] = len(restored_profiles) + 1
+            st.session_state[rules_signature_key] = restored_signature
+            restored_from_pending = True
+
+    if (not restored_from_pending) and (
+        editor_key not in st.session_state or st.session_state.get(rules_signature_key) != rules_signature
+    ):
         st.session_state[editor_key] = [
             _profile_to_editor_item(profile, idx + 1) for idx, profile in enumerate(profiles)
         ]
         st.session_state[next_id_key] = len(st.session_state[editor_key]) + 1
+        st.session_state[rules_signature_key] = rules_signature
 
     buffer: list[dict] = st.session_state[editor_key]
     return profiles, builtin_profiles, level_template_map, key_scope, editor_key, next_id_key, buffer
 
 
-def _add_student_to_editor_state(subject: str, grade: str) -> int:
-    _, builtin_profiles, level_template_map, _, editor_key, next_id_key, buffer = _ensure_editor_state(subject, grade)
+def _add_student_to_editor_state(
+    subject: str,
+    grade: str,
+    lesson_topic: str = "",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
+) -> int:
+    _, builtin_profiles, level_template_map, _, editor_key, next_id_key, buffer = _ensure_editor_state(
+        subject,
+        grade,
+        lesson_topic,
+        dynamic_topic_rules,
+    )
     new_id = int(st.session_state.get(next_id_key, len(buffer) + 1))
     st.session_state[next_id_key] = new_id + 1
     default_level = PROFILE_LEVEL_OPTIONS[len(buffer) % len(PROFILE_LEVEL_OPTIONS)]
@@ -195,11 +637,35 @@ def _add_student_to_editor_state(subject: str, grade: str) -> int:
     return new_id
 
 
-def _set_profile_editor_open(subject: str, grade: str, is_open: bool) -> None:
-    key_scope = f"{subject}_{grade}"
+def _set_profile_editor_open(subject: str, grade: str, lesson_topic: str, is_open: bool) -> None:
+    key_scope = _build_editor_scope(subject, grade, lesson_topic)
     st.session_state[f"profile_editor_open_{key_scope}"] = is_open
     if not is_open:
         st.session_state.pop(f"profile_editor_focus_{key_scope}", None)
+
+
+def _get_level_switch_template_map(
+    subject: str,
+    grade: str,
+    lesson_topic: str,
+    builtin_profiles: list[StudentProfile],
+) -> dict[str, StudentProfile]:
+    snapshot = _load_realtime_profile_snapshot(subject, grade, lesson_topic)
+    if snapshot is not None:
+        snapshot_profiles, _ = snapshot
+        return {profile.level: profile for profile in snapshot_profiles}
+    return {profile.level: profile for profile in builtin_profiles}
+
+
+def _apply_level_template_to_widget_state(editor_key: str, sid: int, template: StudentProfile) -> None:
+    st.session_state[f"{editor_key}_strengths_{sid}"] = "\n".join(template.strengths)
+    st.session_state[f"{editor_key}_weaknesses_{sid}"] = "\n".join(template.weaknesses)
+    st.session_state[f"{editor_key}_errors_{sid}"] = "\n".join(template.likely_errors)
+    st.session_state[f"{editor_key}_support_{sid}"] = "\n".join(template.support_needs)
+    st.session_state[f"{editor_key}_activity_{sid}"] = int(template.activity_level)
+    st.session_state[f"{editor_key}_success_{sid}"] = int(template.baseline_success_rate)
+    st.session_state[f"{editor_key}_focus_{sid}"] = int(template.focus_stability)
+    st.session_state[f"{editor_key}_coverage_{sid}"] = int(template.knowledge_coverage)
 
 
 def _on_profile_editor_dismiss() -> None:
@@ -231,8 +697,26 @@ def _profile_card_theme(level: str) -> tuple[str, str, str]:
     return palette.get(level, ("#0F766E", "#F8FAFC", "#CBD5E1"))
 
 
-def _render_profile_editor_contents(subject: str, grade: str) -> None:
-    profiles, builtin_profiles, level_template_map, key_scope, editor_key, next_id_key, buffer = _ensure_editor_state(subject, grade)
+def _get_template_source_label(subject: str) -> str:
+    source = get_profile_template_source(subject)
+    if source == "custom":
+        return "当前学生画像来源：自定义"
+    return "当前学生画像来源：内置实时生成"
+
+
+def _render_profile_editor_contents(
+    subject: str,
+    grade: str,
+    lesson_topic: str = "",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
+) -> None:
+    profiles, builtin_profiles, level_template_map, key_scope, editor_key, next_id_key, buffer = _ensure_editor_state(
+        subject,
+        grade,
+        lesson_topic,
+        dynamic_topic_rules,
+    )
+    level_switch_template_map = _get_level_switch_template_map(subject, grade, lesson_topic, builtin_profiles)
     focus_student_id = st.session_state.get(f"profile_editor_focus_{key_scope}")
     is_single_student_mode = focus_student_id is not None
     render_buffer = [
@@ -276,6 +760,10 @@ def _render_profile_editor_contents(subject: str, grade: str) -> None:
                             PROFILE_LEVEL_FULL_LABELS.get(lv, PROFILE_LEVEL_LABELS.get(lv, lv))
                         ),
                     )
+                if level != current_level:
+                    switched_template = level_switch_template_map.get(level) or level_template_map.get(level)
+                    if switched_template is not None:
+                        _apply_level_template_to_widget_state(editor_key, sid, switched_template)
 
                 strengths = st.text_area(
                     "优势（每行一项）",
@@ -335,32 +823,6 @@ def _render_profile_editor_contents(subject: str, grade: str) -> None:
                     )
                     st.caption("越高，表示已掌握的前置知识更完整。")
 
-                if st.button("恢复该学生为当前层级默认参数", key=f"{editor_key}_reset_{sid}", use_container_width=True):
-                    template = level_template_map.get(level)
-                    if template is not None:
-                        updated: list[dict] = []
-                        for row in buffer:
-                            if int(row["id"]) == sid:
-                                updated.append(
-                                    {
-                                        "id": sid,
-                                        "name": name.strip() or f"学生{idx}",
-                                        "level": level,
-                                        "strengths": list(template.strengths),
-                                        "weaknesses": list(template.weaknesses),
-                                        "likely_errors": list(template.likely_errors),
-                                        "support_needs": list(template.support_needs),
-                                        "activity_level": int(template.activity_level),
-                                        "baseline_success_rate": int(template.baseline_success_rate),
-                                        "focus_stability": int(template.focus_stability),
-                                        "knowledge_coverage": int(template.knowledge_coverage),
-                                    }
-                                )
-                            else:
-                                updated.append(row)
-                        st.session_state[editor_key] = updated
-                    st.rerun()
-
             else:
                 with st.expander(
                     f"{student_name}｜{level_label}",
@@ -388,6 +850,10 @@ def _render_profile_editor_contents(subject: str, grade: str) -> None:
                                 PROFILE_LEVEL_FULL_LABELS.get(lv, PROFILE_LEVEL_LABELS.get(lv, lv))
                             ),
                         )
+                    if level != current_level:
+                        switched_template = level_switch_template_map.get(level) or level_template_map.get(level)
+                        if switched_template is not None:
+                            _apply_level_template_to_widget_state(editor_key, sid, switched_template)
 
                     strengths = st.text_area(
                         "优势（每行一项）",
@@ -446,32 +912,6 @@ def _render_profile_editor_contents(subject: str, grade: str) -> None:
                             key=f"{editor_key}_coverage_{sid}",
                         )
                         st.caption("越高，表示已掌握的前置知识更完整。")
-
-                    if st.button("恢复该学生为当前层级默认参数", key=f"{editor_key}_reset_{sid}", use_container_width=True):
-                        template = level_template_map.get(level)
-                        if template is not None:
-                            updated: list[dict] = []
-                            for row in buffer:
-                                if int(row["id"]) == sid:
-                                    updated.append(
-                                        {
-                                            "id": sid,
-                                            "name": name.strip() or f"学生{idx}",
-                                            "level": level,
-                                            "strengths": list(template.strengths),
-                                            "weaknesses": list(template.weaknesses),
-                                            "likely_errors": list(template.likely_errors),
-                                            "support_needs": list(template.support_needs),
-                                            "activity_level": int(template.activity_level),
-                                            "baseline_success_rate": int(template.baseline_success_rate),
-                                            "focus_stability": int(template.focus_stability),
-                                            "knowledge_coverage": int(template.knowledge_coverage),
-                                        }
-                                    )
-                                else:
-                                    updated.append(row)
-                            st.session_state[editor_key] = updated
-                        st.rerun()
 
         edited_rows.append(
             {
@@ -578,14 +1018,33 @@ def _save_profiles_from_editor_state(subject: str, key_scope: str, editor_key: s
 
 
 @st.dialog("当前学科学生配置", width="large", on_dismiss=_on_profile_editor_dismiss)
-def _render_profile_editor_dialog(subject: str, grade: str) -> None:
-    _, _, _, key_scope, editor_key, next_id_key, _ = _ensure_editor_state(subject, grade)
-    focus_student_id = st.session_state.get(f"profile_editor_focus_{key_scope}")
-    st.caption(
-        f"内置画像已按「{get_grade_band_label(grade)}」×「{subject}」匹配（教材进度参照广东深圳）；"
-        "修改年级或学科后内置模板会随之切换。"
+def _render_profile_editor_dialog(
+    subject: str,
+    grade: str,
+    region_curriculum: str,
+    lesson_topic: str,
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...],
+    api_key: str,
+) -> None:
+    _, _, _, key_scope, editor_key, next_id_key, _ = _ensure_editor_state(
+        subject,
+        grade,
+        lesson_topic,
+        dynamic_topic_rules,
     )
-    _render_profile_editor_contents(subject, grade)
+    focus_student_id = st.session_state.get(f"profile_editor_focus_{key_scope}")
+    st.caption(_get_template_source_label(subject))
+    st.caption(
+        f"内置画像已按「{get_grade_band_label(grade)}」×「{subject}」匹配（教材地区: {region_curriculum}）；"
+        "修改年级或学科后或输入材料后内置模板会随之切换。"
+    )
+    _render_topic_adjustment_status(
+        subject=subject,
+        lesson_topic=lesson_topic,
+        dynamic_topic_rules=dynamic_topic_rules,
+        api_key=api_key,
+    )
+    _render_profile_editor_contents(subject, grade, lesson_topic, dynamic_topic_rules)
 
     bottom_save_col, bottom_close_col = st.columns(2)
     save_button_label = "保存当前学生配置" if focus_student_id is not None else "保存当前学科学生配置"
@@ -594,20 +1053,65 @@ def _render_profile_editor_dialog(subject: str, grade: str) -> None:
             _save_profiles_from_editor_state(subject, key_scope, editor_key, next_id_key)
     with bottom_close_col:
         if st.button("关闭窗口", key=f"close_profile_editor_{subject}_{grade}", use_container_width=True):
-            _set_profile_editor_open(subject, grade, False)
+            _set_profile_editor_open(subject, grade, lesson_topic, False)
             st.rerun()
 
 
-def render_profile_editor(subject: str, grade: str) -> None:
-    _, _, _, key_scope, editor_key, next_id_key, buffer = _ensure_editor_state(subject, grade)
+def render_profile_editor(
+    subject: str,
+    grade: str,
+    region_curriculum: str = "广东深圳",
+    lesson_topic: str = "",
+    provider: str = "",
+    api_key: str = "",
+    base_url: str = "",
+    model: str = "",
+) -> None:
+    dynamic_topic_rules = _get_profile_editor_topic_rules(
+        subject=subject,
+        grade=grade,
+        lesson_topic=lesson_topic,
+        region_curriculum=region_curriculum,
+        provider=provider,
+        api_key=api_key,
+        base_url=base_url,
+        model=model,
+    )
+    profiles, _, _, key_scope, editor_key, next_id_key, buffer = _ensure_editor_state(
+        subject,
+        grade,
+        lesson_topic,
+        dynamic_topic_rules,
+    )
+    if (
+        get_profile_template_source(subject) != "custom"
+        and _normalize_lesson_topic(lesson_topic)
+        and _get_profile_editor_material_text().strip()
+        and str(api_key or "").strip()
+    ):
+        _save_realtime_profile_snapshot(
+            subject=subject,
+            grade=grade,
+            lesson_topic=lesson_topic,
+            region_curriculum=region_curriculum,
+            profiles=profiles,
+            rules_signature=_topic_rules_signature(dynamic_topic_rules),
+        )
     focus_student_id = st.session_state.get(f"profile_editor_focus_{key_scope}")
     is_single_student_mode = focus_student_id is not None
     is_dialog_open = bool(st.session_state.get(f"profile_editor_open_{key_scope}")) and focus_student_id is not None
 
     st.markdown("##### 当前学科待模拟学生")
+    st.caption(_get_template_source_label(subject))
     st.caption(
-        f"内置画像已按「{get_grade_band_label(grade)}」×「{subject}」匹配（教材进度参照广东深圳）；"
-        "修改年级或学科后内置模板会随之切换。"
+        f"内置画像已按「{get_grade_band_label(grade)}」×「{subject}」匹配（教材地区: {region_curriculum}）；"
+        "修改年级或学科或输入材料后内置模板会随之切换。"
+    )
+    _render_topic_adjustment_status(
+        subject=subject,
+        lesson_topic=lesson_topic,
+        dynamic_topic_rules=dynamic_topic_rules,
+        api_key=api_key,
     )
     st.markdown(
         """
@@ -725,7 +1229,7 @@ def render_profile_editor(subject: str, grade: str) -> None:
                         use_container_width=True,
                     ):
                         st.session_state[f"profile_editor_focus_{key_scope}"] = sid
-                        _set_profile_editor_open(subject, grade, True)
+                        _set_profile_editor_open(subject, grade, lesson_topic, True)
                         st.rerun()
                     if st.button(
                         "删除",
@@ -734,16 +1238,16 @@ def render_profile_editor(subject: str, grade: str) -> None:
                         disabled=len(buffer) <= 1,
                     ):
                         st.session_state[editor_key] = [row for row in buffer if int(row["id"]) != sid]
-                        _set_profile_editor_open(subject, grade, False)
+                        _set_profile_editor_open(subject, grade, lesson_topic, False)
                         if st.session_state.get(f"profile_editor_focus_{key_scope}") == sid:
                             st.session_state.pop(f"profile_editor_focus_{key_scope}", None)
                         st.rerun()
     action_col1, action_col2 = st.columns(2)
     with action_col1:
         if st.button("新增学生", key=f"add_student_{key_scope}", use_container_width=True):
-            new_id = _add_student_to_editor_state(subject, grade)
+            new_id = _add_student_to_editor_state(subject, grade, lesson_topic, dynamic_topic_rules)
             st.session_state[f"profile_editor_focus_{key_scope}"] = new_id
-            _set_profile_editor_open(subject, grade, True)
+            _set_profile_editor_open(subject, grade, lesson_topic, True)
             st.rerun()
     with action_col2:
         if st.button(
@@ -752,9 +1256,18 @@ def render_profile_editor(subject: str, grade: str) -> None:
             use_container_width=True,
         ):
             clear_custom_profiles_for_subject(subject)
+            restored_from_snapshot = _queue_snapshot_restore(
+                subject=subject,
+                grade=grade,
+                lesson_topic=lesson_topic,
+                region_curriculum=region_curriculum,
+            )
             st.session_state.pop(editor_key, None)
             st.session_state.pop(next_id_key, None)
-            st.success("已恢复为内置模板。")
+            if restored_from_snapshot:
+                st.success("已从临时实时学生画像快照恢复。")
+            else:
+                st.success("已恢复为内置模板。")
             st.rerun()
 
     batch_export_col, batch_import_col = st.columns(2)
@@ -791,4 +1304,11 @@ def render_profile_editor(subject: str, grade: str) -> None:
                 st.error(f"导入失败: {exc}")
 
     if is_dialog_open:
-        _render_profile_editor_dialog(subject, grade)
+        _render_profile_editor_dialog(
+            subject,
+            grade,
+            region_curriculum,
+            lesson_topic,
+            dynamic_topic_rules,
+            api_key,
+        )

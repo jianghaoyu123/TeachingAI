@@ -1,0 +1,1139 @@
+{
+  "meta": {
+    "version": 1,
+    "source": "manual-json-profile-catalog",
+    "generated_at": "2026-05-29T10:40:00+00:00",
+    "region": "dynamic"
+  },
+  "subject": "班会",
+  "bands": {
+    "primary_lower": [
+      {
+        "name": "安静依赖型",
+        "level": "low",
+        "strengths": [
+          "愿意听老师讲故事",
+          "对表扬反馈敏感",
+          "能模仿简单班级规范",
+          "喜欢有图片和游戏的活动"
+        ],
+        "weaknesses": [
+          "不敢主动发言",
+          "规则迁移慢",
+          "表达情绪词汇少",
+          "遇到冲突只会沉默"
+        ],
+        "likely_errors": [
+          "只会重复老师答案",
+          "把班会当放松课",
+          "听懂要求但不行动",
+          "不知道如何求助"
+        ],
+        "support_needs": [
+          "明确口令和步骤图",
+          "示范句型",
+          "表扬贴纸强化",
+          "同伴结对提醒"
+        ],
+        "activity_level": 45,
+        "baseline_success_rate": 58,
+        "focus_stability": 60,
+        "knowledge_coverage": 42
+      },
+      {
+        "name": "跟随参与型",
+        "level": "mid-low",
+        "strengths": [
+          "愿意参加举手投票",
+          "能说出简单规则",
+          "对同伴示范反应快",
+          "喜欢角色扮演"
+        ],
+        "weaknesses": [
+          "独立表达不完整",
+          "遇到分歧容易跟风",
+          "反思停留在表面"
+        ],
+        "likely_errors": [
+          "只说要团结不说做法",
+          "把纪律问题归给别人",
+          "回答过于简短"
+        ],
+        "support_needs": [
+          "句式支架",
+          "情境卡片",
+          "先同桌说再全班说"
+        ],
+        "activity_level": 52,
+        "baseline_success_rate": 63,
+        "focus_stability": 63,
+        "knowledge_coverage": 48
+      },
+      {
+        "name": "稳定达标型",
+        "level": "mid",
+        "strengths": [
+          "能理解常见班会主题",
+          "愿意遵守班规",
+          "可完成简单反思",
+          "能听别人发言"
+        ],
+        "weaknesses": [
+          "观点不够具体",
+          "联系自身经历较少",
+          "面对冲突策略单一"
+        ],
+        "likely_errors": [
+          "空泛地说要文明",
+          "案例分析只讲结果",
+          "忽略他人感受"
+        ],
+        "support_needs": [
+          "问题拆分",
+          "生活化案例",
+          "反思模板"
+        ],
+        "activity_level": 58,
+        "baseline_success_rate": 70,
+        "focus_stability": 68,
+        "knowledge_coverage": 56
+      },
+      {
+        "name": "主动分享型",
+        "level": "mid-high",
+        "strengths": [
+          "敢于分享经历",
+          "能提出简单建议",
+          "班级活动参与积极",
+          "对合作任务投入"
+        ],
+        "weaknesses": [
+          "表达有时过快",
+          "容易抢答",
+          "反思深度不稳定"
+        ],
+        "likely_errors": [
+          "只讲自己忽略同伴",
+          "建议可执行性不足",
+          "情绪判断偏主观"
+        ],
+        "support_needs": [
+          "倾听提醒",
+          "更具体的行动目标",
+          "同伴互评"
+        ],
+        "activity_level": 68,
+        "baseline_success_rate": 78,
+        "focus_stability": 72,
+        "knowledge_coverage": 64
+      },
+      {
+        "name": "示范带动型",
+        "level": "high",
+        "strengths": [
+          "能带头遵守规则",
+          "表达清楚",
+          "能安慰同伴",
+          "愿意承担班级小任务"
+        ],
+        "weaknesses": [
+          "有时替别人做决定",
+          "容易以自己标准要求他人"
+        ],
+        "likely_errors": [
+          "把帮助变成指挥",
+          "忽视低参与同学",
+          "总结过快"
+        ],
+        "support_needs": [
+          "同理心提醒",
+          "轮流发言机制",
+          "更开放的讨论任务"
+        ],
+        "activity_level": 75,
+        "baseline_success_rate": 85,
+        "focus_stability": 76,
+        "knowledge_coverage": 72
+      }
+    ],
+    "primary_upper": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "知道基本班规",
+          "对故事案例有兴趣",
+          "在提醒下能参与",
+          "愿意完成简单记录"
+        ],
+        "weaknesses": [
+          "自我管理弱",
+          "情绪表达单一",
+          "常把问题归因外部",
+          "合作意识不稳定"
+        ],
+        "likely_errors": [
+          "检讨只说我错了",
+          "不知道改进步骤",
+          "讨论时跑题",
+          "把班会内容和现实分开"
+        ],
+        "support_needs": [
+          "行为清单",
+          "情绪词卡",
+          "一步一步的改进模板",
+          "具体情境练习"
+        ],
+        "activity_level": 46,
+        "baseline_success_rate": 58,
+        "focus_stability": 58,
+        "knowledge_coverage": 45
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能理解常见主题",
+          "愿意参与小组交流",
+          "对真实案例有反应"
+        ],
+        "weaknesses": [
+          "观点依据不足",
+          "合作时容易被带节奏",
+          "反思偏空泛"
+        ],
+        "likely_errors": [
+          "只会喊口号",
+          "建议停留在应该",
+          "分析冲突只看对错"
+        ],
+        "support_needs": [
+          "观点+原因支架",
+          "小组角色分工",
+          "案例追问"
+        ],
+        "activity_level": 54,
+        "baseline_success_rate": 64,
+        "focus_stability": 62,
+        "knowledge_coverage": 52
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "能联系日常班级生活",
+          "可较完整表达观点",
+          "规则意识较稳定",
+          "愿意倾听"
+        ],
+        "weaknesses": [
+          "迁移到复杂情境较慢",
+          "解决策略不够多样",
+          "深层反思不足"
+        ],
+        "likely_errors": [
+          "分析只有单一视角",
+          "忽视长期影响",
+          "行动计划不够具体"
+        ],
+        "support_needs": [
+          "多视角讨论",
+          "行动计划模板",
+          "复盘清单"
+        ],
+        "activity_level": 60,
+        "baseline_success_rate": 71,
+        "focus_stability": 68,
+        "knowledge_coverage": 60
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "能主动分享班级观察",
+          "会提出改进建议",
+          "合作中能协调分工",
+          "表达较有条理"
+        ],
+        "weaknesses": [
+          "有时结论先行",
+          "对少数同学关注不足",
+          "建议落地性偶尔不够"
+        ],
+        "likely_errors": [
+          "把复杂问题简单化",
+          "对同伴评价偏快",
+          "忽略执行难点"
+        ],
+        "support_needs": [
+          "证据意识提醒",
+          "执行条件分析",
+          "更开放的辩论任务"
+        ],
+        "activity_level": 70,
+        "baseline_success_rate": 79,
+        "focus_stability": 73,
+        "knowledge_coverage": 68
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "班级责任感强",
+          "能主持片段讨论",
+          "能从多方看问题",
+          "愿意推动班级改进"
+        ],
+        "weaknesses": [
+          "容易替别人下定义",
+          "有时过度主导"
+        ],
+        "likely_errors": [
+          "方案理想化",
+          "忽略执行阻力",
+          "把沉默同学视为不配合"
+        ],
+        "support_needs": [
+          "同伴反馈",
+          "项目化班会任务",
+          "更复杂的案例研讨"
+        ],
+        "activity_level": 78,
+        "baseline_success_rate": 86,
+        "focus_stability": 77,
+        "knowledge_coverage": 76
+      }
+    ],
+    "junior_7": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "愿意听真实校园案例",
+          "对安全和同伴话题敏感",
+          "在点名下可简短回应"
+        ],
+        "weaknesses": [
+          "自我反思弱",
+          "规则内化不足",
+          "表达冲突经历困难",
+          "责任意识波动大"
+        ],
+        "likely_errors": [
+          "把问题都归给同学",
+          "只讲感受不讲事实",
+          "讨论中容易偏题"
+        ],
+        "support_needs": [
+          "事实-感受-行动模板",
+          "匿名案例讨论",
+          "更小步的参与任务"
+        ],
+        "activity_level": 44,
+        "baseline_success_rate": 56,
+        "focus_stability": 57,
+        "knowledge_coverage": 46
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能理解常见班会主题",
+          "愿意表达基本立场",
+          "对小组讨论有参与意愿"
+        ],
+        "weaknesses": [
+          "证据不足",
+          "容易跟从主流意见",
+          "行动建议模糊"
+        ],
+        "likely_errors": [
+          "空喊要尊重他人",
+          "分析问题只看表面",
+          "忽略规则边界"
+        ],
+        "support_needs": [
+          "案例拆解表",
+          "发言提示卡",
+          "小组角色约束"
+        ],
+        "activity_level": 53,
+        "baseline_success_rate": 64,
+        "focus_stability": 63,
+        "knowledge_coverage": 54
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "能联系班级日常现象",
+          "表达基本完整",
+          "理解纪律与合作要求"
+        ],
+        "weaknesses": [
+          "深度不足",
+          "迁移到新情境较慢",
+          "对群体影响认识不足"
+        ],
+        "likely_errors": [
+          "只给原则不给做法",
+          "反思停留在个人层面",
+          "忽略长期习惯形成"
+        ],
+        "support_needs": [
+          "追问式提纲",
+          "同伴互评",
+          "行动承诺单"
+        ],
+        "activity_level": 60,
+        "baseline_success_rate": 72,
+        "focus_stability": 69,
+        "knowledge_coverage": 61
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "能主动分析班级问题",
+          "建议较具体",
+          "愿意协助组织活动",
+          "倾听能力较好"
+        ],
+        "weaknesses": [
+          "有时过早下结论",
+          "对执行难点估计不足"
+        ],
+        "likely_errors": [
+          "默认大家都能做到",
+          "把个别问题泛化",
+          "忽略情绪因素"
+        ],
+        "support_needs": [
+          "可行性分析",
+          "角色互换讨论",
+          "更复杂案例"
+        ],
+        "activity_level": 69,
+        "baseline_success_rate": 80,
+        "focus_stability": 74,
+        "knowledge_coverage": 69
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "责任感强",
+          "能组织讨论",
+          "能兼顾规则与感受",
+          "具备初步带动同伴能力"
+        ],
+        "weaknesses": [
+          "容易承担过多",
+          "对同伴要求偏高"
+        ],
+        "likely_errors": [
+          "方案过于理想化",
+          "忽视少数沉默者",
+          "过早给出标准答案"
+        ],
+        "support_needs": [
+          "主持技巧训练",
+          "协商型任务",
+          "班级议题项目化"
+        ],
+        "activity_level": 77,
+        "baseline_success_rate": 87,
+        "focus_stability": 78,
+        "knowledge_coverage": 77
+      }
+    ],
+    "junior_8": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对青春期、人际、安全话题有关注",
+          "愿意在熟悉情境下表达",
+          "能听懂基本规范"
+        ],
+        "weaknesses": [
+          "情绪管理弱",
+          "常把矛盾个人化",
+          "讨论中缺乏边界意识"
+        ],
+        "likely_errors": [
+          "以情绪代替分析",
+          "把玩笑合理化",
+          "只看眼前结果"
+        ],
+        "support_needs": [
+          "冲突情境脚本",
+          "情绪调节步骤",
+          "清晰边界案例"
+        ],
+        "activity_level": 46,
+        "baseline_success_rate": 57,
+        "focus_stability": 56,
+        "knowledge_coverage": 47
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "愿意讨论班级现象",
+          "能表达是非判断",
+          "对真实案例投入度较高"
+        ],
+        "weaknesses": [
+          "观点证据链不足",
+          "容易站队",
+          "反思不够深入"
+        ],
+        "likely_errors": [
+          "把讨论变成评价同学",
+          "建议缺乏操作性",
+          "忽略规则背后原因"
+        ],
+        "support_needs": [
+          "证据-观点结构",
+          "匿名案例",
+          "行为后果追问"
+        ],
+        "activity_level": 55,
+        "baseline_success_rate": 65,
+        "focus_stability": 62,
+        "knowledge_coverage": 55
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "能把班会内容联系到班级治理",
+          "表达较清楚",
+          "合作意识较稳"
+        ],
+        "weaknesses": [
+          "对复杂关系判断偏单线",
+          "行动方案持续性不足"
+        ],
+        "likely_errors": [
+          "方案只有短期措施",
+          "忽略群体差异",
+          "把责任集中给班干部"
+        ],
+        "support_needs": [
+          "长期计划模板",
+          "多角色分析",
+          "复盘机制"
+        ],
+        "activity_level": 61,
+        "baseline_success_rate": 73,
+        "focus_stability": 69,
+        "knowledge_coverage": 62
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "能提出较成熟建议",
+          "理解规则与关系平衡",
+          "能支持小组讨论"
+        ],
+        "weaknesses": [
+          "有时判断偏快",
+          "容易忽略执行资源"
+        ],
+        "likely_errors": [
+          "把班会方案想得太理想",
+          "对个体差异考虑不足"
+        ],
+        "support_needs": [
+          "资源约束分析",
+          "共识形成任务",
+          "过程性评价"
+        ],
+        "activity_level": 70,
+        "baseline_success_rate": 81,
+        "focus_stability": 75,
+        "knowledge_coverage": 70
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "有较强公共意识",
+          "能主持或策划主题班会片段",
+          "能兼顾不同观点",
+          "带动性强"
+        ],
+        "weaknesses": [
+          "可能主导过度",
+          "容易用成熟标准要求所有人"
+        ],
+        "likely_errors": [
+          "方案复杂但落地难",
+          "忽略低参与者需求",
+          "讨论节奏过快"
+        ],
+        "support_needs": [
+          "分层任务设计",
+          "同伴主持反馈",
+          "更开放议题"
+        ],
+        "activity_level": 79,
+        "baseline_success_rate": 88,
+        "focus_stability": 79,
+        "knowledge_coverage": 78
+      }
+    ],
+    "junior_9": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对升学压力、时间管理话题有共鸣",
+          "在具体任务下可参与",
+          "能接受明确规范"
+        ],
+        "weaknesses": [
+          "压力调节弱",
+          "自我评价极端",
+          "班级责任参与感低"
+        ],
+        "likely_errors": [
+          "把班会视为说教",
+          "只关注个人分数",
+          "忽略同伴支持价值"
+        ],
+        "support_needs": [
+          "压力管理清单",
+          "小步目标",
+          "同伴支持情境练习"
+        ],
+        "activity_level": 43,
+        "baseline_success_rate": 55,
+        "focus_stability": 55,
+        "knowledge_coverage": 48
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "理解成长与责任主题",
+          "能表达基本看法",
+          "对经验分享有兴趣"
+        ],
+        "weaknesses": [
+          "反思质量不稳定",
+          "执行计划容易空泛",
+          "合作动力受考试影响"
+        ],
+        "likely_errors": [
+          "口头上认同却不落实",
+          "建议停在大方向",
+          "忽视情绪恢复"
+        ],
+        "support_needs": [
+          "周计划模板",
+          "复盘卡",
+          "更贴近备考生活的案例"
+        ],
+        "activity_level": 52,
+        "baseline_success_rate": 63,
+        "focus_stability": 61,
+        "knowledge_coverage": 56
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "能理性看待常见班级议题",
+          "可较完整表达行动想法",
+          "具备基本自我管理意识"
+        ],
+        "weaknesses": [
+          "压力情境下稳定性下降",
+          "群体互助意识不够强"
+        ],
+        "likely_errors": [
+          "方案只顾自己节奏",
+          "忽略班级共同氛围",
+          "案例分析偏功利"
+        ],
+        "support_needs": [
+          "个人与集体平衡讨论",
+          "长期坚持提醒",
+          "阶段性目标复盘"
+        ],
+        "activity_level": 59,
+        "baseline_success_rate": 71,
+        "focus_stability": 67,
+        "knowledge_coverage": 63
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "能在压力情境下提出实际建议",
+          "表达成熟",
+          "关注班级整体状态"
+        ],
+        "weaknesses": [
+          "偶尔过于现实",
+          "对情绪支持重视不足"
+        ],
+        "likely_errors": [
+          "把效率凌驾于感受",
+          "默认所有人都自律"
+        ],
+        "support_needs": [
+          "情绪支持议题",
+          "更平衡的讨论框架",
+          "同伴互助方案设计"
+        ],
+        "activity_level": 68,
+        "baseline_success_rate": 80,
+        "focus_stability": 74,
+        "knowledge_coverage": 71
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "能带动班级正向氛围",
+          "具备较强组织与反思能力",
+          "能平衡目标与关怀"
+        ],
+        "weaknesses": [
+          "容易承担过多协调任务",
+          "有时对低投入同学不耐烦"
+        ],
+        "likely_errors": [
+          "过快推进方案",
+          "忽略个体压力差异",
+          "把沉默等同消极"
+        ],
+        "support_needs": [
+          "协作分工",
+          "同伴互助项目",
+          "更高阶班级治理议题"
+        ],
+        "activity_level": 77,
+        "baseline_success_rate": 87,
+        "focus_stability": 78,
+        "knowledge_coverage": 79
+      }
+    ],
+    "senior_10": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对新环境适应、同伴关系话题有兴趣",
+          "能在具体引导下参与",
+          "接受明确要求"
+        ],
+        "weaknesses": [
+          "自我管理松散",
+          "规划意识弱",
+          "面对集体事务参与度低"
+        ],
+        "likely_errors": [
+          "把问题完全交给班干部",
+          "反思只停留在态度",
+          "行动计划缺失"
+        ],
+        "support_needs": [
+          "清晰任务单",
+          "自我管理工具",
+          "情境案例拆解"
+        ],
+        "activity_level": 45,
+        "baseline_success_rate": 57,
+        "focus_stability": 58,
+        "knowledge_coverage": 49
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能理解常见成长主题",
+          "愿意参与小组交流",
+          "对校园真实议题有反应"
+        ],
+        "weaknesses": [
+          "观点分析不够深入",
+          "执行跟进不足",
+          "公共责任感一般"
+        ],
+        "likely_errors": [
+          "建议停留在口号层面",
+          "把班会与个人成长割裂",
+          "案例分析偏单一"
+        ],
+        "support_needs": [
+          "观点依据模板",
+          "阶段跟进表",
+          "更贴近高中生活的案例"
+        ],
+        "activity_level": 54,
+        "baseline_success_rate": 65,
+        "focus_stability": 63,
+        "knowledge_coverage": 57
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "能联系学业、关系与自我管理",
+          "表达较完整",
+          "具备基本公共意识"
+        ],
+        "weaknesses": [
+          "对复杂议题多角度分析不足",
+          "行动持续性一般"
+        ],
+        "likely_errors": [
+          "短期方案多长期方案少",
+          "忽略制度与氛围因素"
+        ],
+        "support_needs": [
+          "多因素分析图",
+          "班级共识形成任务",
+          "定期复盘"
+        ],
+        "activity_level": 61,
+        "baseline_success_rate": 73,
+        "focus_stability": 69,
+        "knowledge_coverage": 64
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "能提出较成熟的班级改进建议",
+          "逻辑清晰",
+          "有协作意识"
+        ],
+        "weaknesses": [
+          "可能过于强调效率",
+          "对情感支持关注不足"
+        ],
+        "likely_errors": [
+          "方案偏理性但温度不足",
+          "默认规则即可解决问题"
+        ],
+        "support_needs": [
+          "情感维度提醒",
+          "执行风险分析",
+          "角色互换讨论"
+        ],
+        "activity_level": 70,
+        "baseline_success_rate": 81,
+        "focus_stability": 75,
+        "knowledge_coverage": 72
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "能主持深度讨论",
+          "具备较强公共表达能力",
+          "能够带动班级项目"
+        ],
+        "weaknesses": [
+          "有时主导过强",
+          "容易对低投入者失去耐心"
+        ],
+        "likely_errors": [
+          "高估执行力",
+          "忽略沉默者声音",
+          "方案复杂度过高"
+        ],
+        "support_needs": [
+          "项目管理支持",
+          "同伴反馈机制",
+          "更开放社会议题"
+        ],
+        "activity_level": 79,
+        "baseline_success_rate": 88,
+        "focus_stability": 79,
+        "knowledge_coverage": 80
+      }
+    ],
+    "senior_11": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对压力管理、同伴支持话题有感受",
+          "在熟悉问题上能回应",
+          "可接受具体建议"
+        ],
+        "weaknesses": [
+          "计划执行弱",
+          "情绪波动影响参与",
+          "常把班会当附属任务"
+        ],
+        "likely_errors": [
+          "认为班会无实际作用",
+          "把困扰简单归因于时间不够",
+          "缺少实际调整步骤"
+        ],
+        "support_needs": [
+          "周计划与复盘卡",
+          "压力纾解策略",
+          "同伴互助结构化活动"
+        ],
+        "activity_level": 42,
+        "baseline_success_rate": 54,
+        "focus_stability": 54,
+        "knowledge_coverage": 50
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能理解自律与合作主题",
+          "愿意分享部分经验",
+          "对同龄案例有共鸣"
+        ],
+        "weaknesses": [
+          "反思深度不足",
+          "集体议题参与度波动",
+          "建议落实不稳"
+        ],
+        "likely_errors": [
+          "只说要坚持",
+          "忽略情绪和关系因素",
+          "把问题归结为个人意志"
+        ],
+        "support_needs": [
+          "案例追问",
+          "可执行行动清单",
+          "分层目标设置"
+        ],
+        "activity_level": 51,
+        "baseline_success_rate": 63,
+        "focus_stability": 61,
+        "knowledge_coverage": 58
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "能较平衡地看待学业与班级生活",
+          "表达清晰",
+          "具备基本反思能力"
+        ],
+        "weaknesses": [
+          "对复杂公共议题论证不够",
+          "行动方案缺少跟踪"
+        ],
+        "likely_errors": [
+          "讨论较理性但不够具体",
+          "忽略不同学生处境差异"
+        ],
+        "support_needs": [
+          "证据链训练",
+          "阶段性复盘",
+          "多主体视角分析"
+        ],
+        "activity_level": 60,
+        "baseline_success_rate": 72,
+        "focus_stability": 68,
+        "knowledge_coverage": 65
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "能提出成熟可行的班级建议",
+          "理解集体治理逻辑",
+          "能兼顾效率与合作"
+        ],
+        "weaknesses": [
+          "偶尔忽略情绪脆弱同学",
+          "对执行难度估计偏乐观"
+        ],
+        "likely_errors": [
+          "建议偏向自律强学生",
+          "方案公平性考虑不足"
+        ],
+        "support_needs": [
+          "公平性讨论",
+          "执行阻力评估",
+          "多层目标设计"
+        ],
+        "activity_level": 69,
+        "baseline_success_rate": 80,
+        "focus_stability": 75,
+        "knowledge_coverage": 73
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "具备较强组织、表达与反思能力",
+          "能推动高质量班会讨论",
+          "公共意识强"
+        ],
+        "weaknesses": [
+          "容易承担过多",
+          "对低配合同学包容度有限"
+        ],
+        "likely_errors": [
+          "方案太满",
+          "忽略讨论留白",
+          "推进过快"
+        ],
+        "support_needs": [
+          "领导力反馈",
+          "分层参与机制",
+          "更复杂社会议题联动"
+        ],
+        "activity_level": 78,
+        "baseline_success_rate": 87,
+        "focus_stability": 79,
+        "knowledge_coverage": 81
+      }
+    ],
+    "senior_12": [
+      {
+        "name": "基础薄弱型",
+        "level": "low",
+        "strengths": [
+          "对减压、互助、毕业规划话题有需求",
+          "在具体任务下愿意回应",
+          "能接受明确安排"
+        ],
+        "weaknesses": [
+          "焦虑影响参与",
+          "容易认为班会占用复习时间",
+          "反思与规划能力弱"
+        ],
+        "likely_errors": [
+          "只关注个人复习",
+          "忽略同伴支持和班级氛围",
+          "把建议停留在空话"
+        ],
+        "support_needs": [
+          "简短高效任务设计",
+          "减压工具",
+          "毕业阶段支持案例"
+        ],
+        "activity_level": 40,
+        "baseline_success_rate": 53,
+        "focus_stability": 52,
+        "knowledge_coverage": 51
+      },
+      {
+        "name": "中等偏下型",
+        "level": "mid-low",
+        "strengths": [
+          "能理解备考阶段班会价值",
+          "愿意听同伴经验",
+          "可表达基本诉求"
+        ],
+        "weaknesses": [
+          "执行持续性不足",
+          "共情与支持表达偏弱",
+          "对公共议题耐心不足"
+        ],
+        "likely_errors": [
+          "把班会只看成技巧分享",
+          "建议偏短视",
+          "忽略情绪健康"
+        ],
+        "support_needs": [
+          "短周期计划",
+          "互助结构",
+          "情绪支持提示"
+        ],
+        "activity_level": 49,
+        "baseline_success_rate": 62,
+        "focus_stability": 60,
+        "knowledge_coverage": 59
+      },
+      {
+        "name": "中等稳定型",
+        "level": "mid",
+        "strengths": [
+          "能平衡备考与班级关系议题",
+          "表达成熟",
+          "具备基本互助意识"
+        ],
+        "weaknesses": [
+          "深层复盘不足",
+          "对不同同学的差异支持不足"
+        ],
+        "likely_errors": [
+          "方案过于标准化",
+          "讨论偏效率导向"
+        ],
+        "support_needs": [
+          "差异化支持讨论",
+          "复盘模板",
+          "毕业阶段主题案例"
+        ],
+        "activity_level": 58,
+        "baseline_success_rate": 71,
+        "focus_stability": 67,
+        "knowledge_coverage": 66
+      },
+      {
+        "name": "中等偏上型",
+        "level": "mid-high",
+        "strengths": [
+          "能提出务实班级支持方案",
+          "逻辑清楚",
+          "愿意维护班级氛围"
+        ],
+        "weaknesses": [
+          "有时过于结果导向",
+          "对情绪修复关注不足"
+        ],
+        "likely_errors": [
+          "把所有问题都转成效率问题",
+          "忽略个体承受差异"
+        ],
+        "support_needs": [
+          "温度与效率平衡讨论",
+          "同伴支持机制设计",
+          "毕业成长反思"
+        ],
+        "activity_level": 67,
+        "baseline_success_rate": 79,
+        "focus_stability": 74,
+        "knowledge_coverage": 74
+      },
+      {
+        "name": "拔高拓展型",
+        "level": "high",
+        "strengths": [
+          "具备成熟公共表达与组织能力",
+          "能带动班级互助",
+          "能把班会主题转化为实际行动"
+        ],
+        "weaknesses": [
+          "可能给自己和他人压力过大",
+          "容易过度承担"
+        ],
+        "likely_errors": [
+          "高标准推进",
+          "忽略情绪缓冲需要",
+          "方案节奏偏满"
+        ],
+        "support_needs": [
+          "分工协同",
+          "柔性领导提醒",
+          "毕业议题项目化讨论"
+        ],
+        "activity_level": 76,
+        "baseline_success_rate": 86,
+        "focus_stability": 78,
+        "knowledge_coverage": 82
+      }
+    ]
+  }
+}

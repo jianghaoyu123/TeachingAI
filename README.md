@@ -109,6 +109,10 @@ The Deep Mode UI displays a progress bar. After completion you can expand "Deep 
   - **Memory reinforcement**: repeated confusions/errors are strengthened across modules
   - **Memory decay/forgetting**: weak memories decay over modules to reduce stale bias
 - Student profiles automatically switch by grade, subject, and ability level: humanities profiles emphasize reading comprehension and evidence expression; STEM profiles emphasize step-by-step reasoning and condition verification
+- Student profile auto-generation improvements (new):
+  - The system starts from built-in student profile templates by subject, grade, and level
+  - After you provide lesson topic and materials (upload or paste), it automatically enriches student profiles with lesson-specific traits
+  - Different student levels receive different enriched traits, so classroom simulation stays level-aware
 - Profile editing panel: customize and save student profiles
 - Quantitative profile indicators (editable per student):
   - `activity_level` (learning activity)

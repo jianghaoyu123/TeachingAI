@@ -288,6 +288,68 @@ def _append_deep_docx(doc, report: SimulationReport) -> None:
                     doc.add_paragraph(f"错误: {err}", style="List Bullet")
 
 
+def _append_profile_snapshot_markdown(lines: list[str], report: SimulationReport) -> None:
+    if not report.applied_profiles:
+        return
+    lines.append("## 本次使用的学生画像快照")
+    for profile in report.applied_profiles:
+        lines.append(f"### {profile.name}（{profile.level}）")
+        lines.append(f"- 优势: {'; '.join(profile.strengths)}")
+        lines.append(f"- 薄弱点: {'; '.join(profile.weaknesses)}")
+        lines.append(f"- 典型错误: {'; '.join(profile.likely_errors)}")
+        lines.append(f"- 支持需求: {'; '.join(profile.support_needs)}")
+        lines.append(
+            "- 量化画像: "
+            f"学习活跃度={profile.activity_level}/100; "
+            f"基线正确率={profile.baseline_success_rate}/100; "
+            f"专注稳定性={profile.focus_stability}/100; "
+            f"知识覆盖度={profile.knowledge_coverage}/100"
+        )
+    lines.append("")
+
+
+def _append_profile_snapshot_html(parts: list[str], report: SimulationReport) -> None:
+    if not report.applied_profiles:
+        return
+    parts.append("<section><h2>本次使用的学生画像快照</h2>")
+    for profile in report.applied_profiles:
+        parts.append(f"<h3>{escape(profile.name)}<span class='tag'>{escape(profile.level)}</span></h3>")
+        parts.append("<ul>")
+        parts.append(f"<li><strong>优势:</strong> {escape('; '.join(profile.strengths))}</li>")
+        parts.append(f"<li><strong>薄弱点:</strong> {escape('; '.join(profile.weaknesses))}</li>")
+        parts.append(f"<li><strong>典型错误:</strong> {escape('; '.join(profile.likely_errors))}</li>")
+        parts.append(f"<li><strong>支持需求:</strong> {escape('; '.join(profile.support_needs))}</li>")
+        parts.append(
+            "<li><strong>量化画像:</strong> "
+            f"学习活跃度={profile.activity_level}/100; "
+            f"基线正确率={profile.baseline_success_rate}/100; "
+            f"专注稳定性={profile.focus_stability}/100; "
+            f"知识覆盖度={profile.knowledge_coverage}/100"
+            "</li>"
+        )
+        parts.append("</ul>")
+    parts.append("</section>")
+
+
+def _append_profile_snapshot_docx(doc, report: SimulationReport) -> None:
+    if not report.applied_profiles:
+        return
+    doc.add_heading("本次使用的学生画像快照", level=2)
+    for profile in report.applied_profiles:
+        doc.add_heading(f"{profile.name}（{profile.level}）", level=3)
+        doc.add_paragraph(f"优势: {'; '.join(profile.strengths)}")
+        doc.add_paragraph(f"薄弱点: {'; '.join(profile.weaknesses)}")
+        doc.add_paragraph(f"典型错误: {'; '.join(profile.likely_errors)}")
+        doc.add_paragraph(f"支持需求: {'; '.join(profile.support_needs)}")
+        doc.add_paragraph(
+            "量化画像: "
+            f"学习活跃度={profile.activity_level}/100; "
+            f"基线正确率={profile.baseline_success_rate}/100; "
+            f"专注稳定性={profile.focus_stability}/100; "
+            f"知识覆盖度={profile.knowledge_coverage}/100"
+        )
+
+
 def to_markdown(report: SimulationReport) -> str:
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     lines: list[str] = []
@@ -302,6 +364,7 @@ def to_markdown(report: SimulationReport) -> str:
     lines.append("")
 
     _append_deep_markdown(lines, report)
+    _append_profile_snapshot_markdown(lines, report)
 
     lines.append("## 关键知识点")
     for point in report.extracted_key_points:
@@ -388,6 +451,7 @@ def to_html(report: SimulationReport) -> str:
     parts.append("</section>")
 
     _append_deep_html(parts, report)
+    _append_profile_snapshot_html(parts, report)
 
     parts.append("<section><h2>关键知识点</h2><ul>")
     for point in report.extracted_key_points:
@@ -463,6 +527,7 @@ def to_docx_bytes(report: SimulationReport) -> bytes:
     doc.add_paragraph(f"分析模式: {_mode_label(report)}")
 
     _append_deep_docx(doc, report)
+    _append_profile_snapshot_docx(doc, report)
 
     doc.add_heading("关键知识点", level=2)
     for point in report.extracted_key_points:

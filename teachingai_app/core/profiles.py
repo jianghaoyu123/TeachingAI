@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .models import StudentProfile
 from .profile_runtime import get_catalog_profiles, get_grade_band_label
+from .topic_profile_adjustments import TopicAdjustmentRule, apply_topic_adjustments
 
 DEFAULT_STUDENT_NAMES_BY_LEVEL = {
     "low": "李明",
@@ -184,13 +185,29 @@ def _apply_quant_defaults_by_level(
     return named
 
 
-def get_builtin_profiles_for_subject(subject: str, grade: str = "七年级") -> list[StudentProfile]:
+def get_builtin_profiles_for_subject(
+    subject: str,
+    grade: str = "七年级",
+    lesson_topic: str = "",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
+) -> list[StudentProfile]:
     profiles = get_catalog_profiles(subject, grade)
-    return _apply_quant_defaults_by_level(_apply_default_student_names(profiles), force_by_level=True)
+    builtin_profiles = _apply_quant_defaults_by_level(_apply_default_student_names(profiles), force_by_level=True)
+    return apply_topic_adjustments(builtin_profiles, subject, lesson_topic, dynamic_topic_rules)
 
 
-def get_profiles_for_subject(subject: str, grade: str = "七年级") -> list[StudentProfile]:
+def get_profiles_for_subject(
+    subject: str,
+    grade: str = "七年级",
+    lesson_topic: str = "",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
+) -> list[StudentProfile]:
     custom = _read_custom_templates()
     if subject in custom and custom[subject]:
-        return _apply_quant_defaults(custom[subject])
-    return get_builtin_profiles_for_subject(subject, grade)
+        return apply_topic_adjustments(
+            _apply_quant_defaults(custom[subject]),
+            subject,
+            lesson_topic,
+            dynamic_topic_rules,
+        )
+    return get_builtin_profiles_for_subject(subject, grade, lesson_topic, dynamic_topic_rules)

@@ -15,6 +15,12 @@ from .models import (
     StudentReaction,
 )
 from .profiles import get_grade_band_label, get_profiles_for_subject
+from .topic_profile_adjustments import (
+    TopicAdjustmentRule,
+    LevelAdjustment,
+    build_rule_from_dict,
+    describe_topic_adjustments,
+)
 
 
 class LLMApiError(Exception):
@@ -188,17 +194,155 @@ def _build_http_error_message(status_code: int, body_text: str) -> str:
     return f"模型接口返回错误 {status_code}: {compact}"
 
 
-def _build_profile_context(subject: str, grade: str) -> str:
-    profiles = get_profiles_for_subject(subject, grade)
+def _safe_topic_adjustment_deltas(rule: TopicAdjustmentRule) -> TopicAdjustmentRule:
+    def _clamp(delta: int) -> int:
+        return max(-12, min(12, int(delta)))
+
+    return TopicAdjustmentRule(
+        keywords=tuple(rule.keywords)[:8],
+        label=rule.label,
+        strengths=tuple(rule.strengths)[:2],
+        weaknesses=tuple(rule.weaknesses)[:2],
+        likely_errors=tuple(rule.likely_errors)[:2],
+        support_needs=tuple(rule.support_needs)[:2],
+        activity_delta=_clamp(rule.activity_delta),
+        baseline_success_delta=_clamp(rule.baseline_success_delta),
+        focus_delta=_clamp(rule.focus_delta),
+        coverage_delta=_clamp(rule.coverage_delta),
+        level_overrides=tuple(
+            (
+                level,
+                LevelAdjustment(
+                    strengths=tuple(adjustment.strengths)[:2],
+                    weaknesses=tuple(adjustment.weaknesses)[:2],
+                    likely_errors=tuple(adjustment.likely_errors)[:2],
+                    support_needs=tuple(adjustment.support_needs)[:2],
+                    activity_delta=_clamp(adjustment.activity_delta),
+                    baseline_success_delta=_clamp(adjustment.baseline_success_delta),
+                    focus_delta=_clamp(adjustment.focus_delta),
+                    coverage_delta=_clamp(adjustment.coverage_delta),
+                ),
+            )
+            for level, adjustment in rule.level_overrides
+        ),
+    )
+
+
+def generate_topic_adjustments_with_llm(
+    *,
+    text: str,
+    subject: str,
+    lesson_topic: str,
+    grade: str,
+    region_curriculum: str,
+    provider: str,
+    api_key: str,
+    base_url: str,
+    model: str,
+) -> tuple[TopicAdjustmentRule, ...]:
+    lesson_topic = str(lesson_topic or "").strip()
+    if not lesson_topic:
+        return ()
+
+    system_prompt = (
+        "我需要对虚拟学生进行建模，现在有一批基础的学生画像，学生按照能力水平具有low、mid-low、mid、mid-high、high五个层级，现在需要你对学生画像做一些补充。"
+        "请根据学科、年级、课题名称、和教案文本，为本节课生成1-2条学生画像补充规则。"
+        "必须只输出JSON。"
+    )
+    user_prompt = f"""
+学科: {subject}
+年级: {grade}
+教材地区: {region_curriculum}
+课题名称: {lesson_topic}
+
+材料摘要:
+{text[:4000]}
+
+请输出JSON，格式如下：
+{{
+  "rules": [
+    {{
+      "label": "规则名称",
+      "keywords": ["用于匹配课题的关键词1", "关键词2"],
+            "level_overrides": {{
+                "low": {{
+                    "strengths": ["该层级新增优势，1-2条"],
+                    "weaknesses": ["该层级新增薄弱点，1-2条"],
+                    "likely_errors": ["该层级易错点，1-2条"],
+                    "support_needs": ["该层级教学支持，1-2条"],
+                    "activity_delta": -12,
+                    "baseline_success_delta": -12,
+                    "focus_delta": -12,
+                    "coverage_delta": -12
+                }},
+                "mid-low": {{"strengths": [], "weaknesses": [], "likely_errors": [], "support_needs": [], "activity_delta": 0, "baseline_success_delta": 0, "focus_delta": 0, "coverage_delta": 0}},
+                "mid": {{"strengths": [], "weaknesses": [], "likely_errors": [], "support_needs": [], "activity_delta": 0, "baseline_success_delta": 0, "focus_delta": 0, "coverage_delta": 0}},
+                "mid-high": {{"strengths": [], "weaknesses": [], "likely_errors": [], "support_needs": [], "activity_delta": 0, "baseline_success_delta": 0, "focus_delta": 0, "coverage_delta": 0}},
+                "high": {{"strengths": [], "weaknesses": [], "likely_errors": [], "support_needs": [], "activity_delta": 0, "baseline_success_delta": 0, "focus_delta": 0, "coverage_delta": 0}}
+            }}
+    }}
+  ]
+}}
+
+约束：
+- rules 最多 2 条
+- delta 在 -12 到 +12
+- level_overrides 必须包含 low、mid-low、mid、mid-high、high 五个层级
+- 五个层级的文本内容必须有差异，不能完全相同
+- 文本简洁、可执行、贴合本课题
+""".strip()
+
+    try:
+        raw = invoke_llm(
+            provider=provider,
+            api_key=api_key,
+            base_url=base_url,
+            model=model,
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            timeout_sec=90,
+        )
+        parsed = _extract_json_block(raw)
+    except Exception:
+        # Any API/format error should gracefully fallback to built-in rules.
+        return ()
+
+    rules_raw = parsed.get("rules", []) if isinstance(parsed, dict) else []
+    if not isinstance(rules_raw, list):
+        return ()
+
+    rules: list[TopicAdjustmentRule] = []
+    for item in rules_raw[:2]:
+        if not isinstance(item, dict):
+            continue
+        rule = build_rule_from_dict(item)
+        if rule is None:
+            continue
+        rules.append(_safe_topic_adjustment_deltas(rule))
+    return tuple(rules)
+
+
+def _build_profile_context(
+    subject: str,
+    grade: str,
+    lesson_topic: str = "",
+    region_curriculum: str = "广东深圳",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
+) -> str:
+    profiles = get_profiles_for_subject(subject, grade, lesson_topic, dynamic_topic_rules)
     band_label = get_grade_band_label(grade)
     chunks: list[str] = [
         f"学段参考: {band_label}（当前年级: {grade}）",
+        f"教材地区: {region_curriculum}",
         "量化画像字段定义:",
         "- 学习活跃度: 越高，越可能主动回应、提问、参与",
         "- 基线正确率: 越高，表示该学生在还没被点拨前也更容易答对",
         "- 专注稳定性: 越高，表示在较长讲解中更不容易掉线或走神",
         "- 知识覆盖度: 越高，表示已掌握的前置知识更完整",
     ]
+    matched_topics = describe_topic_adjustments(subject, lesson_topic, dynamic_topic_rules)
+    if matched_topics:
+        chunks.append(f"主题修正层: {lesson_topic}（命中: {'、'.join(matched_topics)}）")
     for p in profiles:
         chunks.append(
             "\n".join(
@@ -221,8 +365,22 @@ def _build_profile_context(subject: str, grade: str) -> str:
     return "\n".join(chunks)
 
 
-def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str, improvement_focus: str = "all") -> str:
-    profile_context = _build_profile_context(subject, grade)
+def _build_prompt(
+    text: str,
+    subject: str,
+    lesson_topic: str,
+    grade: str,
+    region_curriculum: str = "广东深圳",
+    improvement_focus: str = "all",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
+) -> str:
+    profile_context = _build_profile_context(
+        subject,
+        grade,
+        lesson_topic,
+        region_curriculum,
+        dynamic_topic_rules,
+    )
     
     focus_desc = {
         "all": "兼顾全体学生，保持教学内容的均衡性",
@@ -239,6 +397,7 @@ def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str, improv
 学科: {subject}
 课题: {lesson_topic}
 年级: {grade}
+教材地区: {region_curriculum}
 学生画像模板(优先遵循):
 {profile_context}
 
@@ -513,12 +672,16 @@ def _default_distraction_reason(state: str, level: str) -> str:
 
 
 def _apply_level_variability(
-    reactions: list[StudentReaction], subject: str, grade: str = "七年级"
+    reactions: list[StudentReaction],
+    subject: str,
+    grade: str = "七年级",
+    lesson_topic: str = "",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
 ) -> list[StudentReaction]:
     if not reactions:
         return reactions
 
-    profiles = get_profiles_for_subject(subject, grade)
+    profiles = get_profiles_for_subject(subject, grade, lesson_topic, dynamic_topic_rules)
     profile_by_name = {p.name: p for p in profiles}
 
     adjusted: list[StudentReaction] = []
@@ -578,9 +741,11 @@ def build_report_from_parsed(
     lesson_modules: list | None = None,
     module_interactions: list | None = None,
     module_deliberations: list | None = None,
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
 ) -> SimulationReport:
     key_points = _as_list(parsed.get("key_points"))[:12]
-    profile_names = {p.name for p in get_profiles_for_subject(subject, grade)}
+    applied_profiles = get_profiles_for_subject(subject, grade, lesson_topic, dynamic_topic_rules)
+    profile_names = {p.name for p in applied_profiles}
 
     reactions: list[StudentReaction] = []
     for item in parsed.get("reactions", []):
@@ -600,7 +765,13 @@ def build_report_from_parsed(
             )
         )
 
-    reactions = _apply_level_variability(reactions, subject, grade)
+    reactions = _apply_level_variability(
+        reactions,
+        subject,
+        grade,
+        lesson_topic,
+        dynamic_topic_rules,
+    )
 
     diff_obj = parsed.get("difficulty", {}) if isinstance(parsed.get("difficulty"), dict) else {}
     difficulty = DifficultyAssessment(
@@ -654,6 +825,7 @@ def build_report_from_parsed(
         lesson_modules=lesson_modules or [],
         module_interactions=module_interactions or [],
         module_deliberations=module_deliberations or [],
+        applied_profiles=applied_profiles,
     )
 
 
@@ -662,14 +834,34 @@ def analyze_with_llm(
     subject: str,
     lesson_topic: str,
     grade: str,
+    region_curriculum: str,
     provider: str,
     api_key: str,
     base_url: str,
     model: str,
     improvement_focus: str = "all",
 ) -> SimulationReport:
+    dynamic_topic_rules = generate_topic_adjustments_with_llm(
+        text=text,
+        subject=subject,
+        lesson_topic=lesson_topic,
+        grade=grade,
+        region_curriculum=region_curriculum,
+        provider=provider,
+        api_key=api_key,
+        base_url=base_url,
+        model=model,
+    )
     system_prompt = f"你是严谨的{subject}教学分析助手，需要结合年级特征给出可执行建议，且必须只输出JSON。"
-    user_prompt = _build_prompt(text=text, subject=subject, lesson_topic=lesson_topic, grade=grade, improvement_focus=improvement_focus)
+    user_prompt = _build_prompt(
+        text=text,
+        subject=subject,
+        lesson_topic=lesson_topic,
+        grade=grade,
+        region_curriculum=region_curriculum,
+        improvement_focus=improvement_focus,
+        dynamic_topic_rules=dynamic_topic_rules,
+    )
 
     raw = invoke_llm(
         provider=provider,
@@ -688,4 +880,5 @@ def analyze_with_llm(
         grade=grade,
         original_lesson_material=text,
         analysis_mode="quick",
+        dynamic_topic_rules=dynamic_topic_rules,
     )
