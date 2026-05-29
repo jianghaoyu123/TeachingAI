@@ -1,20 +1,20 @@
 
 # 🧠 TeachingAI — AI Virtual Student Lab
 
-> Upload your lesson plan → simulate real student reactions → improve your teaching design
+> 上传教案 → 模拟学生反应 → 输出改进建议
 
 🔥 一个用 AI 模拟“真实课堂学生反馈”的备课工具
 
 ---
 
-## ✨ What makes it special?
+## ✨ 特别之处
 
 Most AI teaching tools:
 ❌ 直接生成答案  
 ❌ 不考虑学生差异  
 
 TeachingAI:
-✅ 模拟不同水平学生（好/中/差）  
+✅ 模拟不同水平学生（学科、年级、能力层级个性化建模）  
 ✅ 真实课堂互动 + 讨论  
 ✅ 自动指出哪里讲不好、哪里太难  
 
