@@ -64,7 +64,7 @@ def _open_import_json_dialog(*, title: str) -> str:
     try:
         from tkinter import Tk, filedialog
     except Exception as exc:  # pragma: no cover
-        raise RuntimeError("当前环境无法打开系统文件窗口。") from exc
+        raise RuntimeError("当前环境无法打开系统文件窗口，可能因为App运行于服务器上。") from exc
 
     root = Tk()
     root.withdraw()
@@ -946,50 +946,48 @@ def _render_profile_editor_contents(
             student_name = str(current_student.get("name", "未命名学生")).strip() or "未命名学生"
             single_export_col, single_import_col = st.columns(2)
             with single_export_col:
-                if st.button(
+                safe_name = _safe_filename_stem(student_name, fallback="student")
+                st.download_button(
                     "导出当前学生画像",
+                    data=_build_student_profile_payload(current_student, subject, grade),
+                    file_name=f"student_profile_{safe_name}.json",
+                    mime="application/json",
                     key=f"export_single_profile_{key_scope}_{focus_student_id}",
                     use_container_width=True,
-                ):
-                    try:
-                        safe_name = _safe_filename_stem(student_name, fallback="student")
-                        selected_path = _open_save_json_dialog(
-                            title="导出当前学生画像",
-                            default_filename=f"student_profile_{safe_name}.json",
-                        )
-                        if selected_path:
-                            Path(selected_path).write_text(
-                                _build_student_profile_payload(current_student, subject, grade),
-                                encoding="utf-8",
-                            )
-                            st.success(f"已导出当前学生画像: {selected_path}")
-                    except (OSError, RuntimeError) as exc:
-                        st.error(f"导出失败: {exc}")
+                )
 
             with single_import_col:
+                single_import_file = st.file_uploader(
+                    "导入当前学生画像(JSON)",
+                    type=["json"],
+                    key=f"import_single_profile_file_{key_scope}_{focus_student_id}",
+                    label_visibility="collapsed",
+                )
                 if st.button(
-                    "导入当前学生画像",
-                    key=f"import_single_profile_{key_scope}_{focus_student_id}",
+                    "应用导入内容",
+                    key=f"import_single_profile_apply_{key_scope}_{focus_student_id}",
                     use_container_width=True,
+                    disabled=single_import_file is None,
                 ):
                     try:
-                        selected_path = _open_import_json_dialog(title="导入当前学生画像")
-                        if not selected_path:
-                            st.info("已取消导入。")
-                        else:
-                            imported_profile = _parse_imported_student_profile(Path(selected_path).read_text(encoding="utf-8"))
-                            updated_rows: list[dict] = []
-                            for row in st.session_state[editor_key]:
-                                if int(row["id"]) == int(focus_student_id):
-                                    merged_row = dict(row)
-                                    merged_row.update(imported_profile)
-                                    updated_rows.append(merged_row)
-                                else:
-                                    updated_rows.append(row)
-                            st.session_state[editor_key] = updated_rows
-                            st.success("当前学生画像导入成功。")
-                            st.rerun()
-                    except (ValueError, UnicodeDecodeError, json.JSONDecodeError, OSError, RuntimeError) as exc:
+                        if single_import_file is None:
+                            st.info("请先选择一个 JSON 文件。")
+                            st.stop()
+                        imported_profile = _parse_imported_student_profile(
+                            single_import_file.getvalue().decode("utf-8")
+                        )
+                        updated_rows: list[dict] = []
+                        for row in st.session_state[editor_key]:
+                            if int(row["id"]) == int(focus_student_id):
+                                merged_row = dict(row)
+                                merged_row.update(imported_profile)
+                                updated_rows.append(merged_row)
+                            else:
+                                updated_rows.append(row)
+                        st.session_state[editor_key] = updated_rows
+                        st.success("当前学生画像导入成功。")
+                        st.rerun()
+                    except (ValueError, UnicodeDecodeError, json.JSONDecodeError) as exc:
                         st.error(f"导入失败: {exc}")
 
 
@@ -1272,35 +1270,42 @@ def render_profile_editor(
 
     batch_export_col, batch_import_col = st.columns(2)
     with batch_export_col:
-        if st.button("批量导出画像模板", key=f"export_profiles_{key_scope}", use_container_width=True):
-            try:
-                safe_subject = _safe_filename_stem(subject, fallback="subject")
-                selected_path = _open_save_json_dialog(
-                    title="批量导出画像模板",
-                    default_filename=f"profile_template_{safe_subject}.json",
-                )
-                if selected_path:
-                    Path(selected_path).write_text(export_profiles_for_subject(subject, grade), encoding="utf-8")
-                    st.success(f"已导出当前学科画像模板: {selected_path}")
-            except (OSError, RuntimeError) as exc:
-                st.error(f"导出失败: {exc}")
+        safe_subject = _safe_filename_stem(subject, fallback="subject")
+        st.download_button(
+            "批量导出画像模板",
+            data=export_profiles_for_subject(subject, grade),
+            file_name=f"profile_template_{safe_subject}.json",
+            mime="application/json",
+            key=f"export_profiles_{key_scope}",
+            use_container_width=True,
+        )
 
     with batch_import_col:
-        if st.button("批量导入画像模板", key=f"apply_profile_import_{key_scope}", use_container_width=True):
+        batch_import_file = st.file_uploader(
+            "批量导入画像模板(JSON)",
+            type=["json"],
+            key=f"apply_profile_import_file_{key_scope}",
+            label_visibility="collapsed",
+        )
+        if st.button(
+            "批量导入画像模板",
+            key=f"apply_profile_import_{key_scope}",
+            use_container_width=True,
+            disabled=batch_import_file is None,
+        ):
             try:
-                selected_path = _open_import_json_dialog(title="批量导入画像模板")
-                if not selected_path:
-                    st.info("已取消导入。")
-                else:
-                    import_profiles_for_subject(
-                        subject=subject,
-                        json_text=Path(selected_path).read_text(encoding="utf-8"),
-                    )
-                    st.session_state.pop(editor_key, None)
-                    st.session_state.pop(next_id_key, None)
-                    st.success("导入成功，当前学科已更新为导入模板。")
-                    st.rerun()
-            except (ValueError, UnicodeDecodeError, json.JSONDecodeError, OSError, RuntimeError) as exc:
+                if batch_import_file is None:
+                    st.info("请先选择一个 JSON 文件。")
+                    st.stop()
+                import_profiles_for_subject(
+                    subject=subject,
+                    json_text=batch_import_file.getvalue().decode("utf-8"),
+                )
+                st.session_state.pop(editor_key, None)
+                st.session_state.pop(next_id_key, None)
+                st.success("导入成功，当前学科已更新为导入模板。")
+                st.rerun()
+            except (ValueError, UnicodeDecodeError, json.JSONDecodeError) as exc:
                 st.error(f"导入失败: {exc}")
 
     if is_dialog_open:
