@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "subject": "数学",
+    "grade": "高二",
+    "region": "人教A版",
+    "difficulty_level": "中等偏难",
+    "total_hours": 144,
+    "note": "符合普通高中数学课程标准（2017年版，2020年修订）"
+  },
+  "modules": [
+    {
+      "module_id": "S11_M1",
+      "module_name": "圆锥曲线与方程",
+      "key_concepts": ["椭圆", "双曲线", "抛物线", "标准方程", "几何性质", "离心率", "准线", "焦点", "直线与圆锥曲线"],
+      "required_skills": ["解析几何运算", "方程求解", "综合分析"],
+      "difficulty_level": "较难",
+      "recommended_hours": 30,
+      "academic_requirements": [
+        {"requirement_id": "S11_R1.1", "description": "掌握椭圆、双曲线、抛物线的定义和标准方程", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R1.2", "description": "理解圆锥曲线的几何性质", "proficiency_level": "理解"},
+        {"requirement_id": "S11_R1.3", "description": "能解决直线与圆锥曲线的关系问题", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R1.4", "description": "能用坐标法解决解析几何问题", "proficiency_level": "运用"}
+      ]
+    },
+    {
+      "module_id": "S11_M2",
+      "module_name": "导数及其应用",
+      "key_concepts": ["导数", "导函数", "几何意义", "导数公式", "导数运算法则", "单调性", "极值", "最值", "实际问题"],
+      "required_skills": ["导数计算", "函数分析", "优化能力"],
+      "difficulty_level": "较难",
+      "recommended_hours": 28,
+      "academic_requirements": [
+        {"requirement_id": "S11_R2.1", "description": "理解导数的概念和几何意义", "proficiency_level": "理解"},
+        {"requirement_id": "S11_R2.2", "description": "掌握导数公式和运算法则", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R2.3", "description": "能用导数研究函数的单调性", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R2.4", "description": "能求函数的极值和最值", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R2.5", "description": "能用导数解决优化问题", "proficiency_level": "运用"}
+      ]
+    },
+    {
+      "module_id": "S11_M3",
+      "module_name": "空间向量与立体几何",
+      "key_concepts": ["空间向量", "空间直角坐标系", "向量运算", "数量积", "向量积", "线线垂直", "线面垂直", "面面垂直", "空间角", "空间距离"],
+      "required_skills": ["空间想象", "向量运算", "逻辑推理"],
+      "difficulty_level": "较难",
+      "recommended_hours": 25,
+      "academic_requirements": [
+        {"requirement_id": "S11_R3.1", "description": "理解空间直角坐标系的建立", "proficiency_level": "理解"},
+        {"requirement_id": "S11_R3.2", "description": "掌握空间向量的运算", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R3.3", "description": "能用向量法证明线面垂直和平行", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R3.4", "description": "能求空间角和空间距离", "proficiency_level": "掌握"}
+      ]
+    },
+    {
+      "module_id": "S11_M4",
+      "module_name": "复数",
+      "key_concepts": ["复数", "虚数单位", "复数的模", "共轭复数", "加法", "减法", "乘法", "除法", "复数的几何意义"],
+      "required_skills": ["复数运算", "代数推理"],
+      "difficulty_level": "中等",
+      "recommended_hours": 12,
+      "academic_requirements": [
+        {"requirement_id": "S11_R4.1", "description": "理解复数的概念", "proficiency_level": "理解"},
+        {"requirement_id": "S11_R4.2", "description": "掌握复数的四则运算", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R4.3", "description": "理解复数的几何意义", "proficiency_level": "了解"}
+      ]
+    },
+    {
+      "module_id": "S11_M5",
+      "module_name": "计数原理",
+      "key_concepts": ["分类加法计数原理", "分步乘法计数原理", "排列", "组合", "二项式定理", "二项展开式", "二项式系数"],
+      "required_skills": ["分类讨论", "排列组合计算", "归纳推理"],
+      "difficulty_level": "中等",
+      "recommended_hours": 20,
+      "academic_requirements": [
+        {"requirement_id": "S11_R5.1", "description": "掌握分类加法计数原理和分步乘法计数原理", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R5.2", "description": "理解排列和组合的概念", "proficiency_level": "理解"},
+        {"requirement_id": "S11_R5.3", "description": "掌握排列数和组合数公式", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R5.4", "description": "掌握二项式定理", "proficiency_level": "掌握"}
+      ]
+    },
+    {
+      "module_id": "S11_M6",
+      "module_name": "随机变量及其分布",
+      "key_concepts": ["离散型随机变量", "分布列", "期望", "方差", "二项分布", "正态分布", "超几何分布"],
+      "required_skills": ["概率计算", "数据分析", "统计推断"],
+      "difficulty_level": "较难",
+      "recommended_hours": 24,
+      "academic_requirements": [
+        {"requirement_id": "S11_R6.1", "description": "理解离散型随机变量的概念", "proficiency_level": "理解"},
+        {"requirement_id": "S11_R6.2", "description": "理解随机变量期望和方差的含义", "proficiency_level": "理解"},
+        {"requirement_id": "S11_R6.3", "description": "掌握二项分布", "proficiency_level": "掌握"},
+        {"requirement_id": "S11_R6.4", "description": "了解正态分布的意义", "proficiency_level": "了解"}
+      ]
+    },
+    {
+      "module_id": "S11_M7",
+      "module_name": "统计案例",
+      "key_concepts": ["回归分析", "残差分析", "独立性检验", "非线性回归", "回归方程"],
+      "required_skills": ["数据分析", "软件使用", "报告撰写"],
+      "difficulty_level": "中等",
+      "recommended_hours": 10,
+      "academic_requirements": [
+        {"requirement_id": "S11_R7.1", "description": "理解回归分析的思想", "proficiency_level": "理解"},
+        {"requirement_id": "S11_R7.2", "description": "能进行简单的回归分析", "proficiency_level": "运用"}
+      ]
+    }
+  ]
+}

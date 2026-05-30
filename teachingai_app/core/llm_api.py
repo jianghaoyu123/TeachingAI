@@ -12,6 +12,7 @@ from .models import (
     DifficultyAssessment,
     OptimizationSuggestion,
     SimulationReport,
+    StandardsCompliance,
     StudentReaction,
 )
 from .profiles import get_grade_band_label, get_profiles_for_subject
@@ -808,6 +809,20 @@ def build_report_from_parsed(
     lesson_plan_change_summary = _as_list(parsed.get("lesson_plan_change_summary"))[:10]
     revised_lesson_plan = str(parsed.get("revised_lesson_plan", "")).strip()
 
+    standards_compliance = None
+    if isinstance(parsed.get("standards_compliance"), dict):
+        compliance_obj = parsed.get("standards_compliance", {})
+        standards_compliance = StandardsCompliance(
+            topic_coverage_score=float(compliance_obj.get("topic_coverage_score", 0.0)),
+            missing_topics=_as_list(compliance_obj.get("missing_topics"))[:10],
+            excessive_topics=_as_list(compliance_obj.get("excessive_topics"))[:10],
+            difficulty_match=str(compliance_obj.get("difficulty_match", "未知")),
+            difficulty_score=float(compliance_obj.get("difficulty_score", 0.0)),
+            objective_achievement=_as_list(compliance_obj.get("objective_achievement"))[:10],
+            overall_compliance_score=float(compliance_obj.get("overall_compliance_score", 0.0)),
+            recommendations=_as_list(compliance_obj.get("recommendations"))[:10],
+        )
+
     return SimulationReport(
         subject=subject,
         lesson_topic=lesson_topic,
@@ -825,7 +840,7 @@ def build_report_from_parsed(
         lesson_modules=lesson_modules or [],
         module_interactions=module_interactions or [],
         module_deliberations=module_deliberations or [],
-        applied_profiles=applied_profiles,
+        standards_compliance=standards_compliance,
     )
 
 
@@ -834,24 +849,15 @@ def analyze_with_llm(
     subject: str,
     lesson_topic: str,
     grade: str,
-    region_curriculum: str,
-    provider: str,
-    api_key: str,
-    base_url: str,
-    model: str,
+    region_curriculum: str = "人教版",
+    provider: str = "",
+    api_key: str = "",
+    base_url: str = "",
+    model: str = "",
     improvement_focus: str = "all",
 ) -> SimulationReport:
-    dynamic_topic_rules = generate_topic_adjustments_with_llm(
-        text=text,
-        subject=subject,
-        lesson_topic=lesson_topic,
-        grade=grade,
-        region_curriculum=region_curriculum,
-        provider=provider,
-        api_key=api_key,
-        base_url=base_url,
-        model=model,
-    )
+    from .curriculum_standards import CurriculumStandardEvaluator
+    
     system_prompt = f"你是严谨的{subject}教学分析助手，需要结合年级特征给出可执行建议，且必须只输出JSON。"
     user_prompt = _build_prompt(
         text=text,
@@ -873,6 +879,16 @@ def analyze_with_llm(
         timeout_sec=180,
     )
     parsed = _extract_json_block(raw)
+    
+    standards_compliance = None
+    standards_evaluator = CurriculumStandardEvaluator(subject, grade, region_curriculum)
+    # 设置LLM配置，用于智能模块选择
+    standards_evaluator.set_llm_config(provider, api_key, base_url, model)
+    if standards_evaluator.has_standards():
+        standards_compliance = standards_evaluator.evaluate_compliance(text, lesson_topic=lesson_topic)
+        if standards_compliance:
+            parsed["standards_compliance"] = standards_compliance
+    
     return build_report_from_parsed(
         parsed,
         subject=subject,

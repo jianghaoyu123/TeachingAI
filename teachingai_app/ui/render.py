@@ -506,6 +506,32 @@ def render_simulation_results(
         else:
             st.caption("ℹ️ 置信度评估仅在深度思考模式下可用")
 
+        if report.standards_compliance:
+            st.subheader("📋 课程标准合规性评估")
+            compliance = report.standards_compliance
+            metrics_col1, metrics_col2, metrics_col3 = st.columns(3)
+            with metrics_col1:
+                st.metric("知识点覆盖得分", f"{compliance.topic_coverage_score:.1f}/100")
+            with metrics_col2:
+                st.metric("综合合规得分", f"{compliance.overall_compliance_score:.1f}/100")
+            with metrics_col3:
+                st.metric("难度匹配", compliance.difficulty_match)
+
+            if compliance.missing_topics:
+                st.markdown("**⚠️ 缺失的知识点**")
+                st.markdown("，".join(f"`{t}`" for t in compliance.missing_topics[:8]))
+
+            if compliance.excessive_topics:
+                st.markdown("**⚡ 超出课标范围的知识点**")
+                st.markdown("，".join(f"`{t}`" for t in compliance.excessive_topics[:8]))
+
+            if compliance.recommendations:
+                st.markdown("**💡 课程标准改进建议**")
+                for rec in compliance.recommendations[:5]:
+                    st.markdown(f"- {rec}")
+        else:
+            st.caption("ℹ️ 目前该课程暂不支持课标合规性评估")
+
     with col2:
         st.subheader("优化建议")
         for item in report.suggestions:

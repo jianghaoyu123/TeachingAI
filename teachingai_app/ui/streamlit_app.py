@@ -719,7 +719,7 @@ def run_app() -> None:
         enable_ocr = True
         st.info("当前版本仅支持在线模型 API 分析。")
 
-    col1, col2, col3 = st.columns([1, 1, 1.2])
+    col1, col2, col3 = st.columns(3)
     with col1:
         subject = st.selectbox("学科", SUBJECT_OPTIONS, index=0, key="subject_select")
     with col2:
@@ -731,14 +731,14 @@ def run_app() -> None:
             key="grade_select",
         )
     with col3:
-        region_curriculum = st.text_input(
-            "教材地区",
-            key="region_curriculum_input",
-            value="广东深圳",
-            help="用于按地区教材进度动态生成本次学生画像修正层。",
-        ).strip() or "广东深圳"
+        region_curriculum = st.selectbox(
+            "教材版本",
+            ["北师大版", "人教A版", "其他"],
+            index=0,
+            key="region_curriculum_select",
+        )
 
-    lesson_topic = st.text_input("课题", key="lesson_topic_input", value="")
+    lesson_topic = st.text_input("课题", key="lesson_topic_input", value="一元一次方程")
     uploaded_files = st.file_uploader(
         "上传教案/逐字稿/PPT/PDF（可多选）",
         type=["txt", "md", "docx", "pptx", "pdf"],

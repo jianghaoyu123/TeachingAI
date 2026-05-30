@@ -407,6 +407,26 @@ def to_markdown(report: SimulationReport) -> str:
         for item in report.confidence.profile_confidence:
             lines.append(f"- {item}")
 
+    if report.standards_compliance:
+        lines.append("")
+        lines.append("## 课程标准合规性评估")
+        c = report.standards_compliance
+        lines.append(f"- 知识点覆盖得分: {c.topic_coverage_score:.1f}/100")
+        lines.append(f"- 综合合规得分: {c.overall_compliance_score:.1f}/100")
+        lines.append(f"- 难度匹配: {c.difficulty_match}")
+        if c.missing_topics:
+            lines.append("- 缺失的知识点:")
+            for t in c.missing_topics:
+                lines.append(f"  - {t}")
+        if c.excessive_topics:
+            lines.append("- 超出课标范围的知识点:")
+            for t in c.excessive_topics:
+                lines.append(f"  - {t}")
+        if c.recommendations:
+            lines.append("- 改进建议:")
+            for r in c.recommendations:
+                lines.append(f"  - {r}")
+
     lines.append("")
     lines.append("## 教学优化建议")
     for idx, s in enumerate(report.suggestions, start=1):
@@ -499,6 +519,29 @@ def to_html(report: SimulationReport) -> str:
             parts.append(f"<li>{escape(item)}</li>")
         parts.append("</ul></section>")
 
+    if report.standards_compliance:
+        c = report.standards_compliance
+        parts.append("<section><h2>课程标准合规性评估</h2>")
+        parts.append(f"<p><strong>知识点覆盖得分:</strong> {c.topic_coverage_score:.1f}/100</p>")
+        parts.append(f"<p><strong>综合合规得分:</strong> {c.overall_compliance_score:.1f}/100</p>")
+        parts.append(f"<p><strong>难度匹配:</strong> {escape(c.difficulty_match)}</p>")
+        if c.missing_topics:
+            parts.append("<p><strong>缺失的知识点</strong></p><ul>")
+            for t in c.missing_topics:
+                parts.append(f"<li>{escape(t)}</li>")
+            parts.append("</ul>")
+        if c.excessive_topics:
+            parts.append("<p><strong>超出课标范围的知识点</strong></p><ul>")
+            for t in c.excessive_topics:
+                parts.append(f"<li>{escape(t)}</li>")
+            parts.append("</ul>")
+        if c.recommendations:
+            parts.append("<p><strong>改进建议</strong></p><ul>")
+            for r in c.recommendations:
+                parts.append(f"<li>{escape(r)}</li>")
+            parts.append("</ul>")
+        parts.append("</section>")
+
     parts.append("<section><h2>教学优化建议</h2>")
     for idx, suggestion in enumerate(report.suggestions, start=1):
         parts.append(
@@ -566,6 +609,25 @@ def to_docx_bytes(report: SimulationReport) -> bytes:
             doc.add_paragraph(item, style="List Bullet")
         for item in report.confidence.profile_confidence:
             doc.add_paragraph(item, style="List Bullet")
+
+    if report.standards_compliance:
+        c = report.standards_compliance
+        doc.add_heading("课程标准合规性评估", level=2)
+        doc.add_paragraph(f"知识点覆盖得分: {c.topic_coverage_score:.1f}/100")
+        doc.add_paragraph(f"综合合规得分: {c.overall_compliance_score:.1f}/100")
+        doc.add_paragraph(f"难度匹配: {c.difficulty_match}")
+        if c.missing_topics:
+            doc.add_paragraph("缺失的知识点")
+            for t in c.missing_topics:
+                doc.add_paragraph(t, style="List Bullet")
+        if c.excessive_topics:
+            doc.add_paragraph("超出课标范围的知识点")
+            for t in c.excessive_topics:
+                doc.add_paragraph(t, style="List Bullet")
+        if c.recommendations:
+            doc.add_paragraph("改进建议")
+            for r in c.recommendations:
+                doc.add_paragraph(r, style="List Bullet")
 
     doc.add_heading("教学优化建议", level=2)
     for idx, suggestion in enumerate(report.suggestions, start=1):

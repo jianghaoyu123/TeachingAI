@@ -1,5 +1,18 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Any
+
+
+@dataclass
+class StandardsCompliance:
+    """课程标准合规性评估结果"""
+    topic_coverage_score: float = 0.0
+    missing_topics: List[str] = field(default_factory=list)
+    excessive_topics: List[str] = field(default_factory=list)
+    difficulty_match: str = "未知"
+    difficulty_score: float = 0.0
+    objective_achievement: List[dict[str, Any]] = field(default_factory=list)
+    overall_compliance_score: float = 0.0
+    recommendations: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -108,3 +121,4 @@ class SimulationReport:
     module_interactions: List[ModuleStudentInteraction] = field(default_factory=list)
     module_deliberations: List[ModuleDeliberationRecord] = field(default_factory=list)
     applied_profiles: List[StudentProfile] = field(default_factory=list)
+    standards_compliance: StandardsCompliance | None = None
