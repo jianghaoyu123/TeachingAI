@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "subject": "数学",
+    "grade": "八年级",
+    "region": "北师大版",
+    "difficulty_level": "中等",
+    "total_hours": 120,
+    "note": "符合义务教育数学课程标准（2022年版）"
+  },
+  "modules": [
+    {
+      "module_id": "J8_M1",
+      "module_name": "勾股定理",
+      "key_concepts": ["勾股定理", "勾股数", "逆定理", "直角三角形"],
+      "required_skills": ["几何推理", "计算能力", "证明能力"],
+      "difficulty_level": "中等",
+      "recommended_hours": 15,
+      "academic_requirements": [
+        {"requirement_id": "J8_R1.1", "description": "掌握勾股定理", "proficiency_level": "掌握"},
+        {"requirement_id": "J8_R1.2", "description": "能用勾股定理解决实际问题", "proficiency_level": "运用"},
+        {"requirement_id": "J8_R1.3", "description": "了解勾股定理的逆定理", "proficiency_level": "了解"}
+      ]
+    },
+    {
+      "module_id": "J8_M2",
+      "module_name": "实数",
+      "key_concepts": ["平方根", "算术平方根", "立方根", "无理数", "实数", "数轴", "绝对值", "二次根式"],
+      "required_skills": ["数感", "运算能力", "数形结合"],
+      "difficulty_level": "中等",
+      "recommended_hours": 18,
+      "academic_requirements": [
+        {"requirement_id": "J8_R2.1", "description": "了解平方根、算术平方根的概念", "proficiency_level": "了解"},
+        {"requirement_id": "J8_R2.2", "description": "掌握二次根式的运算", "proficiency_level": "掌握"},
+        {"requirement_id": "J8_R2.3", "description": "理解实数与数轴上的点一一对应", "proficiency_level": "理解"}
+      ]
+    },
+    {
+      "module_id": "J8_M3",
+      "module_name": "位置与坐标",
+      "key_concepts": ["有序数对", "平面直角坐标系", "坐标", "象限", "点P(x,y)", "平移", "对称"],
+      "required_skills": ["数形结合", "坐标变换", "空间观念"],
+      "difficulty_level": "中等",
+      "recommended_hours": 15,
+      "academic_requirements": [
+        {"requirement_id": "J8_R3.1", "description": "理解平面直角坐标系的意義", "proficiency_level": "理解"},
+        {"requirement_id": "J8_R3.2", "description": "能在平面直角坐标系中表示点的坐标", "proficiency_level": "掌握"},
+        {"requirement_id": "J8_R3.3", "description": "理解坐标变换与图形变换的关系", "proficiency_level": "理解"}
+      ]
+    },
+    {
+      "module_id": "J8_M4",
+      "module_name": "一次函数",
+      "key_concepts": ["函数", "变量", "自变量", "因变量", "函数值", "一次函数", "正比例函数", "图像", "斜率", "截距"],
+      "required_skills": ["函数思想", "图像分析", "建模能力"],
+      "difficulty_level": "中等",
+      "recommended_hours": 22,
+      "academic_requirements": [
+        {"requirement_id": "J8_R4.1", "description": "理解函数的概念", "proficiency_level": "理解"},
+        {"requirement_id": "J8_R4.2", "description": "理解一次函数的意义", "proficiency_level": "理解"},
+        {"requirement_id": "J8_R4.3", "description": "能画一次函数的图像", "proficiency_level": "掌握"},
+        {"requirement_id": "J8_R4.4", "description": "能用一次函数解决实际问题", "proficiency_level": "运用"}
+      ]
+    },
+    {
+      "module_id": "J8_M5",
+      "module_name": "二元一次方程组",
+      "key_concepts": ["二元一次方程", "二元一次方程组", "解", "代入法", "加减法", "图像法", "实际应用"],
+      "required_skills": ["方程求解", "转化思想", "建模能力"],
+      "difficulty_level": "中等",
+      "recommended_hours": 18,
+      "academic_requirements": [
+        {"requirement_id": "J8_R5.1", "description": "理解二元一次方程组的解的意义", "proficiency_level": "理解"},
+        {"requirement_id": "J8_R5.2", "description": "掌握代入法和加减法解二元一次方程组", "proficiency_level": "掌握"},
+        {"requirement_id": "J8_R5.3", "description": "能用二元一次方程组解决实际问题", "proficiency_level": "运用"}
+      ]
+    },
+    {
+      "module_id": "J8_M6",
+      "module_name": "数据的分析",
+      "key_concepts": ["平均数", "中位数", "众数", "极差", "方差", "标准差", "数据的离散程度"],
+      "required_skills": ["数据分析", "统计计算", "信息处理"],
+      "difficulty_level": "中等",
+      "recommended_hours": 15,
+      "academic_requirements": [
+        {"requirement_id": "J8_R6.1", "description": "理解平均数、中位数、众数的概念", "proficiency_level": "理解"},
+        {"requirement_id": "J8_R6.2", "description": "能计算数据的方差", "proficiency_level": "掌握"},
+        {"requirement_id": "J8_R6.3", "description": "能用统计量描述数据的特征", "proficiency_level": "掌握"}
+      ]
+    },
+    {
+      "module_id": "J8_M7",
+      "module_name": "平行四边形",
+      "key_concepts": ["平行四边形", "矩形", "菱形", "正方形", "性质", "判定", "三角形的中位线"],
+      "required_skills": ["几何推理", "逻辑论证", "证明能力"],
+      "difficulty_level": "中等偏难",
+      "recommended_hours": 17,
+      "academic_requirements": [
+        {"requirement_id": "J8_R7.1", "description": "掌握平行四边形的性质和判定", "proficiency_level": "掌握"},
+        {"requirement_id": "J8_R7.2", "description": "理解矩形、菱形、正方形的联系与区别", "proficiency_level": "理解"},
+        {"requirement_id": "J8_R7.3", "description": "掌握三角形中位线定理", "proficiency_level": "掌握"}
+      ]
+    }
+  ]
+}

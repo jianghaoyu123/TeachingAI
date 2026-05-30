@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "subject": "数学",
+    "grade": "高三",
+    "region": "人教A版",
+    "difficulty_level": "较难",
+    "total_hours": 144,
+    "note": "符合普通高中数学课程标准（2017年版，2020年修订）"
+  },
+  "modules": [
+    {
+      "module_id": "S12_M1",
+      "module_name": "推理与证明",
+      "key_concepts": ["合情推理", "演绎推理", "归纳法", "类比法", "直接证明", "间接证明", "反证法", "数学归纳法"],
+      "required_skills": ["逻辑推理", "证明能力", "归纳演绎"],
+      "difficulty_level": "较难",
+      "recommended_hours": 18,
+      "academic_requirements": [
+        {"requirement_id": "S12_R1.1", "description": "理解合情推理和演绎推理的区别", "proficiency_level": "理解"},
+        {"requirement_id": "S12_R1.2", "description": "掌握直接证明和间接证明的方法", "proficiency_level": "掌握"},
+        {"requirement_id": "S12_R1.3", "description": "理解数学归纳法的原理", "proficiency_level": "理解"},
+        {"requirement_id": "S12_R1.4", "description": "能用数学归纳法证明命题", "proficiency_level": "掌握"}
+      ]
+    },
+    {
+      "module_id": "S12_M2",
+      "module_name": "极坐标与参数方程",
+      "key_concepts": ["极坐标", "极径", "极角", "参数方程", "参数", "普通方程", "互化", "应用"],
+      "required_skills": ["方程变换", "解析几何", "综合应用"],
+      "difficulty_level": "中等偏难",
+      "recommended_hours": 15,
+      "academic_requirements": [
+        {"requirement_id": "S12_R2.1", "description": "理解极坐标的概念", "proficiency_level": "理解"},
+        {"requirement_id": "S12_R2.2", "description": "掌握参数方程与普通方程的互化", "proficiency_level": "掌握"},
+        {"requirement_id": "S12_R2.3", "description": "能用参数方程解决实际问题", "proficiency_level": "运用"}
+      ]
+    },
+    {
+      "module_id": "S12_M3",
+      "module_name": "不等式选讲",
+      "key_concepts": ["绝对值不等式", "柯西不等式", "排序不等式", "不等式证明技巧", "利用基本不等式求最值"],
+      "required_skills": ["不等式证明", "技巧运用", "综合分析"],
+      "difficulty_level": "较难",
+      "recommended_hours": 20,
+      "academic_requirements": [
+        {"requirement_id": "S12_R3.1", "description": "能解绝对值不等式", "proficiency_level": "掌握"},
+        {"requirement_id": "S12_R3.2", "description": "了解柯西不等式和排序不等式", "proficiency_level": "了解"},
+        {"requirement_id": "S12_R3.3", "description": "能用不等式方法解决综合问题", "proficiency_level": "运用"}
+      ]
+    },
+    {
+      "module_id": "S12_M4",
+      "module_name": "坐标系与参数方程选讲",
+      "key_concepts": ["坐标系", "直线与极坐标", "圆锥曲线极坐标方程", "参数方程的应用"],
+      "required_skills": ["方程变换", "解析几何", "建模能力"],
+      "difficulty_level": "中等偏难",
+      "recommended_hours": 15,
+      "academic_requirements": [
+        {"requirement_id": "S12_R4.1", "description": "理解极坐标与直角坐标的互化", "proficiency_level": "理解"},
+        {"requirement_id": "S12_R4.2", "description": "能用极坐标处理圆锥曲线问题", "proficiency_level": "运用"}
+      ]
+    },
+    {
+      "module_id": "S12_M5",
+      "module_name": "综合复习与应用",
+      "key_concepts": ["函数与导数综合", "三角函数与数列综合", "解析几何综合", "立体几何综合", "概率统计综合", "综合应用"],
+      "required_skills": ["综合分析", "知识整合", "应试能力"],
+      "difficulty_level": "较难",
+      "recommended_hours": 60,
+      "academic_requirements": [
+        {"requirement_id": "S12_R5.1", "description": "能综合运用知识解决复杂问题", "proficiency_level": "运用"},
+        {"requirement_id": "S12_R5.2", "description": "能进行知识的横向联系和整合", "proficiency_level": "运用"},
+        {"requirement_id": "S12_R5.3", "description": "掌握高考数学解题策略", "proficiency_level": "运用"}
+      ]
+    },
+    {
+      "module_id": "S12_M6",
+      "module_name": "数学文化与数学思想",
+      "key_concepts": ["数学思想方法", "分类讨论", "数形结合", "函数与方程", "转化与化归", "数学文化", "数学史"],
+      "required_skills": ["思想方法运用", "文化理解", "素养提升"],
+      "difficulty_level": "中等",
+      "recommended_hours": 10,
+      "academic_requirements": [
+        {"requirement_id": "S12_R6.1", "description": "理解主要数学思想方法", "proficiency_level": "理解"},
+        {"requirement_id": "S12_R6.2", "description": "能在解题中自觉运用数学思想", "proficiency_level": "运用"},
+        {"requirement_id": "S12_R6.3", "description": "了解数学文化的价值", "proficiency_level": "了解"}
+      ]
+    }
+  ]
+}

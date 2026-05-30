@@ -19,6 +19,7 @@ from .models import (
     StudentProfile,
 )
 from .profiles import get_profiles_for_subject
+from .curriculum_standards import CurriculumStandardEvaluator
 
 ProgressCallback = Callable[[str, int, int], None]
 TeacherFeedback = dict[str, dict[str, Any]]
@@ -731,6 +732,7 @@ def _run_aggregator_agent(
     subject: str,
     lesson_topic: str,
     grade: str,
+    region_curriculum: str,
     teacher_script: str,
     modules: list[LessonModule],
     interactions: list[ModuleStudentInteraction],
@@ -743,7 +745,18 @@ def _run_aggregator_agent(
 ) -> dict[str, Any]:
     profile_context = _build_profile_context(subject, grade)
     interaction_log = _summarize_interactions_for_aggregator(modules, interactions, module_deliberations)
-    
+
+    standards_evaluator = CurriculumStandardEvaluator(subject, grade, region_curriculum)
+    # 设置LLM配置，用于智能模块选择
+    standards_evaluator.set_llm_config(provider, api_key, base_url, model)
+    standards_compliance = None
+    standards_summary = ""
+    has_curriculum_standards = standards_evaluator.has_standards()
+
+    if has_curriculum_standards:
+        standards_compliance = standards_evaluator.evaluate_compliance(text, teacher_script, lesson_topic)
+        standards_summary = standards_evaluator.get_standards_summary()
+
     focus_desc = {
         "all": "兼顾全体学生，保持教学内容的均衡性",
         "low": "重点面向基础薄弱型学生，降低难度，增加更多基础讲解和练习",
@@ -753,18 +766,53 @@ def _run_aggregator_agent(
         "high": "重点面向拔高拓展型学生，增加拓展内容和高阶思维训练",
     }
 
+    curriculum_standards_instruction = ""
+    if has_curriculum_standards:
+        curriculum_standards_instruction = (
+            "你应结合课程标准要求进行评估，确保教案符合课程标准规定的内容和难度要求。"
+        )
+    else:
+        curriculum_standards_instruction = (
+            "请基于教学经验和学生反馈进行综合评估。"
+        )
+
     system_prompt = (
         f"你是{subject}教研组长智能体，负责汇总多轮课堂预演结果并输出最终分析报告。"
-        "必须只输出JSON。"
+        + curriculum_standards_instruction
+        + "必须只输出JSON。"
     )
+
+    standards_info = ""
+    standards_requirement = ""
+    if has_curriculum_standards:
+        standards_info = f"""
+课程标准信息:
+{standards_summary}
+
+请在评估教案时，特别关注以下方面:
+1. 知识点覆盖是否完整
+2. 难度是否符合年级要求
+3. 教学目标是否达成
+"""
+        standards_requirement = f"""
+- standards_compliance: 课程标准合规性评估结果（当有课程标准数据时必填），包含:
+  {{
+    "topic_coverage_score": 知识点覆盖得分(0-100),
+    "missing_topics": ["缺失的知识点列表"],
+    "difficulty_match": "难度匹配度(匹配/偏高/偏低)",
+    "overall_compliance_score": 综合合规得分(0-100),
+    "recommendations": ["改进建议列表"]
+  }}
+"""
+
     user_prompt = f"""
 以下是一次「深度思考模式」多智能体课堂预演的完整记录:
 - 教师智能体已生成讲稿并分 {len(modules)} 个模块授课
 - 各层级学生智能体在每个模块中与教师互动并产生反应
 
-学科: {subject} | 课题: {lesson_topic} | 年级: {grade}
+学科: {subject} | 课题: {lesson_topic} | 年级: {grade} | 教材版本: {region_curriculum}
 教案改进方向: {focus_desc.get(improvement_focus, "兼顾全体学生")}
-
+{standards_info}
 学生画像模板:
 {profile_context}
 
@@ -816,6 +864,7 @@ def _run_aggregator_agent(
   "lesson_plan_change_summary": ["对原教案的关键修改说明"],
   "revised_lesson_plan": "结合各模块学生反应修订后的完整教案，要求：1) 保持与原教案相同的结构和详细程度；2) 保留教学过程中的具体教学步骤、提问、例题和互动设计；3) 根据各模块学生反应和优化建议对原教案进行针对性修改；4) 分点清晰，层次分明，可直接给老师参考使用。需特别注意教案改进方向的要求。"
 }}
+{standards_requirement}
 
 要求:
 - reactions 须覆盖所有参与预演的学生画像
@@ -833,7 +882,10 @@ def _run_aggregator_agent(
         user_prompt=user_prompt,
         timeout_sec=180,
     )
-    return parse_llm_json(raw)
+    parsed = parse_llm_json(raw)
+    if has_curriculum_standards and standards_compliance is not None:
+        parsed["standards_compliance"] = standards_compliance
+    return parsed
 
 
 def analyze_deep_with_llm(
@@ -841,10 +893,11 @@ def analyze_deep_with_llm(
     subject: str,
     lesson_topic: str,
     grade: str,
-    provider: str,
-    api_key: str,
-    base_url: str,
-    model: str,
+    region_curriculum: str = "人教版",
+    provider: str = "",
+    api_key: str = "",
+    base_url: str = "",
+    model: str = "",
     progress_callback: ProgressCallback | None = None,
     improvement_focus: str = "all",
     teacher_feedback: TeacherFeedback | None = None,
@@ -950,6 +1003,7 @@ def analyze_deep_with_llm(
         subject=subject,
         lesson_topic=lesson_topic,
         grade=grade,
+        region_curriculum=region_curriculum,
         teacher_script=teacher_script,
         modules=modules,
         interactions=all_interactions,

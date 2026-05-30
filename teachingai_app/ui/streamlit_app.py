@@ -697,7 +697,7 @@ def run_app() -> None:
         enable_ocr = True
         st.info("当前版本仅支持在线模型 API 分析。")
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     with col1:
         subject = st.selectbox("学科", SUBJECT_OPTIONS, index=0, key="subject_select")
     with col2:
@@ -707,6 +707,13 @@ def run_app() -> None:
             index=7,
             format_func=lambda g: str(GRADE_DISPLAY_LABELS.get(g, g)),
             key="grade_select",
+        )
+    with col3:
+        region_curriculum = st.selectbox(
+            "教材版本",
+            ["北师大版", "人教A版", "其他"],
+            index=0,
+            key="region_curriculum_select",
         )
 
     lesson_topic = st.text_input("课题", key="lesson_topic_input", value="一元一次方程")
@@ -942,6 +949,7 @@ def run_app() -> None:
                 subject=subject,
                 lesson_topic=lesson_topic,
                 grade=grade,
+                region_curriculum=region_curriculum,
                 provider=provider,
                 api_key=api_key,
                 base_url=base_url,
@@ -985,6 +993,7 @@ def run_app() -> None:
                 subject=subject,
                 lesson_topic=lesson_topic,
                 grade=grade,
+                region_curriculum=region_curriculum,
                 provider=provider,
                 api_key=api_key,
                 base_url=base_url,
