@@ -3,7 +3,7 @@
     "version": 1,
     "source": "generated-from-python-profile-catalog",
     "generated_at": "2026-05-29T09:59:00.351976+00:00",
-    "region": "shenzhen"
+    "region": "dynamic"
   },
   "subject": "生物",
   "bands": {
@@ -387,8 +387,7 @@
           "生态案例图",
           "实验探究句式",
           "术语分类记忆",
-          "八年级生物实验与图表题",
-          "深圳地方法规相关案例阅读"
+          "八年级生物实验与图表题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -414,8 +413,7 @@
         ],
         "support_needs": [
           "专题",
-          "八年级生物实验与图表题",
-          "深圳地方法规相关案例阅读"
+          "八年级生物实验与图表题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -438,8 +436,7 @@
         ],
         "support_needs": [
           "真题",
-          "八年级生物实验与图表题",
-          "深圳地方法规相关案例阅读"
+          "八年级生物实验与图表题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -462,8 +459,7 @@
         ],
         "support_needs": [
           "冲刺",
-          "八年级生物实验与图表题",
-          "深圳地方法规相关案例阅读"
+          "八年级生物实验与图表题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -486,8 +482,7 @@
         ],
         "support_needs": [
           "培优",
-          "八年级生物实验与图表题",
-          "深圳地方法规相关案例阅读"
+          "八年级生物实验与图表题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -524,7 +519,6 @@
           "生态案例图",
           "实验探究句式",
           "术语分类记忆",
-          "深圳中考生物开卷定位训练",
           "实验探究题模板"
         ],
         "activity_level": 50,
@@ -551,7 +545,6 @@
         ],
         "support_needs": [
           "专题",
-          "深圳中考生物开卷定位训练",
           "实验探究题模板"
         ],
         "activity_level": 50,
@@ -575,7 +568,6 @@
         ],
         "support_needs": [
           "真题",
-          "深圳中考生物开卷定位训练",
           "实验探究题模板"
         ],
         "activity_level": 50,
@@ -599,7 +591,6 @@
         ],
         "support_needs": [
           "冲刺",
-          "深圳中考生物开卷定位训练",
           "实验探究题模板"
         ],
         "activity_level": 50,
@@ -623,7 +614,6 @@
         ],
         "support_needs": [
           "培优",
-          "深圳中考生物开卷定位训练",
           "实验探究题模板"
         ],
         "activity_level": 50,
@@ -789,8 +779,7 @@
           "必修核心清单",
           "实验得分点",
           "遗传专题",
-          "选填保分",
-          "选择性必修专题+深圳生物赋分策略"
+          "选填保分"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,

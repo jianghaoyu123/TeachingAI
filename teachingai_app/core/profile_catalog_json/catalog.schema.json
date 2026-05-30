@@ -3,26 +3,47 @@
   "$id": "https://teachingai.local/profile-catalog.schema.json",
   "title": "TeachingAI Profile Catalog Subject File",
   "type": "object",
-  "required": ["meta", "subject", "bands"],
+  "required": [
+    "meta",
+    "subject",
+    "bands"
+  ],
   "properties": {
     "meta": {
       "type": "object",
-      "required": ["version", "source"],
+      "required": [
+        "version",
+        "source"
+      ],
       "properties": {
-        "version": { "type": "integer", "minimum": 1 },
-        "source": { "type": "string" },
-        "generated_at": { "type": "string" },
-        "region": { "type": "string" }
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source": {
+          "type": "string"
+        },
+        "generated_at": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
       },
       "additionalProperties": true
     },
-    "subject": { "type": "string", "minLength": 1 },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
     "bands": {
       "type": "object",
       "patternProperties": {
         "^.+$": {
           "type": "array",
-          "items": { "$ref": "#/$defs/profile" },
+          "items": {
+            "$ref": "#/$defs/profile"
+          },
           "minItems": 1
         }
       },
@@ -46,25 +67,61 @@
         "knowledge_coverage"
       ],
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
         "level": {
           "type": "string",
-          "enum": ["low", "mid-low", "mid", "mid-high", "high"]
+          "enum": [
+            "low",
+            "mid-low",
+            "mid",
+            "mid-high",
+            "high"
+          ]
         },
-        "strengths": { "$ref": "#/$defs/stringList" },
-        "weaknesses": { "$ref": "#/$defs/stringList" },
-        "likely_errors": { "$ref": "#/$defs/stringList" },
-        "support_needs": { "$ref": "#/$defs/stringList" },
-        "activity_level": { "type": "integer", "minimum": 0, "maximum": 100 },
-        "baseline_success_rate": { "type": "integer", "minimum": 0, "maximum": 100 },
-        "focus_stability": { "type": "integer", "minimum": 0, "maximum": 100 },
-        "knowledge_coverage": { "type": "integer", "minimum": 0, "maximum": 100 }
+        "strengths": {
+          "$ref": "#/$defs/stringList"
+        },
+        "weaknesses": {
+          "$ref": "#/$defs/stringList"
+        },
+        "likely_errors": {
+          "$ref": "#/$defs/stringList"
+        },
+        "support_needs": {
+          "$ref": "#/$defs/stringList"
+        },
+        "activity_level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "baseline_success_rate": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "focus_stability": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "knowledge_coverage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
       },
       "additionalProperties": false
     },
     "stringList": {
       "type": "array",
-      "items": { "type": "string", "minLength": 1 }
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   }
 }

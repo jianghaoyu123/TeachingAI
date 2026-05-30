@@ -3,7 +3,7 @@
     "version": 1,
     "source": "generated-from-python-profile-catalog",
     "generated_at": "2026-05-29T09:59:00.351976+00:00",
-    "region": "shenzhen"
+    "region": "dynamic"
   },
   "subject": "地理",
   "bands": {
@@ -533,7 +533,6 @@
           "气候成因模板",
           "区域案例卡片",
           "综合题分点",
-          "深圳中考地理图表速查",
           "综合题建模训练"
         ],
         "activity_level": 50,
@@ -557,7 +556,6 @@
         ],
         "support_needs": [
           "专题",
-          "深圳中考地理图表速查",
           "综合题建模训练"
         ],
         "activity_level": 50,
@@ -581,7 +579,6 @@
         ],
         "support_needs": [
           "真题",
-          "深圳中考地理图表速查",
           "综合题建模训练"
         ],
         "activity_level": 50,
@@ -605,7 +602,6 @@
         ],
         "support_needs": [
           "冲刺",
-          "深圳中考地理图表速查",
           "综合题建模训练"
         ],
         "activity_level": 50,
@@ -629,7 +625,6 @@
         ],
         "support_needs": [
           "拓展",
-          "深圳中考地理图表速查",
           "综合题建模训练"
         ],
         "activity_level": 50,

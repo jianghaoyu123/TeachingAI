@@ -3,7 +3,7 @@
     "version": 1,
     "source": "generated-from-python-profile-catalog",
     "generated_at": "2026-05-29T09:59:00.351976+00:00",
-    "region": "shenzhen"
+    "region": "dynamic"
   },
   "subject": "政治",
   "bands": {
@@ -265,8 +265,7 @@
           "材料题“知识+材料”",
           "论述分点模板",
           "时事与课本联系",
-          "七年级道德与法治情境题",
-          "深圳文明校园案例讨论"
+          "七年级道德与法治情境题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -289,8 +288,7 @@
         ],
         "support_needs": [
           "专题",
-          "七年级道德与法治情境题",
-          "深圳文明校园案例讨论"
+          "七年级道德与法治情境题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -313,8 +311,7 @@
         ],
         "support_needs": [
           "真题",
-          "七年级道德与法治情境题",
-          "深圳文明校园案例讨论"
+          "七年级道德与法治情境题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -337,8 +334,7 @@
         ],
         "support_needs": [
           "冲刺",
-          "七年级道德与法治情境题",
-          "深圳文明校园案例讨论"
+          "七年级道德与法治情境题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -361,8 +357,7 @@
         ],
         "support_needs": [
           "拓展",
-          "七年级道德与法治情境题",
-          "深圳文明校园案例讨论"
+          "七年级道德与法治情境题"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -528,7 +523,6 @@
           "材料题“知识+材料”",
           "论述分点模板",
           "时事与课本联系",
-          "深圳本地时政与国策专题",
           "中考主观题术语库"
         ],
         "activity_level": 50,
@@ -552,7 +546,6 @@
         ],
         "support_needs": [
           "专题",
-          "深圳本地时政与国策专题",
           "中考主观题术语库"
         ],
         "activity_level": 50,
@@ -576,7 +569,6 @@
         ],
         "support_needs": [
           "真题",
-          "深圳本地时政与国策专题",
           "中考主观题术语库"
         ],
         "activity_level": 50,
@@ -600,7 +592,6 @@
         ],
         "support_needs": [
           "冲刺",
-          "深圳本地时政与国策专题",
           "中考主观题术语库"
         ],
         "activity_level": 50,
@@ -624,7 +615,6 @@
         ],
         "support_needs": [
           "拓展",
-          "深圳本地时政与国策专题",
           "中考主观题术语库"
         ],
         "activity_level": 50,

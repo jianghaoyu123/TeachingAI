@@ -3,7 +3,7 @@
     "version": 1,
     "source": "generated-from-python-profile-catalog",
     "generated_at": "2026-05-29T09:59:00.351976+00:00",
-    "region": "shenzhen"
+    "region": "dynamic"
   },
   "subject": "历史",
   "bands": {
@@ -270,8 +270,7 @@
           "材料题答题模板",
           "论述“观点+史实+小结”",
           "错题按类型归类",
-          "七年级中国古代史时间轴",
-          "深圳博物馆/地方史素材拓展"
+          "七年级中国古代史时间轴"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -294,8 +293,7 @@
         ],
         "support_needs": [
           "专题",
-          "七年级中国古代史时间轴",
-          "深圳博物馆/地方史素材拓展"
+          "七年级中国古代史时间轴"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -318,8 +316,7 @@
         ],
         "support_needs": [
           "真题",
-          "七年级中国古代史时间轴",
-          "深圳博物馆/地方史素材拓展"
+          "七年级中国古代史时间轴"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -342,8 +339,7 @@
         ],
         "support_needs": [
           "冲刺",
-          "七年级中国古代史时间轴",
-          "深圳博物馆/地方史素材拓展"
+          "七年级中国古代史时间轴"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -366,8 +362,7 @@
         ],
         "support_needs": [
           "拓展",
-          "七年级中国古代史时间轴",
-          "深圳博物馆/地方史素材拓展"
+          "七年级中国古代史时间轴"
         ],
         "activity_level": 50,
         "baseline_success_rate": 60,
@@ -538,7 +533,6 @@
           "材料题答题模板",
           "论述“观点+史实+小结”",
           "错题按类型归类",
-          "深圳中考历史专题索引",
           "开卷速查与观点题模板"
         ],
         "activity_level": 50,
@@ -562,7 +556,6 @@
         ],
         "support_needs": [
           "专题",
-          "深圳中考历史专题索引",
           "开卷速查与观点题模板"
         ],
         "activity_level": 50,
@@ -586,7 +579,6 @@
         ],
         "support_needs": [
           "真题",
-          "深圳中考历史专题索引",
           "开卷速查与观点题模板"
         ],
         "activity_level": 50,
@@ -610,7 +602,6 @@
         ],
         "support_needs": [
           "冲刺",
-          "深圳中考历史专题索引",
           "开卷速查与观点题模板"
         ],
         "activity_level": 50,
@@ -634,7 +625,6 @@
         ],
         "support_needs": [
           "拓展",
-          "深圳中考历史专题索引",
           "开卷速查与观点题模板"
         ],
         "activity_level": 50,

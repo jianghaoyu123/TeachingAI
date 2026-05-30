@@ -3,7 +3,7 @@
     "version": 1,
     "source": "generated-from-python-profile-catalog",
     "generated_at": "2026-05-29T09:59:00.351976+00:00",
-    "region": "shenzhen"
+    "region": "dynamic"
   },
   "subject": "化学",
   "bands": {
@@ -527,7 +527,6 @@
           "实验探究模板",
           "推断题突破口训练",
           "计算题规范步骤",
-          "深圳中考化学方程式分类默写",
           "实验操作与现象描述规范"
         ],
         "activity_level": 50,
@@ -554,7 +553,6 @@
         ],
         "support_needs": [
           "专题",
-          "深圳中考化学方程式分类默写",
           "实验操作与现象描述规范"
         ],
         "activity_level": 50,
@@ -579,7 +577,6 @@
         ],
         "support_needs": [
           "真题",
-          "深圳中考化学方程式分类默写",
           "实验操作与现象描述规范"
         ],
         "activity_level": 50,
@@ -604,7 +601,6 @@
         ],
         "support_needs": [
           "冲刺",
-          "深圳中考化学方程式分类默写",
           "实验操作与现象描述规范"
         ],
         "activity_level": 50,
@@ -628,7 +624,6 @@
         ],
         "support_needs": [
           "培优",
-          "深圳中考化学方程式分类默写",
           "实验操作与现象描述规范"
         ],
         "activity_level": 50,
