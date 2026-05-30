@@ -11,95 +11,325 @@
     {
       "module_id": "J9_M1",
       "module_name": "特殊的平行四边形",
-      "key_concepts": ["矩形", "菱形", "正方形", "性质定理", "判定定理", "证明"],
-      "required_skills": ["几何推理", "逻辑论证", "分类讨论"],
+      "key_concepts": [
+        "矩形",
+        "菱形",
+        "正方形",
+        "性质定理",
+        "判定定理",
+        "证明"
+      ],
+      "required_skills": [
+        "几何推理",
+        "逻辑论证",
+        "分类讨论"
+      ],
       "difficulty_level": "中等偏难",
       "recommended_hours": 15,
       "academic_requirements": [
-        {"requirement_id": "J9_R1.1", "description": "掌握矩形的性质和判定", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R1.2", "description": "掌握菱形的性质和判定", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R1.3", "description": "理解正方形与矩形、菱形的关系", "proficiency_level": "理解"}
+        {
+          "requirement_id": "J9_R1.1",
+          "description": "掌握矩形的性质和判定",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R1.2",
+          "description": "掌握菱形的性质和判定",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R1.3",
+          "description": "理解正方形与矩形、菱形的关系",
+          "proficiency_level": "理解"
+        }
       ]
     },
     {
       "module_id": "J9_M2",
       "module_name": "相似图形",
-      "key_concepts": ["相似多边形", "相似三角形", "相似比", "相似三角形的判定", "相似三角形的性质"],
-      "required_skills": ["几何推理", "证明能力", "应用能力"],
+      "key_concepts": [
+        "相似多边形",
+        "相似三角形",
+        "相似比",
+        "相似三角形的判定",
+        "相似三角形的性质"
+      ],
+      "required_skills": [
+        "几何推理",
+        "证明能力",
+        "应用能力"
+      ],
       "difficulty_level": "中等偏难",
       "recommended_hours": 20,
       "academic_requirements": [
-        {"requirement_id": "J9_R2.1", "description": "理解相似多边形的概念", "proficiency_level": "理解"},
-        {"requirement_id": "J9_R2.2", "description": "掌握相似三角形的判定定理", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R2.3", "description": "掌握相似三角形的性质", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R2.4", "description": "能用相似三角形解决实际问题", "proficiency_level": "运用"}
+        {
+          "requirement_id": "J9_R2.1",
+          "description": "理解相似多边形的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "J9_R2.2",
+          "description": "掌握相似三角形的判定定理",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R2.3",
+          "description": "掌握相似三角形的性质",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R2.4",
+          "description": "能用相似三角形解决实际问题",
+          "proficiency_level": "运用"
+        }
       ]
     },
     {
       "module_id": "J9_M3",
       "module_name": "投影与视图",
-      "key_concepts": ["投影", "中心投影", "平行投影", "正视图", "侧视图", "俯视图", "三视图"],
-      "required_skills": ["空间想象", "图形识别", "画图能力"],
+      "key_concepts": [
+        "投影",
+        "中心投影",
+        "平行投影",
+        "正视图",
+        "侧视图",
+        "俯视图",
+        "三视图"
+      ],
+      "required_skills": [
+        "空间想象",
+        "图形识别",
+        "画图能力"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 12,
       "academic_requirements": [
-        {"requirement_id": "J9_R3.1", "description": "了解投影的概念", "proficiency_level": "了解"},
-        {"requirement_id": "J9_R3.2", "description": "能画简单几何体的三视图", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R3.3", "description": "能根据三视图还原几何体", "proficiency_level": "掌握"}
+        {
+          "requirement_id": "J9_R3.1",
+          "description": "了解投影的概念",
+          "proficiency_level": "了解"
+        },
+        {
+          "requirement_id": "J9_R3.2",
+          "description": "能画简单几何体的三视图",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R3.3",
+          "description": "能根据三视图还原几何体",
+          "proficiency_level": "掌握"
+        }
       ]
     },
     {
       "module_id": "J9_M4",
       "module_name": "反比例函数",
-      "key_concepts": ["反比例函数", "图像", "性质", "k的几何意义", "实际应用"],
-      "required_skills": ["函数思想", "图像分析", "建模能力"],
+      "key_concepts": [
+        "反比例函数",
+        "图像",
+        "性质",
+        "k的几何意义",
+        "实际应用"
+      ],
+      "required_skills": [
+        "函数思想",
+        "图像分析",
+        "建模能力"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 15,
       "academic_requirements": [
-        {"requirement_id": "J9_R4.1", "description": "理解反比例函数的概念", "proficiency_level": "理解"},
-        {"requirement_id": "J9_R4.2", "description": "掌握反比例函数的图像和性质", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R4.3", "description": "能用反比例函数解决实际问题", "proficiency_level": "运用"}
+        {
+          "requirement_id": "J9_R4.1",
+          "description": "理解反比例函数的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "J9_R4.2",
+          "description": "掌握反比例函数的图像和性质",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R4.3",
+          "description": "能用反比例函数解决实际问题",
+          "proficiency_level": "运用"
+        }
       ]
     },
     {
       "module_id": "J9_M5",
       "module_name": "直角三角形",
-      "key_concepts": ["锐角三角函数", "正弦", "余弦", "正切", "特殊角三角函数值", "解直角三角形", "仰角", "俯角"],
-      "required_skills": ["计算能力", "应用能力", "空间观念"],
+      "key_concepts": [
+        "锐角三角函数",
+        "正弦",
+        "余弦",
+        "正切",
+        "特殊角三角函数值",
+        "解直角三角形",
+        "仰角",
+        "俯角"
+      ],
+      "required_skills": [
+        "计算能力",
+        "应用能力",
+        "空间观念"
+      ],
       "difficulty_level": "中等偏难",
       "recommended_hours": 18,
       "academic_requirements": [
-        {"requirement_id": "J9_R5.1", "description": "理解锐角三角函数的定义", "proficiency_level": "理解"},
-        {"requirement_id": "J9_R5.2", "description": "掌握特殊角的三角函数值", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R5.3", "description": "能解直角三角形", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R5.4", "description": "能用三角函数解决测量问题", "proficiency_level": "运用"}
+        {
+          "requirement_id": "J9_R5.1",
+          "description": "理解锐角三角函数的定义",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "J9_R5.2",
+          "description": "掌握特殊角的三角函数值",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R5.3",
+          "description": "能解直角三角形",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R5.4",
+          "description": "能用三角函数解决测量问题",
+          "proficiency_level": "运用"
+        }
       ]
     },
     {
       "module_id": "J9_M6",
       "module_name": "圆",
-      "key_concepts": ["圆", "弧", "弦", "圆心角", "圆周角", "垂径定理", "切线", "切线的判定", "切线的性质", "弧长", "扇形面积"],
-      "required_skills": ["几何推理", "证明能力", "计算能力"],
+      "key_concepts": [
+        "圆",
+        "弧",
+        "弦",
+        "圆心角",
+        "圆周角",
+        "垂径定理",
+        "切线",
+        "切线的判定",
+        "切线的性质",
+        "弧长",
+        "扇形面积"
+      ],
+      "required_skills": [
+        "几何推理",
+        "证明能力",
+        "计算能力"
+      ],
       "difficulty_level": "较难",
       "recommended_hours": 25,
       "academic_requirements": [
-        {"requirement_id": "J9_R6.1", "description": "理解圆的有关概念", "proficiency_level": "理解"},
-        {"requirement_id": "J9_R6.2", "description": "掌握垂径定理", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R6.3", "description": "理解圆心角、圆周角的关系", "proficiency_level": "理解"},
-        {"requirement_id": "J9_R6.4", "description": "掌握切线的判定和性质", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R6.5", "description": "能计算弧长和扇形面积", "proficiency_level": "掌握"}
+        {
+          "requirement_id": "J9_R6.1",
+          "description": "理解圆的有关概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "J9_R6.2",
+          "description": "掌握垂径定理",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R6.3",
+          "description": "理解圆心角、圆周角的关系",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "J9_R6.4",
+          "description": "掌握切线的判定和性质",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R6.5",
+          "description": "能计算弧长和扇形面积",
+          "proficiency_level": "掌握"
+        }
       ]
     },
     {
       "module_id": "J9_M7",
       "module_name": "概率的进一步认识",
-      "key_concepts": ["用列举法求概率", "树状图", "列表法", "概率的应用", "游戏公平性"],
-      "required_skills": ["概率计算", "分析能力", "逻辑推理"],
+      "key_concepts": [
+        "用列举法求概率",
+        "树状图",
+        "列表法",
+        "概率的应用",
+        "游戏公平性"
+      ],
+      "required_skills": [
+        "概率计算",
+        "分析能力",
+        "逻辑推理"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 15,
       "academic_requirements": [
-        {"requirement_id": "J9_R7.1", "description": "能用树状图或列表法求概率", "proficiency_level": "掌握"},
-        {"requirement_id": "J9_R7.2", "description": "能设计简单的概率游戏", "proficiency_level": "运用"}
+        {
+          "requirement_id": "J9_R7.1",
+          "description": "能用树状图或列表法求概率",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R7.2",
+          "description": "能设计简单的概率游戏",
+          "proficiency_level": "运用"
+        }
+      ]
+    },
+    {
+      "module_id": "J9_M8",
+      "module_name": "一元二次方程",
+      "key_concepts": [
+        "一元二次方程",
+        "配方法",
+        "公式法",
+        "因式分解法",
+        "根的判别式",
+        "根与系数的关系",
+        "实际应用"
+      ],
+      "required_skills": [
+        "方程求解",
+        "计算能力",
+        "建模能力"
+      ],
+      "difficulty_level": "中等偏难",
+      "recommended_hours": 20,
+      "academic_requirements": [
+        {
+          "requirement_id": "J9_R8.1",
+          "description": "理解一元二次方程的意义",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "J9_R8.2",
+          "description": "掌握配方法解一元二次方程",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R8.3",
+          "description": "掌握公式法解一元二次方程",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R8.4",
+          "description": "理解根的判别式的意义",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "J9_R8.5",
+          "description": "掌握根与系数的关系",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "J9_R8.6",
+          "description": "能用一元二次方程解决实际问题",
+          "proficiency_level": "运用"
+        }
       ]
     }
   ]

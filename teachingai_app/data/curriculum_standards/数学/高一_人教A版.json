@@ -11,96 +11,395 @@
     {
       "module_id": "S10_M1",
       "module_name": "集合与函数概念",
-      "key_concepts": ["集合", "元素", "子集", "交集", "并集", "补集", "函数", "定义域", "值域", "对应法则"],
-      "required_skills": ["集合运算", "函数概念理解", "符号表示"],
+      "key_concepts": [
+        "集合",
+        "元素",
+        "子集",
+        "交集",
+        "并集",
+        "补集",
+        "函数",
+        "定义域",
+        "值域",
+        "对应法则"
+      ],
+      "required_skills": [
+        "集合运算",
+        "函数概念理解",
+        "符号表示"
+      ],
       "difficulty_level": "基础",
       "recommended_hours": 20,
       "academic_requirements": [
-        {"requirement_id": "S10_R1.1", "description": "理解集合的概念", "proficiency_level": "理解"},
-        {"requirement_id": "S10_R1.2", "description": "掌握集合的基本运算", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R1.3", "description": "理解函数的概念", "proficiency_level": "理解"},
-        {"requirement_id": "S10_R1.4", "description": "会求函数的定义域和值域", "proficiency_level": "掌握"}
+        {
+          "requirement_id": "S10_R1.1",
+          "description": "理解集合的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R1.2",
+          "description": "掌握集合的基本运算",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R1.3",
+          "description": "理解函数的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R1.4",
+          "description": "会求函数的定义域和值域",
+          "proficiency_level": "掌握"
+        }
       ]
     },
     {
       "module_id": "S10_M2",
       "module_name": "基本初等函数",
-      "key_concepts": ["指数函数", "对数函数", "幂函数", "指数运算", "对数运算", "换底公式", "反函数"],
-      "required_skills": ["运算能力", "函数图像分析", "建模能力"],
+      "key_concepts": [
+        "指数函数",
+        "对数函数",
+        "幂函数",
+        "指数运算",
+        "对数运算",
+        "换底公式",
+        "反函数"
+      ],
+      "required_skills": [
+        "运算能力",
+        "函数图像分析",
+        "建模能力"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 25,
       "academic_requirements": [
-        {"requirement_id": "S10_R2.1", "description": "理解指数函数和对数函数的概念", "proficiency_level": "理解"},
-        {"requirement_id": "S10_R2.2", "description": "掌握指数运算和对数运算", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R2.3", "description": "能画指数函数、对数函数的图像", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R2.4", "description": "理解幂函数的概念", "proficiency_level": "了解"}
+        {
+          "requirement_id": "S10_R2.1",
+          "description": "理解指数函数和对数函数的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R2.2",
+          "description": "掌握指数运算和对数运算",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R2.3",
+          "description": "能画指数函数、对数函数的图像",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R2.4",
+          "description": "理解幂函数的概念",
+          "proficiency_level": "了解"
+        }
       ]
     },
     {
       "module_id": "S10_M3",
       "module_name": "三角函数",
-      "key_concepts": ["任意角", "弧度制", "正弦函数", "余弦函数", "正切函数", "图像", "性质", "周期", "振幅", "相位"],
-      "required_skills": ["三角计算", "图像分析", "周期意识"],
+      "key_concepts": [
+        "任意角",
+        "弧度制",
+        "正弦函数",
+        "余弦函数",
+        "正切函数",
+        "图像",
+        "性质",
+        "周期",
+        "振幅",
+        "相位"
+      ],
+      "required_skills": [
+        "三角计算",
+        "图像分析",
+        "周期意识"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 28,
       "academic_requirements": [
-        {"requirement_id": "S10_R3.1", "description": "理解任意角的概念和弧度制", "proficiency_level": "理解"},
-        {"requirement_id": "S10_R3.2", "description": "掌握正弦函数、余弦函数、正切函数的定义", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R3.3", "description": "能画三角函数的图像并理解其性质", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R3.4", "description": "理解函数y=Asin(ωx+φ)的图像变换", "proficiency_level": "理解"}
+        {
+          "requirement_id": "S10_R3.1",
+          "description": "理解任意角的概念和弧度制",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R3.2",
+          "description": "掌握正弦函数、余弦函数、正切函数的定义",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R3.3",
+          "description": "能画三角函数的图像并理解其性质",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R3.4",
+          "description": "理解函数y=Asin(ωx+φ)的图像变换",
+          "proficiency_level": "理解"
+        }
       ]
     },
     {
       "module_id": "S10_M4",
       "module_name": "平面向量",
-      "key_concepts": ["向量", "零向量", "单位向量", "平行向量", "相等向量", "加法", "减法", "数乘", "数量积", "坐标表示"],
-      "required_skills": ["向量运算", "几何直观", "代数运算"],
+      "key_concepts": [
+        "向量",
+        "零向量",
+        "单位向量",
+        "平行向量",
+        "相等向量",
+        "加法",
+        "减法",
+        "数乘",
+        "数量积",
+        "坐标表示"
+      ],
+      "required_skills": [
+        "向量运算",
+        "几何直观",
+        "代数运算"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 20,
       "academic_requirements": [
-        {"requirement_id": "S10_R4.1", "description": "理解平面向量的概念", "proficiency_level": "理解"},
-        {"requirement_id": "S10_R4.2", "description": "掌握平面向量的运算", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R4.3", "description": "理解平面向量的几何意义", "proficiency_level": "理解"},
-        {"requirement_id": "S10_R4.4", "description": "能用坐标表示平面向量", "proficiency_level": "掌握"}
+        {
+          "requirement_id": "S10_R4.1",
+          "description": "理解平面向量的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R4.2",
+          "description": "掌握平面向量的运算",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R4.3",
+          "description": "理解平面向量的几何意义",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R4.4",
+          "description": "能用坐标表示平面向量",
+          "proficiency_level": "掌握"
+        }
       ]
     },
     {
       "module_id": "S10_M5",
       "module_name": "数列",
-      "key_concepts": ["数列", "通项公式", "递推公式", "等差数列", "等比数列", "前n项和", "数学归纳法"],
-      "required_skills": ["归纳推理", "运算能力", "建模能力"],
+      "key_concepts": [
+        "数列",
+        "通项公式",
+        "递推公式",
+        "等差数列",
+        "等比数列",
+        "前n项和",
+        "数学归纳法"
+      ],
+      "required_skills": [
+        "归纳推理",
+        "运算能力",
+        "建模能力"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 22,
       "academic_requirements": [
-        {"requirement_id": "S10_R5.1", "description": "理解数列的概念", "proficiency_level": "理解"},
-        {"requirement_id": "S10_R5.2", "description": "掌握等差数列和等比数列的通项公式和前n项和", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R5.3", "description": "能用数列解决实际问题", "proficiency_level": "运用"}
+        {
+          "requirement_id": "S10_R5.1",
+          "description": "理解数列的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R5.2",
+          "description": "掌握等差数列和等比数列的通项公式和前n项和",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R5.3",
+          "description": "能用数列解决实际问题",
+          "proficiency_level": "运用"
+        }
       ]
     },
     {
       "module_id": "S10_M6",
       "module_name": "不等式",
-      "key_concepts": ["不等式", "基本不等式", "一元二次不等式", "线性规划", "绝对值不等式"],
-      "required_skills": ["不等式求解", "最值问题", "优化意识"],
+      "key_concepts": [
+        "不等式",
+        "基本不等式",
+        "一元二次不等式",
+        "线性规划",
+        "绝对值不等式"
+      ],
+      "required_skills": [
+        "不等式求解",
+        "最值问题",
+        "优化意识"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 18,
       "academic_requirements": [
-        {"requirement_id": "S10_R6.1", "description": "掌握基本不等式", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R6.2", "description": "能解一元二次不等式", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R6.3", "description": "能用不等式解决优化问题", "proficiency_level": "运用"}
+        {
+          "requirement_id": "S10_R6.1",
+          "description": "掌握基本不等式",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R6.2",
+          "description": "能解一元二次不等式",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R6.3",
+          "description": "能用不等式解决优化问题",
+          "proficiency_level": "运用"
+        }
       ]
     },
     {
       "module_id": "S10_M7",
       "module_name": "统计与概率",
-      "key_concepts": ["随机抽样", "简单随机抽样", "分层抽样", "系统抽样", "用样本估计总体", "线性回归", "独立性检验"],
-      "required_skills": ["数据收集", "数据分析", "统计推断"],
+      "key_concepts": [
+        "随机抽样",
+        "简单随机抽样",
+        "分层抽样",
+        "系统抽样",
+        "用样本估计总体",
+        "线性回归",
+        "独立性检验"
+      ],
+      "required_skills": [
+        "数据收集",
+        "数据分析",
+        "统计推断"
+      ],
       "difficulty_level": "中等",
       "recommended_hours": 16,
       "academic_requirements": [
-        {"requirement_id": "S10_R7.1", "description": "掌握各种抽样方法", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R7.2", "description": "能用样本估计总体", "proficiency_level": "掌握"},
-        {"requirement_id": "S10_R7.3", "description": "了解独立性检验的基本思想", "proficiency_level": "了解"}
+        {
+          "requirement_id": "S10_R7.1",
+          "description": "掌握各种抽样方法",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R7.2",
+          "description": "能用样本估计总体",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R7.3",
+          "description": "了解独立性检验的基本思想",
+          "proficiency_level": "了解"
+        }
+      ]
+    },
+    {
+      "module_id": "S10_M8",
+      "module_name": "函数的应用",
+      "key_concepts": [
+        "函数零点",
+        "二分法",
+        "函数模型",
+        "实际应用",
+        "拟合"
+      ],
+      "required_skills": [
+        "函数思想",
+        "建模能力",
+        "数据分析"
+      ],
+      "difficulty_level": "中等",
+      "recommended_hours": 12,
+      "academic_requirements": [
+        {
+          "requirement_id": "S10_R8.1",
+          "description": "理解函数零点的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R8.2",
+          "description": "掌握用二分法求方程近似解",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R8.3",
+          "description": "能用函数模型解决实际问题",
+          "proficiency_level": "运用"
+        }
+      ]
+    },
+    {
+      "module_id": "S10_M9",
+      "module_name": "算法初步",
+      "key_concepts": [
+        "算法",
+        "程序框图",
+        "顺序结构",
+        "条件结构",
+        "循环结构",
+        "基本算法语句"
+      ],
+      "required_skills": [
+        "逻辑思维",
+        "流程分析",
+        "程序设计基础"
+      ],
+      "difficulty_level": "基础",
+      "recommended_hours": 10,
+      "academic_requirements": [
+        {
+          "requirement_id": "S10_R9.1",
+          "description": "理解算法的意义",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R9.2",
+          "description": "能画出程序框图",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R9.3",
+          "description": "理解三种基本结构",
+          "proficiency_level": "理解"
+        }
+      ]
+    },
+    {
+      "module_id": "S10_M10",
+      "module_name": "常用逻辑用语",
+      "key_concepts": [
+        "命题",
+        "充分条件",
+        "必要条件",
+        "充要条件",
+        "全称量词",
+        "存在量词",
+        "逻辑联结词"
+      ],
+      "required_skills": [
+        "逻辑推理",
+        "语言表达",
+        "等价转化"
+      ],
+      "difficulty_level": "中等",
+      "recommended_hours": 10,
+      "academic_requirements": [
+        {
+          "requirement_id": "S10_R10.1",
+          "description": "理解命题的概念",
+          "proficiency_level": "理解"
+        },
+        {
+          "requirement_id": "S10_R10.2",
+          "description": "掌握充分条件与必要条件",
+          "proficiency_level": "掌握"
+        },
+        {
+          "requirement_id": "S10_R10.3",
+          "description": "理解全称量词与存在量词",
+          "proficiency_level": "理解"
+        }
       ]
     }
   ]
