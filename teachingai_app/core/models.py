@@ -27,8 +27,6 @@ class StudentProfile:
     baseline_success_rate: int = 60
     focus_stability: int = 60
     knowledge_coverage: int = 50
-
-
 @dataclass
 class StudentReaction:
     profile_name: str

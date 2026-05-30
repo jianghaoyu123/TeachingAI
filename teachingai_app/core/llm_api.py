@@ -245,6 +245,8 @@ def _build_prompt(text: str, subject: str, lesson_topic: str, grade: str, improv
 
 教案改进方向: {focus_desc.get(improvement_focus, "兼顾全体学生")}
 
+重要提示：聚焦于本课程相关的典型错误和问题，忽略与本课无关的学科特定内容。
+
 输入材料:
 {text[:14000]}
 
