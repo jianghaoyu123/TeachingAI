@@ -511,9 +511,9 @@ def render_simulation_results(
             compliance = report.standards_compliance
             metrics_col1, metrics_col2, metrics_col3 = st.columns(3)
             with metrics_col1:
-                st.metric("知识点覆盖得分", f"{compliance.topic_coverage_score:.1f}/100")
+                st.metric("知识点覆盖得分", f"{compliance.topic_coverage_score:.1f}", delta="/100")
             with metrics_col2:
-                st.metric("综合合规得分", f"{compliance.overall_compliance_score:.1f}/100")
+                st.metric("综合合规得分", f"{compliance.overall_compliance_score:.1f}", delta="/100")
             with metrics_col3:
                 st.metric("难度匹配", compliance.difficulty_match)
 
