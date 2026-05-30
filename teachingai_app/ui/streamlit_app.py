@@ -3,6 +3,7 @@ from __future__ import annotations
 import html
 import os
 import time
+from typing import Any
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -20,7 +21,7 @@ from teachingai_app.ui.constants import (
     MODEL_OPTIONS_BY_PROVIDER,
     SUBJECT_OPTIONS,
 )
-from teachingai_app.ui.profiles_sidebar import render_profile_editor
+from teachingai_app.ui.profiles_sidebar import get_profile_editor_material_status, render_profile_editor
 from teachingai_app.ui.render import render_simulation_results
 
 
@@ -72,6 +73,15 @@ def _mount_app_chrome_styles() -> None:
             padding: 8px 10px;
             font-size: 13px;
             margin: 6px 0 12px 0;
+        }
+        div[data-testid="stTextArea"] div[data-testid="InputInstructions"] {
+            font-size: 0;
+            line-height: 1.2;
+        }
+        div[data-testid="stTextArea"] div[data-testid="InputInstructions"]::after {
+            content: "按 Ctrl+Enter 确认";
+            font-size: 12px;
+            color: #6B7280;
         }
         </style>
         """,
@@ -547,6 +557,7 @@ def _material_consistency_check(subject: str, lesson_topic: str, material: str) 
         "历史": ["朝代", "历史", "变法", "战争", "制度", "文明", "史料", "年代"],
         "地理": ["地形", "气候", "经纬", "区域", "地理", "河流", "人口", "资源"],
         "政治": ["法律", "道德", "公民", "权利", "义务", "政治", "经济生活", "国家"],
+        "班会": ["班级", "同伴", "纪律", "安全", "成长", "心理", "沟通", "合作", "责任", "班会"],
     }
 
     keywords = subject_keywords.get(subject, [])
@@ -570,6 +581,17 @@ def _material_consistency_check(subject: str, lesson_topic: str, material: str) 
         "\n请检查学科、课题和上传教案是否一致。"
     )
     return False, detail, score
+
+
+def _render_material_status(placeholder: Any) -> None:
+    status = get_profile_editor_material_status()
+    if status == "材料解析中":
+        placeholder.warning(f"材料状态：{status}")
+        return
+    if status == "已读取材料":
+        placeholder.success(f"材料状态：{status}")
+        return
+    placeholder.info(f"材料状态：{status}")
 
 
 def _call_with_rate_limit_retry(
@@ -724,6 +746,8 @@ def run_app() -> None:
         key="lesson_files_uploader",
     )
     manual_text = st.text_area("或直接粘贴教案/逐字稿文本", height=180, key="manual_text_input")
+    material_status_placeholder = st.empty()
+    _render_material_status(material_status_placeholder)
 
     export_col1, export_col2 = st.columns(2)
     with export_col1:
@@ -733,7 +757,17 @@ def run_app() -> None:
 
     st.markdown("---")
     st.subheader("待模拟学生设置")
-    render_profile_editor(st.session_state.get("subject_select", ""), st.session_state.get("grade_select", ""))
+    render_profile_editor(
+        st.session_state.get("subject_select", ""),
+        st.session_state.get("grade_select", ""),
+        region_curriculum,
+        lesson_topic,
+        provider,
+        api_key,
+        base_url,
+        model_name,
+    )
+    _render_material_status(material_status_placeholder)
     st.markdown("---")
     st.subheader("教案改进方向")
     improvement_focus_options = [
@@ -833,6 +867,10 @@ def run_app() -> None:
         st.rerun()
     
     st.session_state["simulation_triggered"] = False
+
+    if not lesson_topic.strip():
+        st.error("请输入课题名称后再开始预演。")
+        return
 
     st.info("模拟已开始...")
     

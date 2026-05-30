@@ -109,6 +109,10 @@ The Deep Mode UI displays a progress bar. After completion you can expand "Deep 
   - **Memory reinforcement**: repeated confusions/errors are strengthened across modules
   - **Memory decay/forgetting**: weak memories decay over modules to reduce stale bias
 - Student profiles automatically switch by grade, subject, and ability level: humanities profiles emphasize reading comprehension and evidence expression; STEM profiles emphasize step-by-step reasoning and condition verification
+- Student profile auto-generation improvements (new):
+  - The system starts from built-in student profile templates by subject, grade, and level
+  - After you provide lesson topic and materials (upload or paste), it automatically enriches student profiles with lesson-specific traits
+  - Different student levels receive different enriched traits, so classroom simulation stays level-aware
 - Profile editing panel: customize and save student profiles
 - Quantitative profile indicators (editable per student):
   - `activity_level` (learning activity)
@@ -158,7 +162,6 @@ python -m streamlit run app.py
 - "Strengths" indicates what this type of student typically does well; "Weaknesses" indicates where they are most likely to get stuck; "Common Errors" indicates the most frequent mistakes in class and homework
 - In the profile editor, each student also has four 0-100 quantitative indicators (`activity_level`, `baseline_success_rate`, `focus_stability`, `knowledge_coverage`) to better constrain simulation differences between levels
 - Export the current student profiles as JSON, or import a JSON file to overwrite the current subject template
-- "OCR (Image PDF/PPT)" is enabled by default
 - Select "Quick Mode" or "Deep Thinking Mode" above the "Start Rehearsal & Optimization" button on the main page
 - Click "Start Rehearsal & Optimization"
 

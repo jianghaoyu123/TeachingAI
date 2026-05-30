@@ -7,6 +7,7 @@ from .llm_api import (
     LLMApiError,
     _build_profile_context,
     build_report_from_parsed,
+    generate_topic_adjustments_with_llm,
     invoke_llm,
     normalize_profile_name,
     parse_llm_json,
@@ -45,12 +46,20 @@ def _run_teacher_agent(
     subject: str,
     lesson_topic: str,
     grade: str,
+    region_curriculum: str,
     provider: str,
     api_key: str,
     base_url: str,
     model: str,
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
 ) -> tuple[str, list[LessonModule]]:
-    profile_context = _build_profile_context(subject, grade)
+    profile_context = _build_profile_context(
+        subject,
+        grade,
+        lesson_topic,
+        region_curriculum,
+        dynamic_topic_rules,
+    )
     system_prompt = (
         f"你是经验丰富的{subject}教师智能体，擅长把教案转化为可执行的课堂讲稿。"
         "必须只输出JSON，不要输出其他文字。"
@@ -61,6 +70,7 @@ def _run_teacher_agent(
 学科: {subject}
 课题: {lesson_topic}
 年级: {grade}
+教材地区: {region_curriculum}
 
 后续将安排不同层级学生智能体逐模块与教师互动，请保证每个模块有清晰的教学目标与讲解内容。
 
@@ -742,8 +752,15 @@ def _run_aggregator_agent(
     base_url: str,
     model: str,
     improvement_focus: str = "all",
+    dynamic_topic_rules: tuple[TopicAdjustmentRule, ...] | None = None,
 ) -> dict[str, Any]:
-    profile_context = _build_profile_context(subject, grade)
+    profile_context = _build_profile_context(
+        subject,
+        grade,
+        lesson_topic,
+        region_curriculum,
+        dynamic_topic_rules,
+    )
     interaction_log = _summarize_interactions_for_aggregator(modules, interactions, module_deliberations)
 
     standards_evaluator = CurriculumStandardEvaluator(subject, grade, region_curriculum)
@@ -902,7 +919,18 @@ def analyze_deep_with_llm(
     improvement_focus: str = "all",
     teacher_feedback: TeacherFeedback | None = None,
 ) -> SimulationReport:
-    profiles = get_profiles_for_subject(subject, grade)
+    dynamic_topic_rules = generate_topic_adjustments_with_llm(
+        text=text,
+        subject=subject,
+        lesson_topic=lesson_topic,
+        grade=grade,
+        region_curriculum=region_curriculum,
+        provider=provider,
+        api_key=api_key,
+        base_url=base_url,
+        model=model,
+    )
+    profiles = get_profiles_for_subject(subject, grade, lesson_topic, dynamic_topic_rules)
     student_memory = _init_student_memory(profiles)
     teacher_feedback = teacher_feedback or {}
 
@@ -917,10 +945,12 @@ def analyze_deep_with_llm(
         subject=subject,
         lesson_topic=lesson_topic,
         grade=grade,
+        region_curriculum=region_curriculum,
         provider=provider,
         api_key=api_key,
         base_url=base_url,
         model=model,
+        dynamic_topic_rules=dynamic_topic_rules,
     )
 
     if not modules:
@@ -1013,6 +1043,7 @@ def analyze_deep_with_llm(
         base_url=base_url,
         model=model,
         improvement_focus=improvement_focus,
+        dynamic_topic_rules=dynamic_topic_rules,
     )
 
     report = build_report_from_parsed(
@@ -1026,6 +1057,7 @@ def analyze_deep_with_llm(
         lesson_modules=modules,
         module_interactions=all_interactions,
         module_deliberations=module_deliberations,
+        dynamic_topic_rules=dynamic_topic_rules,
     )
     _emit(progress_callback, "深度预演完成", total_steps, total_steps)
     return report

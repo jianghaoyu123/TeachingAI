@@ -30,12 +30,12 @@ GRADE_TO_BAND: dict[str, str] = {
 BAND_LABELS: dict[str, str] = {
     GRADE_BAND_PRIMARY_LOWER: "小学低段（一至二年级）",
     GRADE_BAND_PRIMARY_UPPER: "小学中高段（三至六年级）",
-    GRADE_BAND_JUNIOR_7: "初一（七年级）·深圳",
-    GRADE_BAND_JUNIOR_8: "初二（八年级）·深圳",
-    GRADE_BAND_JUNIOR_9: "初三（九年级）·深圳",
-    GRADE_BAND_SENIOR_10: "高一·深圳",
-    GRADE_BAND_SENIOR_11: "高二·深圳",
-    GRADE_BAND_SENIOR_12: "高三·深圳",
+    GRADE_BAND_JUNIOR_7: "初一（七年级）",
+    GRADE_BAND_JUNIOR_8: "初二（八年级）",
+    GRADE_BAND_JUNIOR_9: "初三（九年级）",
+    GRADE_BAND_SENIOR_10: "高一",
+    GRADE_BAND_SENIOR_11: "高二",
+    GRADE_BAND_SENIOR_12: "高三",
 }
 
 JUNIOR_BANDS = (GRADE_BAND_JUNIOR_7, GRADE_BAND_JUNIOR_8, GRADE_BAND_JUNIOR_9)

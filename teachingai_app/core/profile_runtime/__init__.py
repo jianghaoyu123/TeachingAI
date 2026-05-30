@@ -104,4 +104,4 @@ def get_catalog_profiles(subject: str, grade: str) -> list[StudentProfile]:
 
 
 def get_grade_band_label(grade: str) -> str:
-    return BAND_LABELS.get(resolve_grade_band(grade), "初二（八年级）·深圳")
+    return BAND_LABELS.get(resolve_grade_band(grade), "初二（八年级）")
